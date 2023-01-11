@@ -1,3 +1,6 @@
+import { FC, SVGProps } from 'react';
+
+// Globally available types
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
@@ -7,20 +10,18 @@ declare global {
     }
   }
 
-  // Optional entity in strapi about current page
-  interface PageDataFields {
-    title: string;
-  }
-
-  interface PageData {
-    pageData: PageDataFields;
-  }
-
   interface ArticleModel {
     title: string;
     details: string;
     links: string[];
     date: string;
+  }
+
+  type IconComponent = FC<SVGProps<SVGSVGElement>>;
+
+  interface LinkProps {
+    href: string;
+    text: string;
   }
 }
 

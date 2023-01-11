@@ -3,6 +3,7 @@ import qs from 'qs';
 import {
   StrapiFindOneResponse,
   StrapiFindResponse,
+  StrapiPagePropsFields,
   StrapiQuery,
 } from 'types/strapi';
 
@@ -24,12 +25,24 @@ export default class ApiFacade {
     query?: StrapiQuery,
   ): Promise<StrapiFindResponse<ArticleModel>> {
     return await this._get<StrapiFindResponse<ArticleModel>>(
-      'articles?' + qs.stringify(query),
+      'articles?' + qs.stringify(query, { encode: false }),
     );
   }
 
-  public async getPageData(slug: string): Promise<PageDataFields> {
-    const req = await this._get<StrapiFindOneResponse<PageDataFields>>(slug);
+  public async getPageProps(
+    slug: string,
+  ): Promise<StrapiPagePropsFields | null> {
+    if (slug === '') {
+      return null;
+    }
+
+    const req = await this._get<StrapiFindOneResponse<StrapiPagePropsFields>>(
+      `pages-data/${slug}`,
+    );
+
+    if (req.error || !req.data) {
+      return null;
+    }
 
     return req.data.attributes;
   }

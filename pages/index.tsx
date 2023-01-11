@@ -2,14 +2,14 @@ import { FC } from 'react';
 import { GetStaticProps } from 'next';
 
 import ApiFacade from 'api';
-import { StrapiFindResponse } from 'types/strapi';
+import { StrapiFindResponse, StrapiPageProps } from 'types/strapi';
 
-interface HomeProps extends PageData {
+interface HomeProps extends StrapiPageProps {
   articles: StrapiFindResponse<ArticleModel>;
 }
 
 const Home: FC<HomeProps> = ({ articles }) => {
-  return <>123</>;
+  return <div className="h-[2000px]">123</div>;
 };
 
 export default Home;
@@ -20,7 +20,7 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   return {
     props: {
       articles: await api.getArticles(),
-      pageData: await api.getPageData('home-page'),
+      pageData: await api.getPageProps('home-page'),
     },
     revalidate: 3600,
   };

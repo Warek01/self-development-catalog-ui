@@ -1,4 +1,22 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-@tailwind variants;
+@import 'tailwindcss/base';
+@import 'tailwindcss/components.css';
+@import 'tailwindcss/utilities.css';
+@import 'tailwindcss/variants.css';
+
+@layer base {
+  a {
+    @apply text-black duration-150;
+
+    &:hover {
+      @apply text-black/80;
+    }
+  }
+
+  button {
+    @apply duration-150;
+
+    &:hover {
+      @apply bg-black/20;
+    }
+  }
+}

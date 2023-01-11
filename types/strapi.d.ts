@@ -1,3 +1,4 @@
+// Query object model to be encoded via qs
 export interface StrapiQuery {
   pagination?: {
     start?: number;
@@ -10,6 +11,7 @@ export interface StrapiQuery {
   populate?: string[];
 }
 
+// Error object in response
 export interface StrapiError {
   details: any;
   message: string;
@@ -17,6 +19,7 @@ export interface StrapiError {
   status: number;
 }
 
+// Wrapper around entity returned by Strapi
 export interface StrapiEntity<T> {
   id: number;
   attributes: T & {
@@ -26,6 +29,7 @@ export interface StrapiEntity<T> {
   };
 }
 
+// Meta object present in find responses
 export interface StrapiFindMeta {
   pagination: {
     page: number;
@@ -45,4 +49,15 @@ export interface StrapiFindOneResponse<T> {
   data: StrapiEntity<T>;
   meta: StrapiFindMeta;
   error?: StrapiError;
+}
+
+// Optional entity in strapi about current page
+interface StrapiPagePropsFields {
+  title: string;
+  slug: string;
+}
+
+// Pages props should extend this if they want to search for data on Strapi
+interface StrapiPageProps {
+  pageData: PageDataFields;
 }
