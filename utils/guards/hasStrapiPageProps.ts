@@ -5,7 +5,7 @@ const hasStrapiPageProps = (obj: unknown): obj is StrapiPageProps => {
     return false;
   }
 
-  return 'pageProps' in obj && typeof obj['pageProps'] === 'object';
+  return 'pageData' in obj && typeof obj['pageData'] === 'object';
 };
 
 export default hasStrapiPageProps;

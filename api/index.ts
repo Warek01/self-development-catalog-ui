@@ -1,7 +1,6 @@
 import qs from 'qs';
 
 import {
-  StrapiFindOneResponse,
   StrapiFindResponse,
   StrapiPagePropsFields,
   StrapiQuery,
@@ -14,7 +13,7 @@ export default class ApiFacade {
   ) {}
 
   private async _get<T>(url: string): Promise<T> {
-    const req = await fetch(this.url + encodeURIComponent(url), {
+    const req = await fetch(this.url + url, {
       headers: this.headers,
     });
 
@@ -25,7 +24,7 @@ export default class ApiFacade {
     query?: StrapiQuery,
   ): Promise<StrapiFindResponse<ArticleModel>> {
     return await this._get<StrapiFindResponse<ArticleModel>>(
-      'articles?' + qs.stringify(query, { encode: false }),
+      'articles?' + qs.stringify(query),
     );
   }
 
@@ -36,14 +35,6 @@ export default class ApiFacade {
       return null;
     }
 
-    const req = await this._get<StrapiFindOneResponse<StrapiPagePropsFields>>(
-      `pages-data/${slug}`,
-    );
-
-    if (req.error || !req.data) {
-      return null;
-    }
-
-    return req.data.attributes;
+    return await this._get<StrapiPagePropsFields>(`pages-data/${slug}`);
   }
 }

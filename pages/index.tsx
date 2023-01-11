@@ -20,7 +20,7 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   return {
     props: {
       articles: await api.getArticles(),
-      pageData: await api.getPageProps('home-page'),
+      pageData: await api.getPageProps('Home'),
     },
     revalidate: 3600,
   };
