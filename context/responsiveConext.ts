@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-interface ResponsiveContextProps {
+export interface ResponsiveContextProps {
   isMobileView: boolean;
 }
 

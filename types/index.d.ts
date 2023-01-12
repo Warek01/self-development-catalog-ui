@@ -17,12 +17,26 @@ declare global {
     date: string;
   }
 
+  interface SocialMediaLinkModel {
+    platform: SocialMediaPlatform;
+    href: string;
+  }
+
   type IconComponent = FC<SVGProps<SVGSVGElement>>;
 
   interface LinkProps {
     href: string;
     text: string;
   }
+
+  type SocialMediaPlatform =
+    | 'web'
+    | 'facebook'
+    | 'discord'
+    | 'github'
+    | 'gitlab'
+    | 'linkedIn'
+    | 'instagram';
 }
 
 export {};

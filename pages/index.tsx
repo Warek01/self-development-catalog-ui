@@ -9,7 +9,7 @@ interface HomeProps extends StrapiPageProps {
 }
 
 const Home: FC<HomeProps> = ({ articles }) => {
-  return <div className="h-[2000px]">123</div>;
+  return <div className="h-[200px]">123</div>;
 };
 
 export default Home;
