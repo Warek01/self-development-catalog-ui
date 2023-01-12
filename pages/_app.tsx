@@ -51,7 +51,7 @@ const App = ({ Component, pageProps }: AppProps) => {
           className={classNames(
             epilogue.variable,
             epilogue.className,
-            'relative min-w-screen max-w-screen overflow-x-hidden text-black',
+            'relative min-w-screen max-w-screen overflow-x-hidden text-black font-epilogue',
           )}
         >
           <SideMenu

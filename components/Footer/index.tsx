@@ -1,9 +1,8 @@
 import { FC, memo } from 'react';
 import useSwr from 'swr';
-import Link from 'next/link';
 
 import { StrapiFindResponse } from 'types/strapi';
-import { icons } from 'components';
+import { icons, LinkIcon } from 'components';
 import socialMediaIconsMap from 'constants/socialMediaIconsMap';
 
 const Footer: FC = () => {
@@ -22,9 +21,7 @@ const Footer: FC = () => {
 
               return (
                 <li key={link.id}>
-                  <Link href={link.attributes.href}>
-                    <Icon width={32} height={32} />
-                  </Link>
+                  <LinkIcon Icon={Icon} size={32} href={link.attributes.href} />
                 </li>
               );
             })}
@@ -34,13 +31,14 @@ const Footer: FC = () => {
           <p className="flex flex-col text-lg md:text-2xl font-semibold">
             Dobrojan Alexandru
           </p>
-          <Link
-            href="https://github.com/Warek01/self-development-catalog-ui"
-            className="flex gap-2 items-center justify-end"
-          >
-            <icons.Github height={20} width={20} />
+          <p className="flex gap-2 items-center justify-end">
+            <LinkIcon
+              Icon={icons.Github}
+              href="https://github.com/Warek01/self-development-catalog-ui"
+              size={24}
+            />
             Source code
-          </Link>
+          </p>
         </section>
       </main>
     </footer>

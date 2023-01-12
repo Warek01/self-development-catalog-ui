@@ -4,11 +4,15 @@
 @import 'tailwindcss/variants.css';
 
 @layer base {
+  * {
+    @apply duration-100;
+  }
+
   a {
     @apply text-black duration-150;
 
     &:hover {
-      @apply text-black/80;
+      @apply text-black/70;
     }
   }
 
