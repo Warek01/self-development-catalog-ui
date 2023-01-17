@@ -18,10 +18,10 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "baseUrl": ".",
+    "baseUrl": "./src/",
     "rootDir": ".",
     "typeRoots": [
-      "./types/"
+      "./src/types/"
     ],
     "alwaysStrict": true,
     "allowSyntheticDefaultImports": true,

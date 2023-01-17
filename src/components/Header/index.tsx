@@ -4,7 +4,8 @@ import Image from 'next/image';
 
 import responsiveContext from 'context/responsiveConext';
 import headerLinks from 'constants/headerLinks';
-import { icons } from 'components';
+import { icons } from 'components/index';
+import AppRoutes from '../../constants/appRoutes';
 
 interface Props {
   onMenuOpen: () => void;
@@ -24,7 +25,7 @@ const Header: FC<Props> = ({ onMenuOpen }) => {
   return (
     <header className="flex justify-between px-12 py-6 max-h-20">
       <Link
-        href="/"
+        href={AppRoutes.home}
         className="flex gap-6 items-center font-semibold text-lg md:text-xl"
       >
         <Image

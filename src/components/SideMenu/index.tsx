@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import responsiveContext from 'context/responsiveConext';
 import headerLinks from 'constants/headerLinks';
 import Link from 'next/link';
-import { icons } from 'components';
+import { icons } from 'components/index';
 
 interface Props {
   isOpen: boolean;

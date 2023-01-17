@@ -2,7 +2,7 @@ import { FC, memo } from 'react';
 import useSwr from 'swr';
 
 import { StrapiFindResponse } from 'types/strapi';
-import { icons, LinkIcon } from 'components';
+import { icons, LinkIcon } from 'components/index';
 import socialMediaIconsMap from 'constants/socialMediaIconsMap';
 
 const Footer: FC = () => {
