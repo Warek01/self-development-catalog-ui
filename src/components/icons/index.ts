@@ -32,6 +32,8 @@ import StencilJs from './StencilJs';
 import Javascript from './Javascript';
 import ExpressJs from './ExpressJs';
 import Loading from './Loading';
+import List from './List';
+import Hammer from './Hammer';
 
 export {
   Menu,
@@ -68,4 +70,6 @@ export {
   Javascript,
   ExpressJs,
   Loading,
+  List,
+  Hammer,
 };

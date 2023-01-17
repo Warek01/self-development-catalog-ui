@@ -3,7 +3,12 @@ import { GetStaticProps } from 'next';
 
 import ApiFacade from 'api';
 import { StrapiFindResponse, StrapiPageProps } from 'types/strapi';
-import { AboutPreview, CategorySelect, Welcome } from 'components';
+import {
+  AboutPreview,
+  CategorySelect,
+  FeatureSelect,
+  Welcome,
+} from 'components';
 
 interface HomeProps extends StrapiPageProps {
   categories: StrapiFindResponse<ArticleCategoryModel>;
@@ -15,6 +20,7 @@ const Home: FC<HomeProps> = ({ categories }) => {
       <Welcome />
       <AboutPreview />
       <CategorySelect categories={categories} />
+      <FeatureSelect />
     </div>
   );
 };

@@ -4,6 +4,7 @@ const AppRoutes = {
   articles: '/articles',
   about: '/about',
   work: '/my-work',
+  resources: '/resources',
   ANY: '*',
 };
 

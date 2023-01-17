@@ -8,6 +8,7 @@ import Welcome from './Welcome';
 import AboutPreview from './AboutPreview';
 import Loading from './Loading';
 import CategorySelect from './CategorySelect';
+import FeatureSelect from './FeatureSelect';
 
 export {
   Header,
@@ -19,4 +20,5 @@ export {
   AboutPreview,
   Loading,
   CategorySelect,
+  FeatureSelect,
 };

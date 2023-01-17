@@ -1,7 +1,7 @@
 import { FC, memo } from 'react';
 import useSwr from 'swr';
 
-import { StrapiFindResponse } from 'types/strapi';
+import type { StrapiFindResponse } from 'types/strapi';
 import { icons, LinkIcon } from 'components/index';
 import socialMediaIconsMap from 'constants/socialMediaIconsMap';
 import { Loading } from 'components';
