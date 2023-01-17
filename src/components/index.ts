@@ -6,5 +6,17 @@ import SideMenu from './SideMenu';
 import LinkIcon from './LinkIcon';
 import Welcome from './Welcome';
 import AboutPreview from './AboutPreview';
+import Loading from './Loading';
+import CategorySelect from './CategorySelect';
 
-export { Header, SideMenu, Footer, icons, LinkIcon, Welcome, AboutPreview };
+export {
+  Header,
+  SideMenu,
+  Footer,
+  icons,
+  LinkIcon,
+  Welcome,
+  AboutPreview,
+  Loading,
+  CategorySelect,
+};

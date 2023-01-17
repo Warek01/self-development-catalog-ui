@@ -9,6 +9,8 @@ export interface StrapiQuery {
   };
   sort?: string[];
   populate?: string[];
+
+  [key: string]: any;
 }
 
 // Error object in response
@@ -60,4 +62,24 @@ interface StrapiPagePropsFields {
 // Pages props should extend this if they want to search for data on Strapi
 interface StrapiPageProps {
   pageData: PageDataFields;
+}
+
+export interface StrapiMultimediaModel {
+  id: number;
+  attributes: {
+    name: string;
+    alternativeText?: string;
+    caption?: string;
+    height: number;
+    width: number;
+    formats?: any;
+    hash: string;
+    ext: string;
+    mime: string;
+    size: number;
+    url: string;
+    previewUrl?: string;
+    provider: string;
+    provider_metadata?: any;
+  };
 }

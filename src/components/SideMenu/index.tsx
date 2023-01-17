@@ -1,10 +1,13 @@
 import { FC, memo, useContext } from 'react';
 import classNames from 'classnames';
+import useSwr from 'swr';
 
 import responsiveContext from 'context/responsiveConext';
 import headerLinks from 'constants/headerLinks';
 import Link from 'next/link';
-import { icons } from 'components/index';
+import { icons, LinkIcon, Loading } from 'components/index';
+import { StrapiFindResponse } from '../../types/strapi';
+import socialMediaIconsMap from '../../constants/socialMediaIconsMap';
 
 interface Props {
   isOpen: boolean;
@@ -13,6 +16,10 @@ interface Props {
 
 const SideMenu: FC<Props> = ({ isOpen, onClose }) => {
   const { isMobileView } = useContext(responsiveContext);
+
+  const socialMediaLinks = useSwr<StrapiFindResponse<SocialMediaLinkModel>>(
+    process.env.NEXT_PUBLIC_STRAPI_API_URL + '/social-media-links',
+  );
 
   return isMobileView ? (
     <aside
@@ -36,6 +43,22 @@ const SideMenu: FC<Props> = ({ isOpen, onClose }) => {
           </Link>
         ))}
       </ul>
+
+      {socialMediaLinks.isLoading || socialMediaLinks.isValidating ? (
+        <Loading />
+      ) : (
+        <ul className="absolute bottom-12 gap-12 grid grid-cols-2 w-9/12">
+          {socialMediaLinks.data?.data?.map((link) => {
+            const Icon = socialMediaIconsMap[link.attributes.platform];
+
+            return (
+              <li key={link.id} className="col-span-1 flex items-center justify-center">
+                <LinkIcon Icon={Icon} size={32} href={link.attributes.href} />
+              </li>
+            );
+          })}
+        </ul>
+      )}
     </aside>
   ) : null;
 };

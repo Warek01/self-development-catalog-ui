@@ -31,6 +31,7 @@ import DB from './DB';
 import StencilJs from './StencilJs';
 import Javascript from './Javascript';
 import ExpressJs from './ExpressJs';
+import Loading from './Loading';
 
 export {
   Menu,
@@ -66,4 +67,5 @@ export {
   StencilJs,
   Javascript,
   ExpressJs,
+  Loading,
 };

@@ -10,18 +10,6 @@ declare global {
     }
   }
 
-  interface ArticleModel {
-    title: string;
-    details: string;
-    links: string[];
-    date: string;
-  }
-
-  interface SocialMediaLinkModel {
-    platform: SocialMediaPlatform;
-    href: string;
-  }
-
   type IconComponent = FC<SVGProps<SVGSVGElement>>;
 
   interface LinkProps {
