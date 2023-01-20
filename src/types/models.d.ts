@@ -1,5 +1,9 @@
-import { SocialMediaPlatform } from './index';
-import { StrapiEntity, StrapiMultimediaModel } from './strapi';
+import type { SocialMediaPlatform } from './index';
+import type {
+  StrapiFindOneResponse,
+  StrapiFindResponse,
+  StrapiMultimediaModel,
+} from './strapi';
 
 declare global {
   interface ArticleModel {
@@ -18,12 +22,15 @@ declare global {
     title: string;
     slug: string;
     bgColor: string;
-    icon: {
-      data: StrapiMultimediaModel;
-    };
-    articles?: {
-      data: StrapiEntity<ArticleModel>[];
-    };
+    icon: StrapiFindOneResponse<StrapiMultimediaModel>;
+    articles?: StrapiFindResponse<ArticleModel>;
+  }
+
+  interface OtherDataModel {
+    longTitle: string;
+    shortTitle: string;
+    logo: StrapiFindOneResponse<StrapiMultimediaModel>;
+    welcomeImage: StrapiFindOneResponse<StrapiMultimediaModel>;
   }
 }
 

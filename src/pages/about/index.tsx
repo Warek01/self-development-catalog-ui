@@ -1,11 +1,24 @@
 import { FC } from 'react';
+import { GetStaticProps } from 'next';
 
-import { StrapiPageProps } from 'types/strapi';
+import ApiFacade from 'api';
+import { AboutPageProps } from './interface';
 
-interface Props extends StrapiPageProps {}
-
-const AboutPage: FC<Props> = ({}) => {
+const AboutPage: FC<AboutPageProps> = ({}) => {
   return <div>About</div>;
 };
 
 export default AboutPage;
+
+export const getStaticProps: GetStaticProps<AboutPageProps> = async () => {
+  const api = new ApiFacade();
+
+  return {
+    props: {
+      pageData: await api.getPageProps('about'),
+      title: 'About',
+      description: 'Description',
+    },
+    revalidate: Number(process.env.REVALIDATE_TIMEOUT),
+  };
+};

@@ -1,8 +1,6 @@
 // Imports
-import { Component, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import type { AppProps } from 'next/app';
-import localFont from '@next/font/local';
-import classNames from 'classnames';
 import Head from 'next/head';
 
 // Side effects
@@ -12,15 +10,6 @@ import 'styles/globals.scss';
 import responsiveContext from 'context/responsiveConext';
 import hasStrapiPageProps from 'utils/guards/hasStrapiPageProps';
 import sideMenuContext, { SideMenuContextProps } from 'context/sideMenuContext';
-
-// Fonts
-const epilogue = localFont({
-  src: '../assets/fonts/Epilogue-VariableFont_wght.ttf',
-  preload: true,
-  display: 'swap',
-  fallback: ['monospace', 'Ubuntu', 'sans-serif'],
-  variable: '--font-epilogue',
-});
 
 const App = ({ Component, pageProps }: AppProps) => {
   const [isMobileView, setIsMobileView] = useState<boolean>(false);
@@ -54,15 +43,7 @@ const App = ({ Component, pageProps }: AppProps) => {
         <Head>
           <title>{title}</title>
         </Head>
-        <main
-          className={classNames(
-            epilogue.variable,
-            epilogue.className,
-            'relative min-w-screen max-w-screen overflow-x-hidden text-black font-epilogue px-6 md:px-12',
-          )}
-        >
-          <Component {...pageProps} />
-        </main>
+        <Component {...pageProps} />
       </sideMenuContext.Provider>
     </responsiveContext.Provider>
   );

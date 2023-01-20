@@ -2,13 +2,15 @@ import { FC, memo, useCallback, useContext } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
+import type { HeaderProps } from './interface';
+
 import responsiveContext from 'context/responsiveConext';
 import headerLinks from 'constants/headerLinks';
 import { icons } from 'components/index';
 import AppRoutes from 'constants/appRoutes';
 import sideMenuContext from 'context/sideMenuContext';
 
-const Header: FC = () => {
+const Header: FC<HeaderProps> = ({ longTitle, shortTitle, logo }) => {
   const { isMobileView } = useContext(responsiveContext);
   const { isOpen, open } = useContext(sideMenuContext);
 
@@ -27,8 +29,8 @@ const Header: FC = () => {
         className="flex gap-6 items-center font-semibold text-lg md:text-xl"
       >
         <Image
-          src="/Logo.png"
-          alt="Self development catalog"
+          src={process.env.NEXT_PUBLIC_STRAPI_URL + logo.data.attributes.url}
+          alt={longTitle}
           priority={true}
           width={32}
           height={32}
@@ -36,10 +38,8 @@ const Header: FC = () => {
           draggable={false}
           placeholder="empty"
         />
-        <span>
-          Self-Dev
-          <span className="hidden md:inline-block">elopment Catalog</span>
-        </span>
+        <span className="hidden md:inline-block">{longTitle}</span>
+        <span className="inline-block md:hidden">{shortTitle}</span>
       </Link>
       <div className="flex items-center">
         {isMobileView ? (

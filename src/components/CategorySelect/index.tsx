@@ -17,6 +17,7 @@ const CategorySelect: FC<Props> = ({ categories }) => {
               attributes={attributes}
               isFirst={index === 0}
               isEven={index % 2 === 1}
+              id={id}
             />
           </li>
         ))}

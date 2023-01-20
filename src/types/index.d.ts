@@ -7,6 +7,7 @@ declare global {
       NEXT_PUBLIC_STRAPI_URL: string;
       NEXT_PUBLIC_STRAPI_API_URL: string;
       NEXT_PUBLIC_APP_TITLE: string;
+      REVALIDATE_TIMEOUT: string;
     }
   }
 

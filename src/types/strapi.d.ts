@@ -65,21 +65,18 @@ interface StrapiPageProps {
 }
 
 export interface StrapiMultimediaModel {
-  id: number;
-  attributes: {
-    name: string;
-    alternativeText?: string;
-    caption?: string;
-    height: number;
-    width: number;
-    formats?: any;
-    hash: string;
-    ext: string;
-    mime: string;
-    size: number;
-    url: string;
-    previewUrl?: string;
-    provider: string;
-    provider_metadata?: any;
-  };
+  name: string;
+  alternativeText?: string;
+  caption?: string;
+  height: number;
+  width: number;
+  formats?: any;
+  hash: string;
+  ext: string;
+  mime: string;
+  size: number;
+  url: string;
+  previewUrl?: string;
+  provider: string;
+  provider_metadata?: any;
 }

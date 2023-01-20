@@ -8,6 +8,7 @@ import Welcome from './Welcome';
 import AboutPreview from './AboutPreview';
 import CategorySelect from './CategorySelect';
 import FeatureSelect from './FeatureSelect';
+import AppLayout from './AppLayout';
 
 export {
   Header,
@@ -19,4 +20,5 @@ export {
   AboutPreview,
   CategorySelect,
   FeatureSelect,
+  AppLayout,
 };

@@ -2,10 +2,17 @@ import { FC, memo } from 'react';
 import Image from 'next/image';
 import classNames from 'classnames';
 
+import type { StrapiFindOneResponse, StrapiMultimediaModel } from 'types/strapi';
+
 import { useRenderState } from 'utils/hooks';
 import style from './style.module.scss';
 
-const Welcome: FC = () => {
+interface Props {
+  message: string;
+  welcomeImage: StrapiFindOneResponse<StrapiMultimediaModel>;
+}
+
+const Welcome: FC<Props> = ({ message, welcomeImage }) => {
   const isRendered = useRenderState(150);
 
   return (
@@ -14,21 +21,19 @@ const Welcome: FC = () => {
         <p
           className={classNames(
             style.transition,
-            'w-fit text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold transform transform-gpu relative',
-            'left-0 md:hover:left-6 bottom-0 md:hover:bottom-4 z-10',
+            'w-fit text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold relative whitespace-pre-line',
+            'transform transform-gpu left-0 md:hover:left-6 bottom-0 md:hover:bottom-4 z-10',
             {
               'opacity-0 -translate-x-full': !isRendered,
             },
           )}
         >
-          Here I share thoughts
-          <br />
-          and resources
+          {message}
         </p>
       </div>
       <div className="flex items-center absolute right-12">
         <Image
-          src="/shapes.webp"
+          src={process.env.NEXT_PUBLIC_STRAPI_URL + welcomeImage.data.attributes.url}
           alt="Shapes"
           width={200}
           height={200}

@@ -1,18 +1,19 @@
 import Link from 'next/link';
 import { FC, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import classNames from 'classnames';
+import Image from 'next/image';
 
 import AppRoutes from 'constants/appRoutes';
-import responsiveContext from '../../../context/responsiveConext';
-import Image from 'next/image';
+import responsiveContext from 'context/responsiveConext';
 
 interface Props {
   attributes: ArticleCategoryModel;
+  id: number;
   isFirst: boolean;
   isEven: boolean;
 }
 
-const Category: FC<Props> = ({ attributes, isFirst, isEven }) => {
+const Category: FC<Props> = ({ attributes, isFirst, isEven, id }) => {
   const { isMobileView } = useContext(responsiveContext);
   const [isShown, setIsShown] = useState<boolean>(false);
   const observerTarget = useRef<HTMLDivElement>(null);
@@ -71,7 +72,7 @@ const Category: FC<Props> = ({ attributes, isFirst, isEven }) => {
           </p>
         )}
         <Link
-          href={`${AppRoutes.articles}/${attributes.slug}`}
+          href={`${AppRoutes.categories}/${id}`}
           className="relative flex-1 z-20 overflow-hidden z-20 peer group"
           style={{ backgroundColor: attributes.bgColor }}
         >

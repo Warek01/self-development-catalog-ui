@@ -1,47 +1,51 @@
 import { FC } from 'react';
 import { GetStaticProps } from 'next';
 
+import type { HomePageProps } from './interface';
+
 import ApiFacade from 'api';
-import type { StrapiFindResponse, StrapiPageProps } from 'types/strapi';
 import {
   AboutPreview,
+  AppLayout,
   CategorySelect,
   FeatureSelect,
-  Footer,
-  Header,
   SideMenu,
   Welcome,
 } from 'components';
 
-interface HomeProps extends StrapiPageProps {
-  categories: StrapiFindResponse<ArticleCategoryModel>;
-  socialMediaLinks: StrapiFindResponse<SocialMediaLinkModel>;
-}
-
-const Home: FC<HomeProps> = ({ categories, socialMediaLinks }) => {
+const Home: FC<HomePageProps> = (props) => {
   return (
-    <>
-      <SideMenu socialMediaLinks={socialMediaLinks} />
-      <Header />
-      <Welcome />
+    <AppLayout {...props.layoutProps}>
+      <SideMenu socialMediaLinks={props.socialMediaLinks} />
+      <Welcome message={props.welcomeMessage} welcomeImage={props.welcomeImage}/>
       <AboutPreview />
-      <CategorySelect categories={categories} />
+      <CategorySelect categories={props.categories} />
       <FeatureSelect />
-      <Footer socialMediaLinks={socialMediaLinks} />
-    </>
+    </AppLayout>
   );
 };
 
 export default Home;
 
-export const getStaticProps: GetStaticProps<HomeProps> = async () => {
+export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
   const api = new ApiFacade();
+
+  const homeProps = await api.singleTypes.getHomePageProps();
+  const pageData = await api.getPageProps('home');
+  const socialMediaLinks = await api.getSocialMediaLinks();
+  const categories = await api.articles.getAllCategories({
+    populate: ['icon'],
+  });
+  const layoutProps = await api.getAppLayoutProps();
 
   return {
     props: {
-      pageData: await api.getPageProps('Home'),
-      categories: await api.getArticleCategories({ populate: ['icon'] }),
-      socialMediaLinks: await api.getSocialMediaLinks(),
+      pageData,
+      categories,
+      socialMediaLinks,
+      layoutProps,
+      ...homeProps,
     },
+    revalidate: Number(process.env.REVALIDATE_TIMEOUT),
   };
 };

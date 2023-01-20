@@ -1,8 +1,9 @@
 import { FC, memo } from 'react';
 
+import type { FooterProps } from './interface';
+
 import { icons, LinkIcon } from 'components/index';
 import socialMediaIconsMap from 'constants/socialMediaIconsMap';
-import type FooterProps from './interface';
 
 const Footer: FC<FooterProps> = ({ socialMediaLinks }) => {
   return (

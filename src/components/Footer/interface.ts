@@ -1,5 +1,5 @@
-import { StrapiFindResponse } from '../../types/strapi';
+import type { StrapiFindResponse } from 'types/strapi';
 
-export default interface FooterProps {
+export interface FooterProps {
   socialMediaLinks: StrapiFindResponse<SocialMediaLinkModel>;
 }
