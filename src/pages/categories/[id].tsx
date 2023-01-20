@@ -40,6 +40,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
     paths: categories.data.map(({ id }) => ({
       params: { id: id.toString() },
     })),
-    fallback: true,
+    fallback: 'blocking',
   };
 };
