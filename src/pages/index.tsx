@@ -43,6 +43,5 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
       categories: await api.getArticleCategories({ populate: ['icon'] }),
       socialMediaLinks: await api.getSocialMediaLinks(),
     },
-    revalidate: 3600,
   };
 };

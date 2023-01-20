@@ -6,7 +6,7 @@ import responsiveContext from 'context/responsiveConext';
 import headerLinks from 'constants/headerLinks';
 import { icons } from 'components/index';
 import AppRoutes from 'constants/appRoutes';
-import sideMenuContext from '../../context/sideMenuContext';
+import sideMenuContext from 'context/sideMenuContext';
 
 const Header: FC = () => {
   const { isMobileView } = useContext(responsiveContext);
