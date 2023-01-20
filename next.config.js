@@ -9,7 +9,7 @@ const nextConfig = {
   images: {
     disableStaticImages: false,
     dangerouslyAllowSVG: true,
-    minimumCacheTTL: 60,
+    minimumCacheTTL: 30,
     unoptimized: false,
     domains: ['warek01-sdc-strapi-cms.herokuapp.com', 'localhost'],
   },
