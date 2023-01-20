@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "prod": "rm -rf build dist && next buid && next start -p $PORT",
+    "prod": "NODE_ENV=production rm -rf build dist && next build && next start -p $PORT",
     "format": "prettier -w ./src"
   },
   "engines": {
