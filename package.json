@@ -1,12 +1,12 @@
 {
-  "name": "ui",
+  "name": "self-development-catalog-ui",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "prod": "rm -rf build dist && next buid && next start -p $PORT",
     "format": "prettier -w ./src"
   },
   "engines": {

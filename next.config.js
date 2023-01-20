@@ -13,6 +13,16 @@ const nextConfig = {
     unoptimized: false,
     domains: ['warek01-sdc-strapi-cms.herokuapp.com', 'localhost'],
   },
+  optimizeFonts: true,
+  basePath: '',
+  compress: true,
+  crossOrigin: 'anonymous',
+  staticPageGenerationTimeout: 60,
+  skipTrailingSlashRedirect: true,
+  poweredByHeader: true,
+  env: {},
+  experimental: {},
+  generateEtags: true,
 };
 
 module.exports = nextConfig;
