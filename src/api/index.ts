@@ -50,4 +50,10 @@ export default class ApiFacade {
 
     return await this._get<StrapiPagePropsFields>(`/pages-data/${slug}`);
   }
+
+  public async getSocialMediaLinks(): Promise<
+    StrapiFindResponse<SocialMediaLinkModel>
+  > {
+    return await this._get('/social-media-links');
+  }
 }

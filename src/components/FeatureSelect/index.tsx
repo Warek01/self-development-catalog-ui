@@ -19,7 +19,7 @@ const FeatureSelect: FC = () => {
               height={56}
               className="duration-200 ease-in-out group-hover:fill-black/80"
             />
-            <p className="font-semibold text-sm md:text-lg text-center">{title}</p>
+            <p className="font-semibold text-sm md:text-lg text-center px-3 md:px-0">{title}</p>
           </Link>
         ) : (
           <div
@@ -29,7 +29,7 @@ const FeatureSelect: FC = () => {
             )}
           >
             <Icon width={56} height={56} />
-            <p className="font-semibold text-sm md:text-lg text-center">{title}</p>
+            <p className="font-semibold text-sm md:text-lg text-center px-3 md:px-0">{title}</p>
           </div>
         ),
       )}

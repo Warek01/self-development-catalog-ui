@@ -6,7 +6,6 @@ import SideMenu from './SideMenu';
 import LinkIcon from './LinkIcon';
 import Welcome from './Welcome';
 import AboutPreview from './AboutPreview';
-import Loading from './Loading';
 import CategorySelect from './CategorySelect';
 import FeatureSelect from './FeatureSelect';
 
@@ -18,7 +17,6 @@ export {
   LinkIcon,
   Welcome,
   AboutPreview,
-  Loading,
   CategorySelect,
   FeatureSelect,
 };

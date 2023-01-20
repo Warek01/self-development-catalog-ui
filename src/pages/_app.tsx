@@ -1,10 +1,9 @@
 // Imports
-import { Component, useEffect, useState } from 'react';
+import { Component, useEffect, useMemo, useState } from 'react';
 import type { AppProps } from 'next/app';
 import localFont from '@next/font/local';
 import classNames from 'classnames';
 import Head from 'next/head';
-import { SWRConfig } from 'swr';
 
 // Side effects
 import 'styles/globals.scss';
@@ -12,8 +11,7 @@ import 'styles/globals.scss';
 // Local imports
 import responsiveContext from 'context/responsiveConext';
 import hasStrapiPageProps from 'utils/guards/hasStrapiPageProps';
-import { Footer, Header, SideMenu } from 'components';
-import swrConfig from 'constants/swrConfig';
+import sideMenuContext, { SideMenuContextProps } from 'context/sideMenuContext';
 
 // Fonts
 const epilogue = localFont({
@@ -27,6 +25,15 @@ const epilogue = localFont({
 const App = ({ Component, pageProps }: AppProps) => {
   const [isMobileView, setIsMobileView] = useState<boolean>(false);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState<boolean>(false);
+
+  const sideMenuContextValue = useMemo<SideMenuContextProps>(
+    () => ({
+      isOpen: isSideMenuOpen,
+      open: () => setIsSideMenuOpen(true),
+      close: () => setIsSideMenuOpen(false),
+    }),
+    [isSideMenuOpen],
+  );
 
   const title = hasStrapiPageProps(pageProps)
     ? pageProps.pageData.title
@@ -42,8 +49,8 @@ const App = ({ Component, pageProps }: AppProps) => {
   }, []);
 
   return (
-    <SWRConfig value={swrConfig}>
-      <responsiveContext.Provider value={{ isMobileView }}>
+    <responsiveContext.Provider value={{ isMobileView }}>
+      <sideMenuContext.Provider value={sideMenuContextValue}>
         <Head>
           <title>{title}</title>
         </Head>
@@ -51,19 +58,13 @@ const App = ({ Component, pageProps }: AppProps) => {
           className={classNames(
             epilogue.variable,
             epilogue.className,
-            'relative min-w-screen max-w-screen overflow-x-hidden text-black font-epilogue',
+            'relative min-w-screen max-w-screen overflow-x-hidden text-black font-epilogue px-6 md:px-12',
           )}
         >
-          <SideMenu
-            isOpen={isSideMenuOpen}
-            onClose={() => setIsSideMenuOpen(false)}
-          />
-          <Header onMenuOpen={() => setIsSideMenuOpen(true)} />
           <Component {...pageProps} />
         </main>
-        <Footer />
-      </responsiveContext.Provider>
-    </SWRConfig>
+      </sideMenuContext.Provider>
+    </responsiveContext.Provider>
   );
 };
 

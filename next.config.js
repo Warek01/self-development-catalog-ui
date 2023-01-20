@@ -13,7 +13,7 @@ const nextConfig = {
     disableStaticImages: false,
     dangerouslyAllowSVG: true,
     minimumCacheTTL: 60,
-    domains: ['localhost', '192.168.100.49'],
+    domains: ['localhost', '192.168.100.49', '83.218.209.41'],
     unoptimized: false,
   },
   trailingSlash: true,

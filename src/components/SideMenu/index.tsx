@@ -1,25 +1,17 @@
 import { FC, memo, useContext } from 'react';
 import classNames from 'classnames';
-import useSwr from 'swr';
+import Link from 'next/link';
 
 import responsiveContext from 'context/responsiveConext';
 import headerLinks from 'constants/headerLinks';
-import Link from 'next/link';
-import { icons, LinkIcon, Loading } from 'components/index';
-import { StrapiFindResponse } from '../../types/strapi';
-import socialMediaIconsMap from '../../constants/socialMediaIconsMap';
+import { icons, LinkIcon } from 'components';
+import socialMediaIconsMap from 'constants/socialMediaIconsMap';
+import sideMenuContext from 'context/sideMenuContext';
+import type SideMenuProps from './interface';
 
-interface Props {
-  isOpen: boolean;
-  onClose: () => void;
-}
-
-const SideMenu: FC<Props> = ({ isOpen, onClose }) => {
+const SideMenu: FC<SideMenuProps> = ({ socialMediaLinks }) => {
   const { isMobileView } = useContext(responsiveContext);
-
-  const socialMediaLinks = useSwr<StrapiFindResponse<SocialMediaLinkModel>>(
-    process.env.NEXT_PUBLIC_STRAPI_API_URL + '/social-media-links',
-  );
+  const { isOpen, close } = useContext(sideMenuContext);
 
   return isMobileView ? (
     <aside
@@ -32,7 +24,7 @@ const SideMenu: FC<Props> = ({ isOpen, onClose }) => {
       )}
     >
       <div className="flex w-full pr-12 pb-16 justify-end">
-        <button onClick={onClose} className="p-2 rounded-full">
+        <button onClick={() => close()} className="p-2 rounded-full">
           <icons.Close width={32} height={32} />
         </button>
       </div>
@@ -43,22 +35,23 @@ const SideMenu: FC<Props> = ({ isOpen, onClose }) => {
           </Link>
         ))}
       </ul>
+      <ul className="absolute bottom-12 gap-12 grid grid-cols-2 w-9/12">
+        {socialMediaLinks.data?.map((link) => {
+          const Icon =
+            socialMediaIconsMap[
+              link.attributes.platform as SocialMediaPlatform
+            ];
 
-      {socialMediaLinks.isLoading || socialMediaLinks.isValidating ? (
-        <Loading />
-      ) : (
-        <ul className="absolute bottom-12 gap-12 grid grid-cols-2 w-9/12">
-          {socialMediaLinks.data?.data?.map((link) => {
-            const Icon = socialMediaIconsMap[link.attributes.platform];
-
-            return (
-              <li key={link.id} className="col-span-1 flex items-center justify-center">
-                <LinkIcon Icon={Icon} size={32} href={link.attributes.href} />
-              </li>
-            );
-          })}
-        </ul>
-      )}
+          return (
+            <li
+              key={link.id}
+              className="col-span-1 flex items-center justify-center"
+            >
+              <LinkIcon Icon={Icon} size={32} href={link.attributes.href} />
+            </li>
+          );
+        })}
+      </ul>
     </aside>
   ) : null;
 };

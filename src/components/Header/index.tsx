@@ -5,25 +5,23 @@ import Image from 'next/image';
 import responsiveContext from 'context/responsiveConext';
 import headerLinks from 'constants/headerLinks';
 import { icons } from 'components/index';
-import AppRoutes from '../../constants/appRoutes';
+import AppRoutes from 'constants/appRoutes';
+import sideMenuContext from '../../context/sideMenuContext';
 
-interface Props {
-  onMenuOpen: () => void;
-}
-
-const Header: FC<Props> = ({ onMenuOpen }) => {
+const Header: FC = () => {
   const { isMobileView } = useContext(responsiveContext);
+  const { isOpen, open } = useContext(sideMenuContext);
 
   const handleOpenMenu = useCallback(() => {
     if (!isMobileView) {
       return;
     }
 
-    onMenuOpen();
-  }, [onMenuOpen, isMobileView]);
+    open();
+  }, [isOpen, isMobileView]);
 
   return (
-    <header className="flex justify-between px-12 py-6 max-h-20">
+    <header className="flex justify-between py-6 max-h-20">
       <Link
         href={AppRoutes.home}
         className="flex gap-6 items-center font-semibold text-lg md:text-xl"
