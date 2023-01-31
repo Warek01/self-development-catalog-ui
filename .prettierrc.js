@@ -1,5 +1,5 @@
 module.exports = {
-  semi: true,
+  semi: false,
   useTabs: false,
   arrowParens: 'always',
   bracketSameLine: false,
@@ -12,4 +12,6 @@ module.exports = {
   bracketSpacing: true,
   printWidth: 80,
   proseWrap: 'preserve',
+  embeddedLanguageFormatting: "auto",
+  singleAttributePerLine: true
 };

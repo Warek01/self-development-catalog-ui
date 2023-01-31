@@ -13,6 +13,6 @@ const Html: IconComponent = (props) => (
       </g>
     </g>
   </svg>
-);
+)
 
-export default Html;
+export default Html

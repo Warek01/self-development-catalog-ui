@@ -1,17 +1,17 @@
-import { FC, memo, useContext } from 'react';
-import classNames from 'classnames';
-import Link from 'next/link';
+import { FC, memo, useContext } from 'react'
+import classNames from 'classnames'
+import Link from 'next/link'
 
-import responsiveContext from 'context/responsiveConext';
-import headerLinks from 'constants/headerLinks';
-import { icons, LinkIcon } from 'components';
-import socialMediaIconsMap from 'constants/socialMediaIconsMap';
-import sideMenuContext from 'context/sideMenuContext';
-import type SideMenuProps from './interface';
+import responsiveContext from 'context/responsiveConext'
+import headerLinks from 'constants/headerLinks'
+import { icons, LinkIcon } from 'components'
+import socialMediaIconsMap from 'constants/socialMediaIconsMap'
+import sideMenuContext from 'context/sideMenuContext'
+import type SideMenuProps from './interface'
 
 const SideMenu: FC<SideMenuProps> = ({ socialMediaLinks }) => {
-  const { isMobileView } = useContext(responsiveContext);
-  const { isOpen, close } = useContext(sideMenuContext);
+  const { isMobileView } = useContext(responsiveContext)
+  const { isOpen, close } = useContext(sideMenuContext)
 
   return isMobileView ? (
     <aside
@@ -24,13 +24,22 @@ const SideMenu: FC<SideMenuProps> = ({ socialMediaLinks }) => {
       )}
     >
       <div className="flex w-full pr-12 pb-16 justify-end">
-        <button onClick={() => close()} className="p-2 rounded-full">
-          <icons.Close width={32} height={32} />
+        <button
+          onClick={() => close()}
+          className="p-2 rounded-full"
+        >
+          <icons.Close
+            width={32}
+            height={32}
+          />
         </button>
       </div>
       <ul className="flex flex-col items-center gap-8 text-2xl">
         {headerLinks.map((link) => (
-          <Link href={link.href} key={link.text}>
+          <Link
+            href={link.href}
+            key={link.text}
+          >
             {link.text}
           </Link>
         ))}
@@ -38,22 +47,24 @@ const SideMenu: FC<SideMenuProps> = ({ socialMediaLinks }) => {
       <ul className="absolute bottom-12 gap-12 grid grid-cols-2 w-9/12">
         {socialMediaLinks.data?.map((link) => {
           const Icon =
-            socialMediaIconsMap[
-              link.attributes.platform as SocialMediaPlatform
-            ];
+            socialMediaIconsMap[link.attributes.platform as SocialMediaPlatform]
 
           return (
             <li
               key={link.id}
               className="col-span-1 flex items-center justify-center"
             >
-              <LinkIcon Icon={Icon} size={32} href={link.attributes.href} />
+              <LinkIcon
+                Icon={Icon}
+                size={32}
+                href={link.attributes.link}
+              />
             </li>
-          );
+          )
         })}
       </ul>
     </aside>
-  ) : null;
-};
+  ) : null
+}
 
-export default memo(SideMenu);
+export default memo(SideMenu)

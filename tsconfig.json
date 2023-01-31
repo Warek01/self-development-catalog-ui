@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ES6",
     "lib": [
       "dom",
       "dom.iterable",
@@ -20,14 +20,9 @@
     "incremental": true,
     "baseUrl": "./src/",
     "rootDir": ".",
-    "typeRoots": [
-      "./src/types/"
-    ],
     "alwaysStrict": true,
     "allowSyntheticDefaultImports": true,
     "newLine": "lf",
-    "pretty": true,
-    "removeComments": true
   },
   "include": [
     "next-env.d.ts",

@@ -10,6 +10,6 @@ const Css: IconComponent = (props) => (
       fill="black"
     />
   </svg>
-);
+)
 
-export default Css;
+export default Css

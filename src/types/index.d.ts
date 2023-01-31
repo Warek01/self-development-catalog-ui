@@ -1,21 +1,19 @@
-import { FC, SVGProps } from 'react';
+import type { FC, SVGProps } from 'react'
 
 // Globally available types
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
-      NEXT_PUBLIC_STRAPI_URL: string;
-      NEXT_PUBLIC_STRAPI_API_URL: string;
-      NEXT_PUBLIC_APP_TITLE: string;
-      REVALIDATE_TIMEOUT: string;
+      STRAPI_PUBLIC_TOKEN: string
+      NEXT_PUBLIC_STRAPI_UTL: string
     }
   }
 
-  type IconComponent = FC<SVGProps<SVGSVGElement>>;
+  type IconComponent = FC<SVGProps<SVGSVGElement>>
 
   interface LinkProps {
-    href: string;
-    text: string;
+    href: string
+    text: string
   }
 
   type SocialMediaPlatform =
@@ -25,7 +23,7 @@ declare global {
     | 'github'
     | 'gitlab'
     | 'linkedIn'
-    | 'instagram';
+    | 'instagram'
 }
 
-export {};
+export {}

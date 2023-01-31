@@ -1,3 +1,3 @@
-import useRenderState from './useRenderState';
+import useRenderState from './useRenderState'
 
-export { useRenderState };
+export { useRenderState }

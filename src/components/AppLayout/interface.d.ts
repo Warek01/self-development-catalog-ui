@@ -1,7 +1,5 @@
-import type { HeaderProps } from '../Header/interface';
-import type { FooterProps } from '../Footer/interface';
+import type { StrapiFindResponse } from 'types/strapi'
 
 export interface AppLayoutProps {
-  headerProps: HeaderProps;
-  footerProps: FooterProps;
+  socialMedias: StrapiFindResponse<SocialMediaModel>
 }

@@ -1,11 +1,11 @@
-import {icons} from 'components'
-import AppRoutes from './appRoutes';
+import { icons } from 'components'
+import AppRoutes from './appRoutes'
 
 interface Feature {
-  Icon: IconComponent;
-  title: string;
-  slug: string;
-  accessible: boolean;
+  Icon: IconComponent
+  title: string
+  slug: string
+  accessible: boolean
 }
 
 const featuresList: Feature[] = [
@@ -27,6 +27,6 @@ const featuresList: Feature[] = [
     slug: AppRoutes.home,
     accessible: false,
   },
-];
+]
 
 export default featuresList

@@ -1,5 +1,5 @@
-import type { StrapiFindResponse } from 'types/strapi';
+import type { StrapiFindResponse } from 'types/strapi'
 
 export default interface SideMenuProps {
-  socialMediaLinks: StrapiFindResponse<SocialMediaLinkModel>;
+  socialMediaLinks: StrapiFindResponse<SocialMediaModel>
 }

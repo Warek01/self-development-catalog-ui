@@ -1,19 +1,19 @@
 // Imports
-import { useEffect, useMemo, useState } from 'react';
-import type { AppProps } from 'next/app';
-import Head from 'next/head';
+import { useEffect, useMemo, useState } from 'react'
+import type { AppProps } from 'next/app'
+import { ApolloProvider } from '@apollo/client'
 
 // Side effects
-import 'styles/globals.scss';
+import 'styles/globals.scss'
 
 // Local imports
-import responsiveContext from 'context/responsiveConext';
-import hasStrapiPageProps from 'utils/guards/hasStrapiPageProps';
-import sideMenuContext, { SideMenuContextProps } from 'context/sideMenuContext';
+import responsiveContext from 'context/responsiveConext'
+import sideMenuContext, { SideMenuContextProps } from 'context/sideMenuContext'
+import { apolloSsrClient } from 'utils/gql/client'
 
 const App = ({ Component, pageProps }: AppProps) => {
-  const [isMobileView, setIsMobileView] = useState<boolean>(false);
-  const [isSideMenuOpen, setIsSideMenuOpen] = useState<boolean>(false);
+  const [isMobileView, setIsMobileView] = useState<boolean>(false)
+  const [isSideMenuOpen, setIsSideMenuOpen] = useState<boolean>(false)
 
   const sideMenuContextValue = useMemo<SideMenuContextProps>(
     () => ({
@@ -22,31 +22,26 @@ const App = ({ Component, pageProps }: AppProps) => {
       close: () => setIsSideMenuOpen(false),
     }),
     [isSideMenuOpen],
-  );
-
-  const title = hasStrapiPageProps(pageProps)
-    ? pageProps.pageData.title
-    : process.env.NEXT_PUBLIC_APP_TITLE;
+  )
 
   useEffect(() => {
-    const mediaQuery = matchMedia('(width < 768px)');
+    const mediaQuery = matchMedia('(width < 768px)')
 
-    setIsMobileView(mediaQuery.matches);
+    setIsMobileView(mediaQuery.matches)
     mediaQuery.addEventListener('change', ({ matches }) =>
       setIsMobileView(matches),
-    );
-  }, []);
+    )
+  }, [])
 
   return (
-    <responsiveContext.Provider value={{ isMobileView }}>
-      <sideMenuContext.Provider value={sideMenuContextValue}>
-        <Head>
-          <title>{title}</title>
-        </Head>
-        <Component {...pageProps} />
-      </sideMenuContext.Provider>
-    </responsiveContext.Provider>
-  );
-};
+    <ApolloProvider client={apolloSsrClient}>
+      <responsiveContext.Provider value={{ isMobileView }}>
+        <sideMenuContext.Provider value={sideMenuContextValue}>
+          <Component {...pageProps} />
+        </sideMenuContext.Provider>
+      </responsiveContext.Provider>
+    </ApolloProvider>
+  )
+}
 
-export default App;
+export default App

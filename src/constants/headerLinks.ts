@@ -11,6 +11,6 @@ const headerLinks: LinkProps[] = [
     text: 'Contact',
     href: '#',
   },
-];
+]
 
-export default headerLinks;
+export default headerLinks

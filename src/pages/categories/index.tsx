@@ -1,7 +1,7 @@
-import { FC } from 'react';
+import { FC } from 'react'
 
 const Articles: FC = () => {
-  return <p>123</p>;
-};
+  return <p>123</p>
+}
 
-export default Articles;
+export default Articles

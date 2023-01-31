@@ -1,9 +1,8 @@
-import { FC } from 'react';
-import { GetStaticProps } from 'next';
+import { FC } from 'react'
+import { GetStaticProps } from 'next'
 
-import type { HomePageProps } from './interface';
+import type { StrapiFindResponse } from 'types/strapi'
 
-import ApiFacade from 'api';
 import {
   AboutPreview,
   AppLayout,
@@ -11,41 +10,52 @@ import {
   FeatureSelect,
   SideMenu,
   Welcome,
-} from 'components';
+} from 'components'
+import { apolloSsrClient } from 'utils/gql/client'
+import {
+  GET_ALL_SOCIAL_MEDIAS,
+  GetAllSocialMediasQueryResponse,
+} from 'utils/gql/socialMedias'
+import {
+  GET_ALL_CATEGORIES,
+  GetAllCategoriesQueryResponse,
+} from 'utils/gql/articles'
 
-const Home: FC<HomePageProps> = (props) => {
+interface Props {
+  socialMedias: StrapiFindResponse<SocialMediaModel>
+  categories: StrapiFindResponse<ArticleCategoryModel>
+}
+
+const Home: FC<Props> = ({ socialMedias, categories }) => {
   return (
-    <AppLayout {...props.layoutProps}>
-      <SideMenu socialMediaLinks={props.socialMediaLinks} />
-      <Welcome message={props.welcomeMessage} welcomeImage={props.welcomeImage}/>
-      <AboutPreview />
-      <CategorySelect categories={props.categories} />
+    <AppLayout socialMedias={socialMedias}>
+      <SideMenu socialMediaLinks={socialMedias} />
+      <Welcome />
+       <AboutPreview />
+       <CategorySelect categories={categories} />
       <FeatureSelect />
     </AppLayout>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home
 
-export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
-  const api = new ApiFacade();
+export const getStaticProps: GetStaticProps<Props> = async () => {
+  const socialMedias =
+    await apolloSsrClient.query<GetAllSocialMediasQueryResponse>({
+      query: GET_ALL_SOCIAL_MEDIAS,
+    })
 
-  const homeProps = await api.singleTypes.getHomePageProps();
-  const pageData = await api.getPageProps('home');
-  const socialMediaLinks = await api.getSocialMediaLinks();
-  const categories = await api.articles.getAllCategories({
-    populate: ['icon'],
-  });
-  const layoutProps = await api.getAppLayoutProps();
+  const categories = await apolloSsrClient.query<GetAllCategoriesQueryResponse>(
+    {
+      query: GET_ALL_CATEGORIES,
+    },
+  )
 
   return {
     props: {
-      pageData,
-      categories,
-      socialMediaLinks,
-      layoutProps,
-      ...homeProps,
+      socialMedias: socialMedias.data.socialMedias,
+      categories: categories.data.articleCategories,
     },
-    revalidate: Number(process.env.REVALIDATE_TIMEOUT),
-  };
-};
+  }
+}

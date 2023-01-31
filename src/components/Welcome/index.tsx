@@ -1,19 +1,12 @@
-import { FC, memo } from 'react';
-import Image from 'next/image';
-import classNames from 'classnames';
+import { FC, memo } from 'react'
+import Image from 'next/image'
+import classNames from 'classnames'
 
-import type { StrapiFindOneResponse, StrapiMultimediaModel } from 'types/strapi';
+import { useRenderState } from 'utils/hooks'
+import style from './style.module.scss'
 
-import { useRenderState } from 'utils/hooks';
-import style from './style.module.scss';
-
-interface Props {
-  message: string;
-  welcomeImage: StrapiFindOneResponse<StrapiMultimediaModel>;
-}
-
-const Welcome: FC<Props> = ({ message, welcomeImage }) => {
-  const isRendered = useRenderState(150);
+const Welcome: FC= () => {
+  const isRendered = useRenderState(150)
 
   return (
     <div className="flex py-20 justify-between items-center w-full md:my-12">
@@ -28,12 +21,13 @@ const Welcome: FC<Props> = ({ message, welcomeImage }) => {
             },
           )}
         >
-          {message}
+          Here I share thoughts
+          and resources
         </p>
       </div>
       <div className="flex items-center absolute right-12">
         <Image
-          src={process.env.NEXT_PUBLIC_STRAPI_URL + welcomeImage.data.attributes.url}
+          src="/shapes-min.webp"
           alt="Shapes"
           width={200}
           height={200}
@@ -51,7 +45,7 @@ const Welcome: FC<Props> = ({ message, welcomeImage }) => {
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default memo(Welcome);
+export default memo(Welcome)

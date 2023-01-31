@@ -1,14 +1,14 @@
-import { FC, memo } from 'react';
-import classNames from 'classnames';
+import { FC, memo } from 'react'
+import classNames from 'classnames'
 
-import { useRenderState } from 'utils/hooks';
-import { icons } from 'components/index';
-import Link from 'next/link';
+import { useRenderState } from 'utils/hooks'
+import { icons } from 'components/index'
+import Link from 'next/link'
 
-const iconSize = 56;
+const iconSize = 56
 
 const AboutPreview: FC = () => {
-  const isRendered = useRenderState(150);
+  const isRendered = useRenderState(150)
 
   return (
     <div className="mx-auto my-8 border-y border-y border-y-black/20">
@@ -64,7 +64,7 @@ const AboutPreview: FC = () => {
         </p>
       </Link>
     </div>
-  );
-};
+  )
+}
 
-export default memo(AboutPreview);
+export default memo(AboutPreview)

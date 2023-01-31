@@ -1,4 +1,4 @@
-import { icons } from 'components';
+import { icons } from 'components'
 
 const socialMediaIconsMap: Record<SocialMediaPlatform, IconComponent> = {
   discord: icons.Discord,
@@ -8,6 +8,6 @@ const socialMediaIconsMap: Record<SocialMediaPlatform, IconComponent> = {
   web: icons.Globe,
   instagram: icons.Instagram,
   linkedIn: icons.LinkedIn,
-};
+}
 
-export default socialMediaIconsMap;
+export default socialMediaIconsMap

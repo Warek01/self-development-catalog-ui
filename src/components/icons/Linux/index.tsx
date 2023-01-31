@@ -18,6 +18,6 @@ const Linux: IconComponent = (props) => (
       />
     </g>
   </svg>
-);
+)
 
-export default Linux;
+export default Linux

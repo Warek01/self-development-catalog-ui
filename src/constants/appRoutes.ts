@@ -6,6 +6,6 @@ const AppRoutes = {
   work: '/my-work',
   resources: '/resources',
   ANY: '*',
-};
+}
 
-export default AppRoutes;
+export default AppRoutes

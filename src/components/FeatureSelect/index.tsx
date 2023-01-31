@@ -1,8 +1,8 @@
-import { FC } from 'react';
-import classNames from 'classnames';
-import Link from 'next/link';
+import { FC } from 'react'
+import classNames from 'classnames'
+import Link from 'next/link'
 
-import featuresList from 'constants/featuresList';
+import featuresList from 'constants/featuresList'
 
 const FeatureSelect: FC = () => {
   return (
@@ -19,7 +19,9 @@ const FeatureSelect: FC = () => {
               height={56}
               className="duration-200 ease-in-out group-hover:fill-black/80"
             />
-            <p className="font-semibold text-sm md:text-lg text-center px-3 md:px-0">{title}</p>
+            <p className="font-semibold text-sm md:text-lg text-center px-3 md:px-0">
+              {title}
+            </p>
           </Link>
         ) : (
           <div
@@ -28,13 +30,18 @@ const FeatureSelect: FC = () => {
               'flex flex-col items-center justify-center gap-6 cursor-not-allowed',
             )}
           >
-            <Icon width={56} height={56} />
-            <p className="font-semibold text-sm md:text-lg text-center px-3 md:px-0">{title}</p>
+            <Icon
+              width={56}
+              height={56}
+            />
+            <p className="font-semibold text-sm md:text-lg text-center px-3 md:px-0">
+              {title}
+            </p>
           </div>
         ),
       )}
     </div>
-  );
-};
+  )
+}
 
-export default FeatureSelect;
+export default FeatureSelect

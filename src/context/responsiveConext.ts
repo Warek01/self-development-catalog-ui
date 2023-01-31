@@ -1,11 +1,11 @@
-import { createContext } from 'react';
+import { createContext } from 'react'
 
 export interface ResponsiveContextProps {
-  isMobileView: boolean;
+  isMobileView: boolean
 }
 
 const responsiveContext = createContext<ResponsiveContextProps>({
   isMobileView: false,
-});
+})
 
-export default responsiveContext;
+export default responsiveContext

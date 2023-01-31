@@ -1,10 +1,10 @@
-import { FC, PropsWithChildren } from 'react';
-import classNames from 'classnames';
-import localFont from '@next/font/local';
+import { FC, memo, PropsWithChildren } from 'react'
+import classNames from 'classnames'
+import localFont from '@next/font/local'
 
-import type { AppLayoutProps } from './interface';
+import type { AppLayoutProps } from './interface'
 
-import { Footer, Header } from 'components';
+import { Footer, Header } from 'components'
 
 // Fonts
 const epilogue = localFont({
@@ -13,12 +13,11 @@ const epilogue = localFont({
   display: 'swap',
   fallback: ['monospace', 'Ubuntu', 'sans-serif'],
   variable: '--font-epilogue',
-});
+})
 
 const AppLayout: FC<PropsWithChildren<AppLayoutProps>> = ({
-  headerProps,
   children,
-  footerProps,
+  socialMedias,
 }) => {
   return (
     <main
@@ -28,11 +27,11 @@ const AppLayout: FC<PropsWithChildren<AppLayoutProps>> = ({
         'relative min-w-screen max-w-screen overflow-x-hidden text-black font-epilogue px-6 md:px-12',
       )}
     >
-      <Header {...headerProps} />
+      <Header />
       {children}
-      <Footer {...footerProps} />
+      <Footer socialMedias={socialMedias} />
     </main>
-  );
-};
+  )
+}
 
-export default AppLayout;
+export default memo(AppLayout)

@@ -1,5 +1,4 @@
-/** @type {import('next').NextConfig} */
-const path = require('path');
+const path = require('path')
 
 /** @type {import('next/types').NextConfig} */
 const nextConfig = {
@@ -11,12 +10,12 @@ const nextConfig = {
     dangerouslyAllowSVG: true,
     minimumCacheTTL: 3600,
     unoptimized: false,
-    domains: ['warek01-sdc-strapi-cms.herokuapp.com', 'localhost'],
+    domains: ['localhost'],
   },
   optimizeFonts: true,
   basePath: '',
   compress: true,
   crossOrigin: 'anonymous',
-};
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig

@@ -1,27 +1,34 @@
-import { FC, memo } from 'react';
+import { FC, memo } from 'react'
 
-import type { FooterProps } from './interface';
+import { icons, LinkIcon } from 'components/index'
+import socialMediaIconsMap from 'constants/socialMediaIconsMap'
+import { StrapiFindResponse } from '../../types/strapi';
 
-import { icons, LinkIcon } from 'components/index';
-import socialMediaIconsMap from 'constants/socialMediaIconsMap';
+export interface Props {
+  socialMedias: StrapiFindResponse<SocialMediaModel>
+}
 
-const Footer: FC<FooterProps> = ({ socialMediaLinks }) => {
+const Footer: FC<Props> = ({ socialMedias }) => {
   return (
     <footer className="flex justify-between border-t border-black/20 py-4">
       <nav className="flex-col gap-2 hidden md:flex">
         Follow me
         <ul className="flex gap-6">
-          {socialMediaLinks.data?.map((link) => {
+          {socialMedias.data?.map((link) => {
             const Icon =
               socialMediaIconsMap[
                 link.attributes.platform as SocialMediaPlatform
-              ];
+              ]
 
             return (
               <li key={link.id}>
-                <LinkIcon Icon={Icon} size={32} href={link.attributes.href} />
+                <LinkIcon
+                  Icon={Icon}
+                  size={32}
+                  href={link.attributes.link}
+                />
               </li>
-            );
+            )
           })}
         </ul>
       </nav>
@@ -39,7 +46,7 @@ const Footer: FC<FooterProps> = ({ socialMediaLinks }) => {
         </p>
       </section>
     </footer>
-  );
-};
+  )
+}
 
-export default memo(Footer);
+export default memo(Footer)

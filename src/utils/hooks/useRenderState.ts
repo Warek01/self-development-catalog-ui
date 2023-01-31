@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
 
 const useRenderState = (delay = 0): boolean => {
-  const [isRendered, setIsRendered] = useState<boolean>(false);
+  const [isRendered, setIsRendered] = useState<boolean>(false)
 
   useEffect(() => {
     setTimeout(() => {
-      setIsRendered(true);
-    }, delay);
-  }, []);
+      setIsRendered(true)
+    }, delay)
+  }, [])
 
-  return isRendered;
-};
+  return isRendered
+}
 
-export default useRenderState;
+export default useRenderState
