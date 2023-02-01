@@ -57,10 +57,10 @@ const AboutPreview: FC = () => {
           />
         </div>
         <p
-          className="uppercase text-3xl font-medium absolute tracking-widest -translate-y-full
+          className="uppercase text-3xl font-medium absolute tracking-widest -translate-y-full text-black
             -bottom-[200px] group-hover:bottom-0 duration-500 ease-in-out"
         >
-          About me
+          About
         </p>
       </Link>
     </div>

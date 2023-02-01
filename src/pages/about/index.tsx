@@ -1,15 +1,21 @@
 import { FC } from 'react'
 import { GetStaticProps } from 'next'
+import Head from 'next/head'
 
 const AboutPage: FC = () => {
-  return <div>About</div>
+  return (
+    <>
+      <Head>
+        <title>About</title>
+      </Head>
+    </>
+  )
 }
 
 export default AboutPage
 
 export const getStaticProps: GetStaticProps = async () => {
-
   return {
-    props: {}
+    props: {},
   }
 }

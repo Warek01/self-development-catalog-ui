@@ -9,6 +9,9 @@ import AboutPreview from './AboutPreview'
 import CategorySelect from './CategorySelect'
 import FeatureSelect from './FeatureSelect'
 import AppLayout from './AppLayout'
+import CategoriesList from './CategoriesList'
+import Article from './Article'
+import UsefulResources from './UsefulResources'
 
 export {
   Header,
@@ -21,4 +24,7 @@ export {
   CategorySelect,
   FeatureSelect,
   AppLayout,
+  CategoriesList,
+  Article,
+  UsefulResources,
 }

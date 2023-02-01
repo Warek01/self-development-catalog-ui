@@ -24,7 +24,7 @@ const Header: FC = () => {
     <header className="flex justify-between py-6 max-h-20">
       <Link
         href={AppRoutes.home}
-        className="flex gap-6 items-center font-semibold text-lg md:text-xl"
+        className="flex gap-6 items-center font-semibold text-lg md:text-xl text-black"
       >
         <Image
           src="/Logo.png"
@@ -56,7 +56,7 @@ const Header: FC = () => {
               <Link
                 href={link.href}
                 key={link.text}
-                className=""
+                className="text-black"
               >
                 {link.text}
               </Link>

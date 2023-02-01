@@ -2,6 +2,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import type { AppProps } from 'next/app'
 import { ApolloProvider } from '@apollo/client'
+import Head from 'next/head'
 
 // Side effects
 import 'styles/globals.scss'
@@ -34,13 +35,18 @@ const App = ({ Component, pageProps }: AppProps) => {
   }, [])
 
   return (
-    <ApolloProvider client={apolloSsrClient}>
-      <responsiveContext.Provider value={{ isMobileView }}>
-        <sideMenuContext.Provider value={sideMenuContextValue}>
-          <Component {...pageProps} />
-        </sideMenuContext.Provider>
-      </responsiveContext.Provider>
-    </ApolloProvider>
+    <>
+      <Head>
+        <title>Self Dev</title>
+      </Head>
+      <ApolloProvider client={apolloSsrClient}>
+        <responsiveContext.Provider value={{ isMobileView }}>
+          <sideMenuContext.Provider value={sideMenuContextValue}>
+            <Component {...pageProps} />
+          </sideMenuContext.Provider>
+        </responsiveContext.Provider>
+      </ApolloProvider>
+    </>
   )
 }
 

@@ -12,7 +12,7 @@ const FeatureSelect: FC = () => {
           <Link
             href={slug}
             key={index}
-            className="flex flex-col items-center justify-center gap-6 group"
+            className="flex flex-col items-center justify-center gap-6 group text-black"
           >
             <Icon
               width={56}

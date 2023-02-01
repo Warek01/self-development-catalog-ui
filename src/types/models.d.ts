@@ -8,9 +8,13 @@ import type {
 declare global {
   interface ArticleModel {
     title: string
-    details: string
-    links: string[]
+    description: string
+    links: {
+      text: string
+      link: string
+    }[]
     date: string
+    article_categories?: StrapiFindResponse<ArticleCategoryModel>
   }
 
   interface SocialMediaModel {
@@ -24,6 +28,12 @@ declare global {
     color: string
     icon: StrapiFindOneResponse<StrapiMultimediaModel>
     articles?: StrapiFindResponse<ArticleModel>
+  }
+
+  interface UsefulResourceModel {
+    title: string
+    link: string
+    description: string
   }
 }
 

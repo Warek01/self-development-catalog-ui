@@ -16,10 +16,10 @@ const featuresList: Feature[] = [
     accessible: true,
   },
   {
-    title: 'In development',
-    Icon: icons.Hammer,
-    slug: AppRoutes.home,
-    accessible: false,
+    title: 'All categories',
+    Icon: icons.List,
+    slug: AppRoutes.categories,
+    accessible: true,
   },
   {
     title: 'In development',

@@ -9,11 +9,7 @@
   }
 
   a {
-    @apply text-black duration-150;
-
-    &:hover {
-      @apply text-black/70;
-    }
+    @apply text-link-blue duration-150;
   }
 
   button {

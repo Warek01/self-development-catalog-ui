@@ -22,6 +22,7 @@ const Welcome: FC= () => {
           )}
         >
           Here I share thoughts
+          <br />
           and resources
         </p>
       </div>

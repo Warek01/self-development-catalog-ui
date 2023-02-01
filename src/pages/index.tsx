@@ -31,8 +31,8 @@ const Home: FC<Props> = ({ socialMedias, categories }) => {
     <AppLayout socialMedias={socialMedias}>
       <SideMenu socialMediaLinks={socialMedias} />
       <Welcome />
-       <AboutPreview />
-       <CategorySelect categories={categories} />
+      <AboutPreview />
+      <CategorySelect categories={categories} />
       <FeatureSelect />
     </AppLayout>
   )
