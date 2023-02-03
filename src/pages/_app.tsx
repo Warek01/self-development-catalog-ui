@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from 'react'
 import type { AppProps } from 'next/app'
 import { ApolloProvider } from '@apollo/client'
 import Head from 'next/head'
+import 'rc-tooltip/assets/bootstrap_white.css'
 
 // Side effects
 import 'styles/globals.scss'
@@ -42,6 +43,7 @@ const App = ({ Component, pageProps }: AppProps) => {
       <ApolloProvider client={apolloSsrClient}>
         <responsiveContext.Provider value={{ isMobileView }}>
           <sideMenuContext.Provider value={sideMenuContextValue}>
+            <div id="modal-root" />
             <Component {...pageProps} />
           </sideMenuContext.Provider>
         </responsiveContext.Provider>

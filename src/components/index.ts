@@ -12,6 +12,7 @@ import AppLayout from './AppLayout'
 import CategoriesList from './CategoriesList'
 import Article from './Article'
 import UsefulResources from './UsefulResources'
+import Modal from './Modal'
 
 export {
   Header,
@@ -27,4 +28,5 @@ export {
   CategoriesList,
   Article,
   UsefulResources,
+  Modal,
 }

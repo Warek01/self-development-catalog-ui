@@ -34,6 +34,8 @@ import ExpressJs from './ExpressJs'
 import Loading from './Loading'
 import List from './List'
 import Hammer from './Hammer'
+import Pin from './Pin'
+import Quotes from './Quotes'
 
 export {
   Menu,
@@ -72,4 +74,6 @@ export {
   Loading,
   List,
   Hammer,
+  Pin,
+  Quotes
 }

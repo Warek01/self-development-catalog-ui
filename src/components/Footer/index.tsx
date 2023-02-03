@@ -14,14 +14,14 @@ const Footer: FC<Props> = ({ socialMedias }) => {
       <nav className="flex-col gap-2 hidden md:flex">
         Follow me
         <ul className="flex gap-6">
-          {socialMedias.data?.map((link) => {
+          {socialMedias.data?.map((link, index) => {
             const Icon =
               socialMediaIconsMap[
                 link.attributes.platform as SocialMediaPlatform
               ]
 
             return (
-              <li key={link.id}>
+              <li key={index}>
                 <LinkIcon
                   Icon={Icon}
                   size={32}

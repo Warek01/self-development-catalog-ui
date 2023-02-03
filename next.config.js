@@ -16,6 +16,12 @@ const nextConfig = {
   basePath: '',
   compress: true,
   crossOrigin: 'anonymous',
+  productionBrowserSourceMaps: false,
+  reactStrictMode: true,
+  generateEtags: true,
+  poweredByHeader: true,
+  swcMinify: true,
+  outputFileTracing: true
 }
 
 module.exports = nextConfig

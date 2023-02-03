@@ -35,23 +35,23 @@ const SideMenu: FC<SideMenuProps> = ({ socialMediaLinks }) => {
         </button>
       </div>
       <ul className="flex flex-col items-center gap-8 text-2xl">
-        {headerLinks.map((link) => (
+        {headerLinks.map((link, index) => (
           <Link
             href={link.href}
-            key={link.text}
+            key={index}
           >
             {link.text}
           </Link>
         ))}
       </ul>
       <ul className="absolute bottom-12 gap-12 grid grid-cols-2 w-9/12">
-        {socialMediaLinks.data?.map((link) => {
+        {socialMediaLinks.data?.map((link, index) => {
           const Icon =
             socialMediaIconsMap[link.attributes.platform as SocialMediaPlatform]
 
           return (
             <li
-              key={link.id}
+              key={index}
               className="col-span-1 flex items-center justify-center"
             >
               <LinkIcon

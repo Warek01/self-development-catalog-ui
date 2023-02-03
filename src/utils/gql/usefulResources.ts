@@ -13,7 +13,9 @@ export const USEFUL_RESOURCES_FIELDS = gql`
 export const GET_ALL_USEFUL_RESOURCES = gql`
   ${USEFUL_RESOURCES_FIELDS}
   query GetAllUsefulResources {
-    usefulResources {
+    usefulResources(pagination: {
+      limit: 24
+    }) {
       data {
         id
         attributes {
