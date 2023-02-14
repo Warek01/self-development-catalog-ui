@@ -1,19 +1,17 @@
 import { FC } from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
 
-import { AppLayout, Article } from 'components'
-import { apolloSsrClient } from 'utils/gql/client'
+import type { StrapiFindResponse } from '@/types/strapi'
+import { AppLayout, Article } from '@/components'
 import {
+  apolloSsrClient,
   FIND_ARTICLE,
   FindArticleQueryResponse,
   GET_ALL_ARTICLES,
   GetAllArticlesQueryResponse,
-} from 'utils/gql/articles'
-import {
   GET_ALL_SOCIAL_MEDIAS,
   GetAllSocialMediasQueryResponse,
-} from 'utils/gql/socialMedias'
-import { StrapiFindResponse } from 'types/strapi'
+} from '@/utils/gql'
 
 interface Props {
   article?: ArticleModel

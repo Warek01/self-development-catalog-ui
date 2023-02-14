@@ -1,12 +1,17 @@
-import { FC } from 'react'
+import { FC, memo } from 'react'
 import classNames from 'classnames'
 
-import type { StrapiFindResponse } from 'types/strapi'
+import type { StrapiEntity, StrapiFindResponse } from '@/types/strapi'
+import { useRenderState } from '@/utils/hooks'
+import { isStrapiEntity } from '@/utils/guards'
 import Category from './Category'
-import { useRenderState } from 'utils/hooks'
+import Link from 'next/link'
+import appRoutes from '@/constants/appRoutes'
 
 interface Props {
-  categories: StrapiFindResponse<ArticleCategoryModel>
+  categories:
+    | StrapiFindResponse<ArticleCategoryModel>
+    | StrapiEntity<ArticleCategoryModel>
 }
 
 const CategoriesList: FC<Props> = ({ categories }) => {
@@ -18,16 +23,30 @@ const CategoriesList: FC<Props> = ({ categories }) => {
         'opacity-0': !isRendered,
       })}
     >
-      <h1 className="text-4xl mt-6">Categories</h1>
-      <ul className="my-6">
-        {categories.data.map((category) => (
-          <li key={category.id}>
-            <Category category={category.attributes} />
-          </li>
-        ))}
-      </ul>
+      {isStrapiEntity(categories) ? (
+        <>
+          <Link
+            href={appRoutes.categories}
+            className="text-2xl md:text-xl"
+          >
+            All Categories
+          </Link>
+          <Category category={categories.attributes} />
+        </>
+      ) : (
+        <>
+          <h1 className="text-4xl mt-6">Categories</h1>
+          <ul className="my-6">
+            {categories.data.map((category) => (
+              <li key={category.id}>
+                <Category category={category.attributes} />
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
     </div>
   )
 }
 
-export default CategoriesList
+export default memo(CategoriesList, () => true)

@@ -6,7 +6,7 @@ import { apolloSsrClient } from 'utils/gql/client'
 import {
   GET_ALL_CATEGORIES,
   GetAllCategoriesQueryResponse,
-} from 'utils/gql/articles'
+} from 'utils/gql/categories'
 import { AppLayout, CategoriesList } from 'components'
 import {
   GET_ALL_SOCIAL_MEDIAS,

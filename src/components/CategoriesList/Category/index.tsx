@@ -55,7 +55,7 @@ const Category: FC<Props> = ({ category }) => {
             >
               <Link
                 href={`${AppRoutes.articles}/${article.id}`}
-                className="sm:px-6 md:px-12 py-6 sm:py-3 flex-1 flex items-center justify-between"
+                className="px-6 md:px-12 py-6 py-3 flex-1 flex items-center justify-between"
               >
                 <span className="col-span-1 whitespace-nowrap">
                   {article.attributes.title}

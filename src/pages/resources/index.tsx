@@ -2,17 +2,15 @@ import { FC } from 'react'
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 
-import { AppLayout, UsefulResources } from 'components'
-import { StrapiFindResponse } from 'types/strapi'
-import { apolloSsrClient } from 'utils/gql/client'
+import type { StrapiFindResponse } from '@/types/strapi'
+import { AppLayout, UsefulResources } from '@/components'
 import {
+  apolloSsrClient,
   GET_ALL_SOCIAL_MEDIAS,
   GetAllSocialMediasQueryResponse,
-} from 'utils/gql/socialMedias'
-import {
   GET_ALL_USEFUL_RESOURCES,
   GetAllUsefulResourcesQueryResponse,
-} from 'utils/gql/usefulResources'
+} from '@/utils/gql'
 
 interface Props {
   socialMedias: StrapiFindResponse<SocialMediaModel>

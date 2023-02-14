@@ -1,5 +1,9 @@
 const path = require('path')
 
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+})
+
 /** @type {import('next/types').NextConfig} */
 const nextConfig = {
   sassOptions: {
@@ -21,7 +25,7 @@ const nextConfig = {
   generateEtags: true,
   poweredByHeader: true,
   swcMinify: true,
-  outputFileTracing: true
+  outputFileTracing: true,
 }
 
-module.exports = nextConfig
+module.exports = withBundleAnalyzer(nextConfig)

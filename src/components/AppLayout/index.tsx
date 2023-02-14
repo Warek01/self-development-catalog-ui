@@ -4,7 +4,7 @@ import localFont from '@next/font/local'
 
 import type { AppLayoutProps } from './interface'
 
-import { Footer, Header } from 'components'
+import { Footer, Header, SideMenu } from 'components'
 
 // Fonts
 const epilogue = localFont({
@@ -20,17 +20,20 @@ const AppLayout: FC<PropsWithChildren<AppLayoutProps>> = ({
   socialMedias,
 }) => {
   return (
-    <main
-      className={classNames(
-        epilogue.variable,
-        epilogue.className,
-        'relative min-w-screen max-w-screen overflow-x-hidden text-black font-epilogue px-6 md:px-12',
-      )}
-    >
-      <Header />
-      {children}
-      <Footer socialMedias={socialMedias} />
-    </main>
+    <>
+      <SideMenu socialMediaLinks={socialMedias} />
+      <main
+        className={classNames(
+          epilogue.variable,
+          epilogue.className,
+          'relative min-w-screen max-w-screen overflow-x-hidden text-black font-epilogue px-6 md:px-12',
+        )}
+      >
+        <Header />
+        {children}
+        <Footer socialMedias={socialMedias} />
+      </main>
+    </>
   )
 }
 

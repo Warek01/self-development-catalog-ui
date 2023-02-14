@@ -19,7 +19,7 @@ import {
 import {
   GET_ALL_CATEGORIES,
   GetAllCategoriesQueryResponse,
-} from 'utils/gql/articles'
+} from 'utils/gql/categories'
 
 interface Props {
   socialMedias: StrapiFindResponse<SocialMediaModel>
@@ -29,7 +29,6 @@ interface Props {
 const Home: FC<Props> = ({ socialMedias, categories }) => {
   return (
     <AppLayout socialMedias={socialMedias}>
-      <SideMenu socialMediaLinks={socialMedias} />
       <Welcome />
       <AboutPreview />
       <CategorySelect categories={categories} />

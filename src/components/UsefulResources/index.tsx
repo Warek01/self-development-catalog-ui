@@ -16,9 +16,9 @@ const UsefulResources: FC<Props> = ({ resources }) => {
 
   return (
     <div className="my-12">
-      <header className="text-2xl font-semibold">Useful resources</header>
+      <header className="pl-12 md:pl-0 pb-6 md:pb-0 text-2xl font-semibold">Useful resources</header>
       <main className="">
-        <ul className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <ul className="grid grid-cols-1 px-12 gap-12 md:px-0 md:grid-cols-3 lg:grid-cols-4 md:gap-6">
           {resources.data
             .filter((resource) => favoriteResourcesIds.includes(resource.id))
             .map((resource) => (

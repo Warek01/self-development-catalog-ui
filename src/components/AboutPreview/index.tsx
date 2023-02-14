@@ -1,9 +1,9 @@
 import { FC, memo } from 'react'
 import classNames from 'classnames'
-
-import { useRenderState } from 'utils/hooks'
-import { icons } from 'components/index'
 import Link from 'next/link'
+
+import { useRenderState } from '@/utils/hooks'
+import { icons } from '@/components/index'
 
 const iconSize = 56
 

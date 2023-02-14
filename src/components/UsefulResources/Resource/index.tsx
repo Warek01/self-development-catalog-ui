@@ -1,4 +1,4 @@
-import { FC, memo, useEffect, useState } from 'react'
+import { FC, memo } from 'react'
 import Link from 'next/link'
 import Tooltip from 'rc-tooltip'
 
@@ -20,7 +20,7 @@ const Resource: FC<Props> = ({ attributes, onFavClick, isFavorite }) => {
       {showModal && (
         <Modal>
           <div className="fixed z-50 bg-card-bg/70 w-screen h-screen max-w-screen max-h-screen flex items-center justify-center">
-            <div className="relative p-10 bg-card-bg border border-card-border max-w-[33.3333%]">
+            <div className="relative p-10 bg-card-bg border border-card-border max-w-[80%] md:max-w-[66.6666%] lg:max-w-[50%] xl:max-w-[33.3333%]">
               <button
                 onClick={() => setShowModal(false)}
                 className="absolute top-2 right-2 rounded-full hover:bg-transparent"
@@ -72,7 +72,7 @@ const Resource: FC<Props> = ({ attributes, onFavClick, isFavorite }) => {
         <Link
           href={attributes.link}
           target="_blank"
-          className="text-lg font-bold whitespace-nowrap mr-3"
+          className="text-lg w-full text-center font-bold px-6"
         >
           {attributes.title}
         </Link>

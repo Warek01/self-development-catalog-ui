@@ -9,9 +9,9 @@ import 'rc-tooltip/assets/bootstrap_white.css'
 import 'styles/globals.scss'
 
 // Local imports
-import responsiveContext from 'context/responsiveConext'
-import sideMenuContext, { SideMenuContextProps } from 'context/sideMenuContext'
-import { apolloSsrClient } from 'utils/gql/client'
+import responsiveContext from '@/context/responsiveConext'
+import sideMenuContext, { SideMenuContextProps } from '@/context/sideMenuContext'
+import { apolloSsrClient } from '@/utils/gql/client'
 
 const App = ({ Component, pageProps }: AppProps) => {
   const [isMobileView, setIsMobileView] = useState<boolean>(false)

@@ -23,6 +23,11 @@
     "alwaysStrict": true,
     "allowSyntheticDefaultImports": true,
     "newLine": "lf",
+    "paths": {
+      "@/*": [
+        "./*"
+      ]
+    }
   },
   "include": [
     "next-env.d.ts",
