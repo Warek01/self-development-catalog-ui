@@ -57,6 +57,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
           category: category,
           socialMedias: socialMediasRequest.data.socialMedias,
         },
+        revalidate: 60,
       }
     : { notFound: true }
 }

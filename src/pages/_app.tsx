@@ -10,7 +10,9 @@ import 'styles/globals.scss'
 
 // Local imports
 import responsiveContext from '@/context/responsiveConext'
-import sideMenuContext, { SideMenuContextProps } from '@/context/sideMenuContext'
+import sideMenuContext, {
+  SideMenuContextProps,
+} from '@/context/sideMenuContext'
 import { apolloSsrClient } from '@/utils/gql/client'
 
 const App = ({ Component, pageProps }: AppProps) => {

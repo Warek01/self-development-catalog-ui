@@ -47,5 +47,6 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
       categories: categoriesQuery.data.articleCategories,
       socialMedias: socialMediasQuery.data.socialMedias,
     },
+    revalidate: 60,
   }
 }

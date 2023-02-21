@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import { useRenderState } from 'utils/hooks'
 import style from './style.module.scss'
 
-const Welcome: FC= () => {
+const Welcome: FC = () => {
   const isRendered = useRenderState(150)
 
   return (

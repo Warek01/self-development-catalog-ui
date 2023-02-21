@@ -42,7 +42,7 @@ export const FIND_ARTICLE = gql`
         id
         attributes {
           ...articleFields
-           article_categories @include(if: $includeCategories) {
+          article_categories @include(if: $includeCategories) {
             data {
               attributes {
                 title

@@ -5,7 +5,7 @@ declare global {
   namespace NodeJS {
     interface ProcessEnv {
       STRAPI_PUBLIC_TOKEN: string
-      NEXT_PUBLIC_STRAPI_UTL: string
+      NEXT_PUBLIC_STRAPI_URL: string
     }
   }
 

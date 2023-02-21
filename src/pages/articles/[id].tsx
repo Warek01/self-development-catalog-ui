@@ -63,6 +63,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
       article: articleQuery.data.articles.data[0].attributes,
       socialMedias: socialMediasQuery.data.socialMedias,
     },
+    revalidate: 60,
   }
 }
 

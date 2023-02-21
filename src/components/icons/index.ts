@@ -75,5 +75,5 @@ export {
   List,
   Hammer,
   Pin,
-  Quotes
+  Quotes,
 }
