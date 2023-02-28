@@ -1,5 +1,10 @@
 import Link from 'next/link'
-import { FC } from 'react'
+import { FC, memo, useEffect } from 'react'
+import snarkdown from 'snarkdown'
+import highlight from 'highlight.js'
+import 'highlight.js/styles/github.css'
+
+import preprocessImgSrc from '@/utils/preprocessImgSrc'
 
 interface Props {
   article: ArticleModel
@@ -8,8 +13,14 @@ interface Props {
 const Article: FC<Props> = ({ article }) => {
   const { article_categories, date, description, links, title } = article
 
+  const htmlDescription = preprocessImgSrc(snarkdown(description))
+
+  useEffect(() => {
+    highlight.highlightAll()
+  }, [])
+
   return (
-    <div className="">
+    <div>
       <header className="text-xl flex items-center justify-between mt-12">
         <span className="font-semibold">{title}</span>
         <span>
@@ -17,20 +28,15 @@ const Article: FC<Props> = ({ article }) => {
         </span>
       </header>
       <main
-        className="whitespace-pre-line my-12"
-        dangerouslySetInnerHTML={{ __html: description }}
+        className="default-headings whitespace-pre-line my-12"
+        dangerouslySetInnerHTML={{ __html: htmlDescription }}
       />
-      <section className="">
+      <section>
         <p className="font-bold">Links</p>
         <ul className="flex flex-col px-6 pt-3 pb-6">
           {links.map((link) => (
             <li key={link.text}>
-              <Link
-                href={link.link}
-                className=""
-              >
-                {link.text}
-              </Link>
+              <Link href={link.link}>{link.text}</Link>
             </li>
           ))}
         </ul>
@@ -51,4 +57,4 @@ const Article: FC<Props> = ({ article }) => {
   )
 }
 
-export default Article
+export default memo(Article)

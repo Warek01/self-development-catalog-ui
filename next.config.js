@@ -8,7 +8,7 @@ module.exports = {
   images: {
     disableStaticImages: false,
     dangerouslyAllowSVG: true,
-    minimumCacheTTL: 3600,
+    minimumCacheTTL: 7 * 24 * 3600,
     unoptimized: false,
     domains: ['localhost', 'admin.warek.site'],
   },
@@ -16,7 +16,7 @@ module.exports = {
   basePath: '',
   compress: true,
   crossOrigin: 'anonymous',
-  productionBrowserSourceMaps: false,
+  productionBrowserSourceMaps: true,
   reactStrictMode: true,
   generateEtags: true,
   poweredByHeader: true,

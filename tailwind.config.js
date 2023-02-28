@@ -17,6 +17,7 @@ module.exports = {
       spacing: {},
       fontFamily: {
         epilogue: 'var(--font-epilogue)',
+        inconsolata: 'var(--font-inconsolata)',
       },
       fontSize: {
         17: '17px',

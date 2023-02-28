@@ -1,39 +1,42 @@
 import { FC } from 'react'
 import { GetStaticProps } from 'next'
 
-import type { StrapiFindResponse } from 'types/strapi'
-
+import type { StrapiFindResponse } from '@/types/strapi'
 import {
   AboutPreview,
   AppLayout,
   CategorySelect,
   FeatureSelect,
-  SideMenu,
+  Seo,
   Welcome,
-} from 'components'
-import { apolloSsrClient } from 'utils/gql/client'
+} from '@/components'
 import {
-  GET_ALL_SOCIAL_MEDIAS,
-  GetAllSocialMediasQueryResponse,
-} from 'utils/gql/socialMedias'
-import {
+  apolloSsrClient,
+  FIND_PAGE_SEO,
+  FindPageSeoResponse,
   GET_ALL_CATEGORIES,
+  GET_ALL_SOCIAL_MEDIAS,
   GetAllCategoriesQueryResponse,
-} from 'utils/gql/categories'
+  GetAllSocialMediasQueryResponse,
+} from '@/utils/gql'
 
 interface Props {
+  pageSeo?: PageSeoModel
   socialMedias: StrapiFindResponse<SocialMediaModel>
   categories: StrapiFindResponse<ArticleCategoryModel>
 }
 
-const Home: FC<Props> = ({ socialMedias, categories }) => {
+const Home: FC<Props> = ({ socialMedias, categories, pageSeo }) => {
   return (
-    <AppLayout socialMedias={socialMedias}>
-      <Welcome />
-      <AboutPreview />
-      <CategorySelect categories={categories} />
-      <FeatureSelect />
-    </AppLayout>
+    <>
+      <Seo {...pageSeo} />
+      <AppLayout socialMedias={socialMedias}>
+        <Welcome />
+        <AboutPreview />
+        <CategorySelect categories={categories} />
+        <FeatureSelect />
+      </AppLayout>
+    </>
   )
 }
 
@@ -51,10 +54,18 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
     },
   )
 
+  const seo = await apolloSsrClient.query<FindPageSeoResponse>({
+    query: FIND_PAGE_SEO,
+    variables: {
+      slug: '/',
+    },
+  })
+
   return {
     props: {
       socialMedias: socialMedias.data.socialMedias,
       categories: categories.data.articleCategories,
+      pageSeo: seo.data.pageSeos.data?.at(0)?.attributes,
     },
     revalidate: 60,
   }

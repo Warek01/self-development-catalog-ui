@@ -2,7 +2,7 @@ import { FC } from 'react'
 import classNames from 'classnames'
 import Link from 'next/link'
 
-import featuresList from 'constants/featuresList'
+import featuresList from '@/constants/featuresList'
 
 const FeatureSelect: FC = () => {
   return (

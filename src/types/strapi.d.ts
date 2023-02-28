@@ -25,11 +25,7 @@ export interface StrapiError {
 // Wrapper around entity returned by Strapi
 export interface StrapiEntity<T> {
   id: number
-  attributes: T & {
-    createdAt: string
-    updatedAt: string
-    publishedAt: string
-  }
+  attributes: T
 }
 
 // Meta object present in find responses
