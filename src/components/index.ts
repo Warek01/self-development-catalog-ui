@@ -13,6 +13,7 @@ import CategoriesList from './CategoriesList'
 import Article from './Article'
 import UsefulResources from './UsefulResources'
 import Modal from './Modal'
+import Seo from './Seo'
 
 export {
   Header,
@@ -29,4 +30,5 @@ export {
   Article,
   UsefulResources,
   Modal,
+  Seo
 }

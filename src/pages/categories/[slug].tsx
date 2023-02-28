@@ -4,16 +4,19 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 import type { StrapiEntity, StrapiFindResponse } from '@/types/strapi'
 import {
   apolloSsrClient,
+  FIND_PAGE_SEO,
+  FindPageSeoResponse,
+  GET_ALL_SOCIAL_MEDIAS,
   GET_CATEGORY,
   GET_CATEGORY_SLUGS,
+  GetAllSocialMediasQueryResponse,
   GetCategoryQueryReturn,
   GetCategorySlugsQueryResult,
-  GET_ALL_SOCIAL_MEDIAS,
-  GetAllSocialMediasQueryResponse,
 } from '@/utils/gql'
-import { AppLayout, CategoriesList } from '@/components'
+import { AppLayout, CategoriesList, Seo } from '@/components'
 
 interface Props {
+  pageSeo?: PageSeoModel
   category: StrapiEntity<ArticleCategoryModel>
   socialMedias: StrapiFindResponse<SocialMediaModel>
 }
@@ -22,11 +25,14 @@ interface Params extends Record<string, string> {
   slug: string
 }
 
-const Category: FC<Props> = ({ category, socialMedias }) => {
+const Category: FC<Props> = ({ category, socialMedias, pageSeo }) => {
   return (
-    <AppLayout socialMedias={socialMedias}>
-      <CategoriesList categories={category} />
-    </AppLayout>
+    <>
+      <Seo {...pageSeo} />
+      <AppLayout socialMedias={socialMedias}>
+        <CategoriesList categories={category} />
+      </AppLayout>
+    </>
   )
 }
 
@@ -42,6 +48,13 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
       query: GET_ALL_SOCIAL_MEDIAS,
     })
 
+  const seo = await apolloSsrClient.query<FindPageSeoResponse>({
+    query: FIND_PAGE_SEO,
+    variables: {
+      slug: '/',
+    },
+  })
+
   const categoryRequest = await apolloSsrClient.query<GetCategoryQueryReturn>({
     query: GET_CATEGORY,
     variables: {
@@ -56,6 +69,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
         props: {
           category: category,
           socialMedias: socialMediasRequest.data.socialMedias,
+          pageSeo: seo.data.pageSeos.data?.at(0)?.attributes,
         },
         revalidate: 60,
       }
