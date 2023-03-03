@@ -8,7 +8,7 @@ import { icons } from '@/components/index'
 const iconSize = 56
 
 const AboutPreview: FC = () => {
-  const isRendered = useRenderState(150)
+  const isRendered = useRenderState(100)
 
   return (
     <div className="mx-auto my-8 border-y border-y border-y-black/20">

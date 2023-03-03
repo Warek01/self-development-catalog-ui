@@ -13,7 +13,7 @@ import responsiveContext from '@/context/responsiveConext'
 import sideMenuContext, {
   SideMenuContextProps,
 } from '@/context/sideMenuContext'
-import { apolloSsrClient } from '@/utils/gql/client'
+import { apolloSsrClient } from '@/graphql'
 
 const App = ({ Component, pageProps }: AppProps) => {
   const [isMobileView, setIsMobileView] = useState<boolean>(false)

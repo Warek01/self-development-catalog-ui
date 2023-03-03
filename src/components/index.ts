@@ -10,7 +10,7 @@ import CategorySelect from './CategorySelect'
 import FeatureSelect from './FeatureSelect'
 import AppLayout from './AppLayout'
 import CategoriesList from './CategoriesList'
-import Article from './Article'
+import Blog from './Blog'
 import UsefulResources from './UsefulResources'
 import Modal from './Modal'
 import Seo from './Seo'
@@ -27,7 +27,7 @@ export {
   FeatureSelect,
   AppLayout,
   CategoriesList,
-  Article,
+  Blog,
   UsefulResources,
   Modal,
   Seo

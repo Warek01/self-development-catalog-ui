@@ -1,0 +1,37 @@
+fragment pageSeoFields on PageSeo {
+  slug
+  data {
+    id
+    title
+    link
+    description
+    keywords
+    ogLink
+    link
+    twitterLink
+    preventIndexing
+    robots
+    image {
+      altText
+      media {
+        data {
+          attributes {
+            width
+            height
+            url
+          }
+        }
+      }
+    }
+  }
+}
+
+query FindPageSeo($slug: String!) {
+  pageSeos(filters: { slug: { eq: $slug } }) {
+    data {
+      attributes {
+        ...pageSeoFields
+      }
+    }
+  }
+}

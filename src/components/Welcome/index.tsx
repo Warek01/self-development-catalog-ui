@@ -6,10 +6,10 @@ import { useRenderState } from 'utils/hooks'
 import style from './style.module.scss'
 
 const Welcome: FC = () => {
-  const isRendered = useRenderState(150)
+  const isRendered = useRenderState(100)
 
   return (
-    <div className="flex py-20 justify-between items-center w-full md:my-12">
+    <div className="relative flex py-20 justify-between items-center w-full md:my-12">
       <div className="flex flex-col flex-1">
         <p
           className={classNames(

@@ -1,0 +1,15 @@
+fragment socialMediaFields on SocialMedia {
+  title
+  link
+  platform
+}
+
+query GetAllSocialMedias {
+  socialMedias {
+    data {
+      attributes {
+        ...socialMediaFields
+      }
+    }
+  }
+}

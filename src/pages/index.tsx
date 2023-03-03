@@ -12,18 +12,15 @@ import {
 } from '@/components'
 import {
   apolloSsrClient,
-  FIND_PAGE_SEO,
-  FindPageSeoResponse,
-  GET_ALL_CATEGORIES,
-  GET_ALL_SOCIAL_MEDIAS,
-  GetAllCategoriesQueryResponse,
-  GetAllSocialMediasQueryResponse,
-} from '@/utils/gql'
+  blogCategoryDocument,
+  pageSeoDocument,
+  socialMediaDocument,
+} from '@/graphql'
 
 interface Props {
   pageSeo?: PageSeoModel
   socialMedias: StrapiFindResponse<SocialMediaModel>
-  categories: StrapiFindResponse<ArticleCategoryModel>
+  categories: StrapiFindResponse<BlogCategoryModel>
 }
 
 const Home: FC<Props> = ({ socialMedias, categories, pageSeo }) => {
@@ -43,19 +40,22 @@ const Home: FC<Props> = ({ socialMedias, categories, pageSeo }) => {
 export default Home
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const socialMedias =
-    await apolloSsrClient.query<GetAllSocialMediasQueryResponse>({
-      query: GET_ALL_SOCIAL_MEDIAS,
-    })
+  const socialMediasQuery = await apolloSsrClient.query<
+    GraphqlResponse<'socialMedias', SocialMediaModel>
+  >({
+    query: socialMediaDocument.GetAllSocialMedias,
+  })
 
-  const categories = await apolloSsrClient.query<GetAllCategoriesQueryResponse>(
-    {
-      query: GET_ALL_CATEGORIES,
-    },
-  )
+  const blogCategoriesQuery = await apolloSsrClient.query<
+    GraphqlResponse<'blogCategories', BlogCategoryModel>
+  >({
+    query: blogCategoryDocument.GetAllBlogCategories,
+  })
 
-  const seo = await apolloSsrClient.query<FindPageSeoResponse>({
-    query: FIND_PAGE_SEO,
+  const pageSeoQuery = await apolloSsrClient.query<
+    GraphqlResponse<'pageSeos', PageSeoModel>
+  >({
+    query: pageSeoDocument.FindPageSeo,
     variables: {
       slug: '/',
     },
@@ -63,9 +63,9 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 
   return {
     props: {
-      socialMedias: socialMedias.data.socialMedias,
-      categories: categories.data.articleCategories,
-      pageSeo: seo.data.pageSeos.data?.at(0)?.attributes,
+      socialMedias: socialMediasQuery.data.socialMedias,
+      categories: blogCategoriesQuery.data.blogCategories,
+      pageSeo: pageSeoQuery.data.pageSeos.data?.at(0)?.attributes,
     },
     revalidate: 60,
   }

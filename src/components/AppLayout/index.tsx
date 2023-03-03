@@ -26,7 +26,7 @@ const AppLayout: FC<PropsWithChildren<AppLayoutProps>> = ({
         className={classNames(
           epilogue.variable,
           epilogue.className,
-          'relative min-w-screen max-w-screen overflow-x-hidden text-black font-epilogue px-6 md:px-12',
+          'relative max-w-[1920px] mx-auto text-black font-epilogue px-6 sm:px-12 md:px-24 xl:px-36',
         )}
       >
         <Header />

@@ -1,4 +1,5 @@
 import type { FC, SVGProps } from 'react'
+import type { StrapiFindResponse } from '@/types/strapi'
 
 // Globally available types
 declare global {
@@ -24,6 +25,10 @@ declare global {
     | 'gitlab'
     | 'linkedIn'
     | 'instagram'
+
+  type GraphqlResponse<T1 extends string, T2 extends object> = {
+    [keys in T1]: StrapiFindResponse<T2>
+  }
 }
 
 export {}

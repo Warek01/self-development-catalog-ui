@@ -1,0 +1,65 @@
+fragment blogCategoryFields on BlogCategory {
+  slug
+  title
+  color
+  blogs {
+    data {
+      attributes {
+        title
+        slug
+        blog_categories {
+          data {
+            attributes {
+              title
+            }
+          }
+        }
+      }
+    }
+  }
+  icon {
+    data {
+      attributes {
+        url
+        width
+        height
+        alternativeText
+      }
+    }
+  }
+}
+
+query GetAllBlogCategories {
+  blogCategories {
+    data {
+      id
+      attributes {
+        ...blogCategoryFields
+      }
+    }
+  }
+}
+
+query FindBlogCategory($slug: String!) {
+  blogCategories(filters: {
+    slug: {eq: $slug}
+  }) {
+    data {
+      id
+      attributes {
+        ...blogCategoryFields
+      }
+    }
+  }
+}
+
+query GetAllBlogCategoriesSlugs {
+  blogCategories {
+    data {
+      attributes {
+        slug
+      }
+    }
+  }
+}
+

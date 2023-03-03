@@ -10,12 +10,12 @@ import appRoutes from '@/constants/appRoutes'
 
 interface Props {
   categories:
-    | StrapiFindResponse<ArticleCategoryModel>
-    | StrapiEntity<ArticleCategoryModel>
+    | StrapiFindResponse<BlogCategoryModel>
+    | StrapiEntity<BlogCategoryModel>
 }
 
 const CategoriesList: FC<Props> = ({ categories }) => {
-  const isRendered = useRenderState(150)
+  const isRendered = useRenderState(100)
 
   return (
     <div
