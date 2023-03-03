@@ -1,0 +1,16 @@
+fragment usefulResourcesFields on UsefulResource {
+  title
+  link
+  description
+}
+
+query GetAllUsefulResources {
+  usefulResources(pagination: { limit: 24 }) {
+    data {
+      id
+      attributes {
+        ...usefulResourcesFields
+      }
+    }
+  }
+}

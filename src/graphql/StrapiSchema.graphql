@@ -5,21 +5,22 @@ schema {
   mutation: Mutation
 }
 
-union GenericMorph = Article | ArticleCategory | ComponentSharedSeo | ComponentSharedSeoImage | ComponentUtilsLink | I18NLocale | PageSeo | SocialMedia | UploadFile | UploadFolder | UsefulResource | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser
+union GenericMorph = Blog | BlogCategory | ComponentSharedSeo | ComponentSharedSeoImage | ComponentUtilsLink | I18NLocale | PageSeo | SocialMedia | UploadFile | UploadFolder | UsefulResource | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser
 
-type Article {
-  article_categories(filters: ArticleCategoryFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): ArticleCategoryRelationResponseCollection
+type Blog {
+  blog_categories(filters: BlogCategoryFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): BlogCategoryRelationResponseCollection
+  content: String
   createdAt: DateTime
   date: Date
-  description: String
   links(filters: ComponentUtilsLinkFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentUtilsLink]
   publishedAt: DateTime
+  slug: String
   title: String
   updatedAt: DateTime
 }
 
-type ArticleCategory {
-  articles(filters: ArticleFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): ArticleRelationResponseCollection
+type BlogCategory {
+  blogs(filters: BlogFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): BlogRelationResponseCollection
   color: String
   createdAt: DateTime
   icon: UploadFileEntityResponse
@@ -29,40 +30,40 @@ type ArticleCategory {
   updatedAt: DateTime
 }
 
-type ArticleCategoryEntity {
-  attributes: ArticleCategory
+type BlogCategoryEntity {
+  attributes: BlogCategory
   id: ID
 }
 
-type ArticleCategoryEntityResponse {
-  data: ArticleCategoryEntity
+type BlogCategoryEntityResponse {
+  data: BlogCategoryEntity
 }
 
-type ArticleCategoryEntityResponseCollection {
-  data: [ArticleCategoryEntity!]!
+type BlogCategoryEntityResponseCollection {
+  data: [BlogCategoryEntity!]!
   meta: ResponseCollectionMeta!
 }
 
-type ArticleCategoryRelationResponseCollection {
-  data: [ArticleCategoryEntity!]!
+type BlogCategoryRelationResponseCollection {
+  data: [BlogCategoryEntity!]!
 }
 
-type ArticleEntity {
-  attributes: Article
+type BlogEntity {
+  attributes: Blog
   id: ID
 }
 
-type ArticleEntityResponse {
-  data: ArticleEntity
+type BlogEntityResponse {
+  data: BlogEntity
 }
 
-type ArticleEntityResponseCollection {
-  data: [ArticleEntity!]!
+type BlogEntityResponseCollection {
+  data: [BlogEntity!]!
   meta: ResponseCollectionMeta!
 }
 
-type ArticleRelationResponseCollection {
-  data: [ArticleEntity!]!
+type BlogRelationResponseCollection {
+  data: [BlogEntity!]!
 }
 
 type ComponentSharedSeo {
@@ -114,8 +115,8 @@ type I18NLocaleEntityResponseCollection {
 type Mutation {
   "Change user password. Confirm with the current password."
   changePassword(currentPassword: String!, password: String!, passwordConfirmation: String!): UsersPermissionsLoginPayload
-  createArticle(data: ArticleInput!): ArticleEntityResponse
-  createArticleCategory(data: ArticleCategoryInput!): ArticleCategoryEntityResponse
+  createBlog(data: BlogInput!): BlogEntityResponse
+  createBlogCategory(data: BlogCategoryInput!): BlogCategoryEntityResponse
   createPageSeo(data: PageSeoInput!): PageSeoEntityResponse
   createSocialMedia(data: SocialMediaInput!): SocialMediaEntityResponse
   createUploadFile(data: UploadFileInput!): UploadFileEntityResponse
@@ -125,8 +126,8 @@ type Mutation {
   createUsersPermissionsRole(data: UsersPermissionsRoleInput!): UsersPermissionsCreateRolePayload
   "Create a new user"
   createUsersPermissionsUser(data: UsersPermissionsUserInput!): UsersPermissionsUserEntityResponse!
-  deleteArticle(id: ID!): ArticleEntityResponse
-  deleteArticleCategory(id: ID!): ArticleCategoryEntityResponse
+  deleteBlog(id: ID!): BlogEntityResponse
+  deleteBlogCategory(id: ID!): BlogCategoryEntityResponse
   deletePageSeo(id: ID!): PageSeoEntityResponse
   deleteSocialMedia(id: ID!): SocialMediaEntityResponse
   deleteUploadFile(id: ID!): UploadFileEntityResponse
@@ -147,8 +148,8 @@ type Mutation {
   removeFile(id: ID!): UploadFileEntityResponse
   "Reset user password. Confirm with a code (resetToken from forgotPassword)"
   resetPassword(code: String!, password: String!, passwordConfirmation: String!): UsersPermissionsLoginPayload
-  updateArticle(data: ArticleInput!, id: ID!): ArticleEntityResponse
-  updateArticleCategory(data: ArticleCategoryInput!, id: ID!): ArticleCategoryEntityResponse
+  updateBlog(data: BlogInput!, id: ID!): BlogEntityResponse
+  updateBlogCategory(data: BlogCategoryInput!, id: ID!): BlogCategoryEntityResponse
   updateFileInfo(id: ID!, info: FileInfoInput): UploadFileEntityResponse!
   updatePageSeo(data: PageSeoInput!, id: ID!): PageSeoEntityResponse
   updateSocialMedia(data: SocialMediaInput!, id: ID!): SocialMediaEntityResponse
@@ -192,10 +193,10 @@ type Pagination {
 }
 
 type Query {
-  article(id: ID): ArticleEntityResponse
-  articleCategories(filters: ArticleCategoryFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): ArticleCategoryEntityResponseCollection
-  articleCategory(id: ID): ArticleCategoryEntityResponse
-  articles(filters: ArticleFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): ArticleEntityResponseCollection
+  blog(id: ID): BlogEntityResponse
+  blogCategories(filters: BlogCategoryFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): BlogCategoryEntityResponseCollection
+  blogCategory(id: ID): BlogCategoryEntityResponse
+  blogs(filters: BlogFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): BlogEntityResponseCollection
   i18NLocale(id: ID): I18NLocaleEntityResponse
   i18NLocales(filters: I18NLocaleFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): I18NLocaleEntityResponseCollection
   me: UsersPermissionsMe
@@ -465,22 +466,22 @@ scalar JSON
 "The `Upload` scalar type represents a file upload."
 scalar Upload
 
-input ArticleCategoryFiltersInput {
-  and: [ArticleCategoryFiltersInput]
-  articles: ArticleFiltersInput
+input BlogCategoryFiltersInput {
+  and: [BlogCategoryFiltersInput]
+  blogs: BlogFiltersInput
   color: StringFilterInput
   createdAt: DateTimeFilterInput
   id: IDFilterInput
-  not: ArticleCategoryFiltersInput
-  or: [ArticleCategoryFiltersInput]
+  not: BlogCategoryFiltersInput
+  or: [BlogCategoryFiltersInput]
   publishedAt: DateTimeFilterInput
   slug: StringFilterInput
   title: StringFilterInput
   updatedAt: DateTimeFilterInput
 }
 
-input ArticleCategoryInput {
-  articles: [ID]
+input BlogCategoryInput {
+  blogs: [ID]
   color: String
   icon: ID
   publishedAt: DateTime
@@ -488,27 +489,29 @@ input ArticleCategoryInput {
   title: String
 }
 
-input ArticleFiltersInput {
-  and: [ArticleFiltersInput]
-  article_categories: ArticleCategoryFiltersInput
+input BlogFiltersInput {
+  and: [BlogFiltersInput]
+  blog_categories: BlogCategoryFiltersInput
+  content: StringFilterInput
   createdAt: DateTimeFilterInput
   date: DateFilterInput
-  description: StringFilterInput
   id: IDFilterInput
   links: ComponentUtilsLinkFiltersInput
-  not: ArticleFiltersInput
-  or: [ArticleFiltersInput]
+  not: BlogFiltersInput
+  or: [BlogFiltersInput]
   publishedAt: DateTimeFilterInput
+  slug: StringFilterInput
   title: StringFilterInput
   updatedAt: DateTimeFilterInput
 }
 
-input ArticleInput {
-  article_categories: [ID]
+input BlogInput {
+  blog_categories: [ID]
+  content: String
   date: Date
-  description: String
   links: [ComponentUtilsLinkInput]
   publishedAt: DateTime
+  slug: String
   title: String
 }
 

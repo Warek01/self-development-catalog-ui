@@ -7,11 +7,11 @@ import determineContrastTextColor from 'utils/determineContrastColor'
 import AppRoutes from 'constants/appRoutes'
 
 interface Props {
-  category: ArticleCategoryModel
+  category: BlogCategoryModel
 }
 
 const Category: FC<Props> = ({ category }) => {
-  const articles = category.articles?.data || []
+  const blogs = category.blogs?.data || []
 
   const headerTextColor = determineContrastTextColor(category.color)
     ? 'text-black'
@@ -39,29 +39,29 @@ const Category: FC<Props> = ({ category }) => {
           {category.title}
         </span>
         <span className="text-sm mt-3">
-          {category.articles?.data.length || 0} articles
+          {category.blogs?.data.length || 0} blogs
         </span>
       </header>
       <main>
         <ul
           className={`flex flex-col gap-12 sm:gap-6 ${
-            articles.length ? 'py-6' : 'py-0'
+            blogs.length ? 'py-6' : 'py-0'
           }`}
         >
-          {articles.map((article) => (
+          {blogs.map((blog) => (
             <li
-              key={article.id}
+              key={blog.id}
               className="duration-100 ease-in-out hover:bg-black/10"
             >
               <Link
-                href={`${AppRoutes.articles}/${article.id}`}
+                href={`${AppRoutes.blogs}/${blog.attributes.slug}`}
                 className="px-6 md:px-12 py-6 py-3 flex-1 flex items-center justify-between"
               >
                 <span className="col-span-1 whitespace-nowrap">
-                  {article.attributes.title}
+                  {blog.attributes.title}
                 </span>
                 <div className="flex gap-3 col-span-4">
-                  {article.attributes.article_categories?.data.map(
+                  {blog.attributes.blog_categories?.data.map(
                     (category) => (
                       <span className="py-1 px-3 rounded-md bg-card-bg-dark text-white text-[9px] flex items-center">
                         {category.attributes.title}

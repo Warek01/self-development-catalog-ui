@@ -1,0 +1,41 @@
+fragment blogFields on Blog {
+  slug
+  title
+  date
+  content
+  links {
+    link
+    text
+  }
+  blog_categories {
+    data {
+      attributes {
+        title
+        slug
+      }
+    }
+  }
+}
+
+query FindBlog($slug: String!) {
+  blogs(filters: {
+    slug: {eq: $slug}
+  }) {
+    data {
+      attributes {
+        ...blogFields
+      }
+    }
+  }
+}
+
+query GetAllBlogs {
+  blogs {
+    data {
+      id
+      attributes {
+        ...blogFields
+      }
+    }
+  }
+}

@@ -5,13 +5,10 @@ import type { StrapiFindResponse } from '@/types/strapi'
 import { AppLayout, Seo, UsefulResources } from '@/components'
 import {
   apolloSsrClient,
-  FIND_PAGE_SEO,
-  FindPageSeoResponse,
-  GET_ALL_SOCIAL_MEDIAS,
-  GET_ALL_USEFUL_RESOURCES,
-  GetAllSocialMediasQueryResponse,
-  GetAllUsefulResourcesQueryResponse,
-} from '@/utils/gql'
+  pageSeoDocument,
+  usefulResourceDocument,
+  socialMediaDocument,
+} from '@/graphql'
 
 interface Props {
   pageSeo?: PageSeoModel
@@ -33,18 +30,22 @@ const Resources: FC<Props> = ({ socialMedias, resources, pageSeo }) => {
 export default Resources
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const socialMediasQuery =
-    await apolloSsrClient.query<GetAllSocialMediasQueryResponse>({
-      query: GET_ALL_SOCIAL_MEDIAS,
-    })
+  const socialMediasQuery = await apolloSsrClient.query<
+    GraphqlResponse<'socialMedias', SocialMediaModel>
+  >({
+    query: socialMediaDocument.GetAllSocialMedias,
+  })
 
-  const resourcesQuery =
-    await apolloSsrClient.query<GetAllUsefulResourcesQueryResponse>({
-      query: GET_ALL_USEFUL_RESOURCES,
-    })
+  const resourcesQuery = await apolloSsrClient.query<
+    GraphqlResponse<'usefulResources', UsefulResourceModel>
+  >({
+    query: usefulResourceDocument.GetAllUsefulResources,
+  })
 
-  const seo = await apolloSsrClient.query<FindPageSeoResponse>({
-    query: FIND_PAGE_SEO,
+  const pageSeoQuery = await apolloSsrClient.query<
+    GraphqlResponse<'pageSeos', PageSeoModel>
+  >({
+    query: pageSeoDocument.FindPageSeo,
     variables: {
       slug: '/',
     },
@@ -54,7 +55,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
     props: {
       socialMedias: socialMediasQuery.data.socialMedias,
       resources: resourcesQuery.data.usefulResources,
-      pageSeo: seo.data.pageSeos.data?.at(0)?.attributes,
+      pageSeo: pageSeoQuery.data.pageSeos.data?.at(0)?.attributes,
     },
     revalidate: 60,
   }

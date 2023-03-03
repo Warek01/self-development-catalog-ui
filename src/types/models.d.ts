@@ -7,15 +7,16 @@ import type {
 } from './strapi'
 
 declare global {
-  interface ArticleModel {
+  interface BlogModel {
     title: string
-    description: string
+    slug: string
+    content: string
     links: {
       text: string
       link: string
     }[]
     date: string
-    article_categories?: StrapiFindResponse<ArticleCategoryModel>
+    blog_categories?: StrapiFindResponse<BlogCategoryModel>
   }
 
   interface SocialMediaModel {
@@ -23,12 +24,12 @@ declare global {
     link: string
   }
 
-  interface ArticleCategoryModel {
+  interface BlogCategoryModel {
     title: string
     slug: string
     color: string
     icon: StrapiFindOneResponse<StrapiMultimediaModel>
-    articles?: StrapiFindResponse<ArticleModel>
+    blogs?: StrapiFindResponse<BlogModel>
   }
 
   interface UsefulResourceModel {

@@ -7,7 +7,7 @@ import AppRoutes from 'constants/appRoutes'
 import responsiveContext from 'context/responsiveConext'
 
 interface Props {
-  attributes: ArticleCategoryModel
+  attributes: BlogCategoryModel
   id: number
   isFirst: boolean
   isEven: boolean
@@ -68,7 +68,7 @@ const Category: FC<Props> = ({ attributes, isFirst, isEven, id }) => {
       <div className="flex flex-col relative w-full md:w-3/4 aspect-square">
         {isFirst && (
           <p className="absolute top-0 left-0 transform -translate-y-full py-5 font-semibold text-3xl md:text-4xl lg:text-5xl">
-            Articles
+            Blogs
           </p>
         )}
         <Link

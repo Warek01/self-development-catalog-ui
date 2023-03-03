@@ -1,12 +1,12 @@
 {
-  "name": "Default GraphQL Schema",
-  "schemaPath": "strapi-schema.graphql",
+  "name": "Admin GraphQL Schema",
+  "schemaPath": "./src/graphql/StrapiSchema.graphql",
   "extensions": {
     "endpoints": {
-      "Default GraphQL Endpoint": {
-        "url": "https://admin.warek.site/graphql",
+      "Admin GraphQL Endpoint": {
+        "url": "${env:NEXT_PUBLIC_STRAPI_URL}/graphql",
         "headers": {
-          "user-agent": "JS GraphQL"
+          "Authorization": "Bearer ${env:STRAPI_PUBLIC_TOKEN}"
         },
         "introspect": true
       }

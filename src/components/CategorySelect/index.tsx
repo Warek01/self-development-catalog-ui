@@ -4,7 +4,7 @@ import type { StrapiFindResponse } from 'types/strapi'
 import Category from './Category'
 
 interface Props {
-  categories: StrapiFindResponse<ArticleCategoryModel>
+  categories: StrapiFindResponse<BlogCategoryModel>
 }
 
 const CategorySelect: FC<Props> = ({ categories }) => {

@@ -7,6 +7,7 @@
       "esnext"
     ],
     "allowJs": true,
+    "checkJs": false,
     "skipLibCheck": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
@@ -23,6 +24,10 @@
     "alwaysStrict": true,
     "allowSyntheticDefaultImports": true,
     "newLine": "lf",
+    "typeRoots": [
+      "types",
+      "graphql/types"
+    ],
     "paths": {
       "@/*": [
         "./*"
@@ -32,7 +37,8 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "**/*.graphql"
   ],
   "exclude": [
     "node_modules"
