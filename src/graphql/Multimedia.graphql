@@ -1,0 +1,18 @@
+fragment multimediaFields on UploadFileEntityResponse {
+  data {
+    id
+    attributes {
+      alternativeText
+      url
+      width
+      height
+      caption
+      formats
+      mime
+      name
+      previewUrl
+      size
+      ext
+    }
+  }
+}

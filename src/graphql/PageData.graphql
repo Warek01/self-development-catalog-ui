@@ -1,0 +1,41 @@
+#import "./Seo.graphql"
+#import "./PageComponent.graphql"
+#import "./SocialMedia.graphql"
+
+fragment pageDataFields on Page {
+  seo {
+    data {
+      attributes {
+        ...pageSeoFields
+      }
+    }
+  }
+  props {
+    ... on ComponentPageComponentAbout {
+      ...aboutComponentFields
+    }
+    ... on ComponentPageComponentHome {
+      ...homeComponentFields
+    }
+  }
+}
+
+query FindPageData($slug: String!) {
+  pages (filters: {
+    slug: {eq: $slug}
+  }) {
+    data {
+      attributes {
+        ...pageDataFields
+      }
+    }
+  }
+
+  socialMedias {
+    data {
+      attributes {
+        ...socialMediaFields
+      }
+    }
+  }
+}

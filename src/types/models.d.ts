@@ -1,6 +1,5 @@
 import type { SocialMediaPlatform } from './index'
 import type {
-  StrapiEntity,
   StrapiFindOneResponse,
   StrapiFindResponse,
   StrapiMultimediaModel,
@@ -28,7 +27,7 @@ declare global {
     title: string
     slug: string
     color: string
-    icon: StrapiFindOneResponse<StrapiMultimediaModel>
+    icon: StrapiMultimediaModel
     blogs?: StrapiFindResponse<BlogModel>
   }
 
@@ -45,12 +44,18 @@ declare global {
       description: string
       image: {
         altText: string
-        media: { data: StrapiEntity<StrapiMultimediaModel> }
+        media: StrapiMultimediaModel
       }
       robots: string
       preventIndexing: boolean
       link: string
     }
+  }
+
+  interface PageDataModel<T> {
+    seo: PageSeoModel | null
+    socialMedias: StrapiFindResponse<SocialMediaModel>
+    props: T
   }
 }
 

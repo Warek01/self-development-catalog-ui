@@ -1,18 +1,20 @@
 import { FC, memo, PropsWithChildren } from 'react'
 import classNames from 'classnames'
-import localFont from '@next/font/local'
+import { Epilogue } from '@next/font/google'
 
 import type { AppLayoutProps } from './interface'
-
 import { Footer, Header, SideMenu } from 'components'
 
-// Fonts
-const epilogue = localFont({
-  src: '../../assets/fonts/Epilogue-VariableFont_wght.ttf',
-  preload: true,
-  display: 'swap',
-  fallback: ['monospace', 'Ubuntu', 'sans-serif'],
+
+const epilogue = Epilogue({
   variable: '--font-epilogue',
+  preload: true,
+  fallback: ['monospace', 'Ubuntu', 'sans-serif'],
+  display: 'swap',
+  style: 'normal',
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  adjustFontFallback: true,
 })
 
 const AppLayout: FC<PropsWithChildren<AppLayoutProps>> = ({

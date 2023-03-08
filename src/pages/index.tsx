@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { GetStaticProps } from 'next'
 
-import type { StrapiFindResponse } from '@/types/strapi'
+import type { StrapiFindResponse, StrapiMultimediaModel } from '@/types/strapi'
 import {
   AboutPreview,
   AppLayout,
@@ -10,25 +10,29 @@ import {
   Seo,
   Welcome,
 } from '@/components'
-import {
-  apolloSsrClient,
-  blogCategoryDocument,
-  pageSeoDocument,
-  socialMediaDocument,
-} from '@/graphql'
+import { apolloSsrClient, blogCategoryDocument } from '@/graphql'
+import getPageData from '@/utils/getPageData'
+import AppRoutes from '@/constants/appRoutes'
+
+interface HomePageProps {
+  welcomeText: string
+  welcomeImage: StrapiMultimediaModel
+}
 
 interface Props {
-  pageSeo?: PageSeoModel
-  socialMedias: StrapiFindResponse<SocialMediaModel>
+  data: PageDataModel<HomePageProps>
   categories: StrapiFindResponse<BlogCategoryModel>
 }
 
-const Home: FC<Props> = ({ socialMedias, categories, pageSeo }) => {
+const Home: FC<Props> = ({ data, categories }) => {
   return (
     <>
-      <Seo {...pageSeo} />
-      <AppLayout socialMedias={socialMedias}>
-        <Welcome />
+      <Seo {...data.seo} />
+      <AppLayout socialMedias={data.socialMedias}>
+        <Welcome
+          welcomeImage={data.props.welcomeImage}
+          welcomeTitle={data.props.welcomeText}
+        />
         <AboutPreview />
         <CategorySelect categories={categories} />
         <FeatureSelect />
@@ -40,33 +44,17 @@ const Home: FC<Props> = ({ socialMedias, categories, pageSeo }) => {
 export default Home
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const socialMediasQuery = await apolloSsrClient.query<
-    GraphqlResponse<'socialMedias', SocialMediaModel>
-  >({
-    query: socialMediaDocument.GetAllSocialMedias,
-  })
-
   const blogCategoriesQuery = await apolloSsrClient.query<
     GraphqlResponse<'blogCategories', BlogCategoryModel>
   >({
     query: blogCategoryDocument.GetAllBlogCategories,
   })
 
-  const pageSeoQuery = await apolloSsrClient.query<
-    GraphqlResponse<'pageSeos', PageSeoModel>
-  >({
-    query: pageSeoDocument.FindPageSeo,
-    variables: {
-      slug: '/',
-    },
-  })
-
   return {
     props: {
-      socialMedias: socialMediasQuery.data.socialMedias,
+      data: await getPageData<HomePageProps>(AppRoutes.home),
       categories: blogCategoriesQuery.data.blogCategories,
-      pageSeo: pageSeoQuery.data.pageSeos.data?.at(0)?.attributes,
     },
-    revalidate: 60,
+    revalidate: Number(process.env.REVALIDATE_TIMEOUT),
   }
 }

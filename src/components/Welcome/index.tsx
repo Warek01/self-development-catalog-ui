@@ -2,10 +2,16 @@ import { FC, memo } from 'react'
 import Image from 'next/image'
 import classNames from 'classnames'
 
-import { useRenderState } from 'utils/hooks'
+import { useRenderState } from '@/utils/hooks'
+import type { StrapiMultimediaModel } from '@/types/strapi'
 import style from './style.module.scss'
 
-const Welcome: FC = () => {
+interface Props {
+  welcomeTitle: string
+  welcomeImage: StrapiMultimediaModel
+}
+
+const Welcome: FC<Props> = ({ welcomeTitle, welcomeImage }) => {
   const isRendered = useRenderState(100)
 
   return (
@@ -21,14 +27,12 @@ const Welcome: FC = () => {
             },
           )}
         >
-          Here I share thoughts
-          <br />
-          and resources
+          {welcomeTitle}
         </p>
       </div>
       <div className="flex items-center absolute right-12">
         <Image
-          src="/shapes-min.webp"
+          src={process.env.NEXT_PUBLIC_STRAPI_URL + welcomeImage.data.attributes.url}
           alt="Shapes"
           width={200}
           height={200}

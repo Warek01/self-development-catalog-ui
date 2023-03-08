@@ -1,30 +1,28 @@
 import { FC } from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
 
-import type { StrapiFindResponse } from '@/types/strapi'
 import { AppLayout, Blog, Seo } from '@/components'
 import {
   apolloSsrClient,
-  pageSeoDocument,
   blogDocument,
-  socialMediaDocument,
 } from '@/graphql'
+import AppRoutes from '@/constants/appRoutes'
+import getPageData from '@/utils/getPageData'
 
 interface Props {
-  pageSeo?: PageSeoModel
+  data: PageDataModel<null>
   blog: BlogModel
-  socialMedias: StrapiFindResponse<SocialMediaModel>
 }
 
 interface Params extends Record<string, string> {
   slug: string
 }
 
-const Blogs: FC<Props> = ({ blog, socialMedias, pageSeo }) => {
+const Blogs: FC<Props> = ({ blog, data }) => {
   return (
     <>
-      <Seo {...pageSeo} />
-      <AppLayout socialMedias={socialMedias}>
+      <Seo {...data.seo} />
+      <AppLayout socialMedias={data.socialMedias}>
         <Blog blog={blog} />
       </AppLayout>
     </>
@@ -45,33 +43,17 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
     },
   })
 
-  const socialMediasQuery = await apolloSsrClient.query<
-    GraphqlResponse<'socialMedias', SocialMediaModel>
-  >({
-    query: socialMediaDocument.GetAllSocialMedias,
-  })
-
-  const pageSeoQuery = await apolloSsrClient.query<
-    GraphqlResponse<'pageSeos', PageSeoModel>
-  >({
-    query: pageSeoDocument.FindPageSeo,
-    variables: {
-      slug: '/',
-    },
-  })
-
   return blogQuery.data.blogs.data?.at(0)
     ? {
         props: {
+          data: await getPageData<null>(AppRoutes.blogs),
           blog: blogQuery.data.blogs.data[0].attributes,
-          socialMedias: socialMediasQuery.data.socialMedias,
-          pageSeo: pageSeoQuery.data.pageSeos.data?.at(0)?.attributes,
         },
-        revalidate: 60,
+        revalidate: Number(process.env.REVALIDATE_TIMEOUT),
       }
     : {
         notFound: true,
-        revalidate: 60,
+        revalidate: Number(process.env.REVALIDATE_TIMEOUT),
       }
 }
 

@@ -7,6 +7,7 @@ declare global {
     interface ProcessEnv {
       STRAPI_PUBLIC_TOKEN: string
       NEXT_PUBLIC_STRAPI_URL: string
+      REVALIDATE_TIMEOUT: string
     }
   }
 
@@ -26,7 +27,7 @@ declare global {
     | 'linkedIn'
     | 'instagram'
 
-  type GraphqlResponse<T1 extends string, T2 extends object> = {
+  type GraphqlResponse<T1 extends string | string[], T2 extends object> = {
     [keys in T1]: StrapiFindResponse<T2>
   }
 }

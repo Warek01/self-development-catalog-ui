@@ -4,6 +4,7 @@ fragment blogCategoryFields on BlogCategory {
   color
   blogs {
     data {
+      id
       attributes {
         title
         slug
@@ -56,6 +57,7 @@ query FindBlogCategory($slug: String!) {
 query GetAllBlogCategoriesSlugs {
   blogCategories {
     data {
+      id
       attributes {
         slug
       }
