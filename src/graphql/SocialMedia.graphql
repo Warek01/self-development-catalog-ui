@@ -3,13 +3,3 @@ fragment socialMediaFields on SocialMedia {
   link
   platform
 }
-
-query GetAllSocialMedias {
-  socialMedias {
-    data {
-      attributes {
-        ...socialMediaFields
-      }
-    }
-  }
-}

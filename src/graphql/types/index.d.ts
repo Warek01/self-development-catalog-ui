@@ -20,3 +20,7 @@ declare module '*/SocialMedia.graphql' {
 declare module '*/UsefulResource.graphql' {
   export const GetAllUsefulResources: any
 }
+
+declare module '*/PageData.graphql' {
+  export const FindPageData: any
+}

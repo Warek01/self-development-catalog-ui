@@ -9,22 +9,23 @@ import {
   socialMediaDocument,
 } from '@/graphql'
 import { AppLayout, CategoriesList, Seo } from '@/components'
+import getPageData from '@/utils/getPageData'
+import AppRoutes from '@/constants/appRoutes'
 
 interface Props {
-  pageSeo?: PageSeoModel
+  data: PageDataModel<null>
   category: StrapiEntity<BlogCategoryModel>
-  socialMedias: StrapiFindResponse<SocialMediaModel>
 }
 
 interface Params extends Record<string, string> {
   slug: string
 }
 
-const Category: FC<Props> = ({ category, socialMedias, pageSeo }) => {
+const Category: FC<Props> = ({ category, data }) => {
   return (
     <>
-      <Seo {...pageSeo} />
-      <AppLayout socialMedias={socialMedias}>
+      <Seo {...data.seo} />
+      <AppLayout socialMedias={data.socialMedias}>
         <CategoriesList categories={category} />
       </AppLayout>
     </>
@@ -38,27 +39,12 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
 }) => {
   const slug = params!.slug
 
-  const socialMediasQuery = await apolloSsrClient.query<
-    GraphqlResponse<'socialMedias', SocialMediaModel>
-  >({
-    query: socialMediaDocument.GetAllSocialMedias,
-  })
-
-  const pageSeoQuery = await apolloSsrClient.query<
-    GraphqlResponse<'pageSeos', PageSeoModel>
-  >({
-    query: pageSeoDocument.FindPageSeo,
-    variables: {
-      slug: '/',
-    },
-  })
-
   const blogCategoriesQuery = await apolloSsrClient.query<
     GraphqlResponse<'blogCategories', BlogCategoryModel>
   >({
     query: blogCategoryDocument.FindBlogCategory,
     variables: {
-      slug: slug,
+      slug,
     },
   })
 
@@ -68,12 +54,11 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
     ? {
         props: {
           category,
-          socialMedias: socialMediasQuery.data.socialMedias,
-          pageSeo: pageSeoQuery.data.pageSeos.data?.at(0)?.attributes,
+          data: await getPageData<null>(AppRoutes.categories),
         },
-        revalidate: 60,
+        revalidate: Number(process.env.REVALIDATE_TIMEOUT),
       }
-    : { notFound: true, revalidate: 60 }
+    : { notFound: true, revalidate: Number(process.env.REVALIDATE_TIMEOUT) }
 }
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {

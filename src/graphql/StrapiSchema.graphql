@@ -5,17 +5,19 @@ schema {
   mutation: Mutation
 }
 
-union GenericMorph = Blog | BlogCategory | ComponentSharedSeo | ComponentSharedSeoImage | ComponentUtilsLink | I18NLocale | PageSeo | SocialMedia | UploadFile | UploadFolder | UsefulResource | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser
+union GenericMorph = Blog | BlogCategory | ComponentPageComponentAbout | ComponentPageComponentHome | ComponentSharedSeo | ComponentSharedSeoImage | ComponentUtilsLink | ComponentUtilsTechnology | I18NLocale | Page | PageSeo | SocialMedia | UploadFile | UploadFolder | UsefulResource | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser
+
+union PagePropsDynamicZone = ComponentPageComponentAbout | ComponentPageComponentHome | Error
 
 type Blog {
   blog_categories(filters: BlogCategoryFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): BlogCategoryRelationResponseCollection
   content: String
   createdAt: DateTime
-  date: Date
+  date: Date!
   links(filters: ComponentUtilsLinkFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentUtilsLink]
   publishedAt: DateTime
-  slug: String
-  title: String
+  slug: String!
+  title: String!
   updatedAt: DateTime
 }
 
@@ -23,10 +25,10 @@ type BlogCategory {
   blogs(filters: BlogFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): BlogRelationResponseCollection
   color: String
   createdAt: DateTime
-  icon: UploadFileEntityResponse
+  icon: UploadFileEntityResponse!
   publishedAt: DateTime
-  slug: String
-  title: String
+  slug: String!
+  title: String!
   updatedAt: DateTime
 }
 
@@ -66,16 +68,33 @@ type BlogRelationResponseCollection {
   data: [BlogEntity!]!
 }
 
+type ComponentPageComponentAbout {
+  authorDescription: String
+  authorTechnologies(filters: ComponentUtilsTechnologyFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentUtilsTechnology]
+  authorTitle: String
+  id: ID!
+  projectDescription: String
+  projectTechnologies(filters: ComponentUtilsTechnologyFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentUtilsTechnology]
+  projectTitle: String
+  repoLink: String
+}
+
+type ComponentPageComponentHome {
+  id: ID!
+  welcomeImage: UploadFileEntityResponse
+  welcomeText: String!
+}
+
 type ComponentSharedSeo {
   description: String
   id: ID!
   image: ComponentSharedSeoImage
-  keywords: String
+  keywords: String!
   link: String
   ogLink: String
   preventIndexing: Boolean
   robots: String
-  title: String
+  title: String!
   twitterLink: String
 }
 
@@ -87,8 +106,20 @@ type ComponentSharedSeoImage {
 
 type ComponentUtilsLink {
   id: ID!
+  link: String!
+  text: String!
+}
+
+type ComponentUtilsTechnology {
+  id: ID!
+  image: UploadFileEntityResponse!
   link: String
-  text: String
+  title: String!
+}
+
+type Error {
+  code: String!
+  message: String
 }
 
 type I18NLocale {
@@ -117,6 +148,7 @@ type Mutation {
   changePassword(currentPassword: String!, password: String!, passwordConfirmation: String!): UsersPermissionsLoginPayload
   createBlog(data: BlogInput!): BlogEntityResponse
   createBlogCategory(data: BlogCategoryInput!): BlogCategoryEntityResponse
+  createPage(data: PageInput!): PageEntityResponse
   createPageSeo(data: PageSeoInput!): PageSeoEntityResponse
   createSocialMedia(data: SocialMediaInput!): SocialMediaEntityResponse
   createUploadFile(data: UploadFileInput!): UploadFileEntityResponse
@@ -128,6 +160,7 @@ type Mutation {
   createUsersPermissionsUser(data: UsersPermissionsUserInput!): UsersPermissionsUserEntityResponse!
   deleteBlog(id: ID!): BlogEntityResponse
   deleteBlogCategory(id: ID!): BlogCategoryEntityResponse
+  deletePage(id: ID!): PageEntityResponse
   deletePageSeo(id: ID!): PageSeoEntityResponse
   deleteSocialMedia(id: ID!): SocialMediaEntityResponse
   deleteUploadFile(id: ID!): UploadFileEntityResponse
@@ -151,6 +184,7 @@ type Mutation {
   updateBlog(data: BlogInput!, id: ID!): BlogEntityResponse
   updateBlogCategory(data: BlogCategoryInput!, id: ID!): BlogCategoryEntityResponse
   updateFileInfo(id: ID!, info: FileInfoInput): UploadFileEntityResponse!
+  updatePage(data: PageInput!, id: ID!): PageEntityResponse
   updatePageSeo(data: PageSeoInput!, id: ID!): PageSeoEntityResponse
   updateSocialMedia(data: SocialMediaInput!, id: ID!): SocialMediaEntityResponse
   updateUploadFile(data: UploadFileInput!, id: ID!): UploadFileEntityResponse
@@ -161,6 +195,29 @@ type Mutation {
   "Update an existing user"
   updateUsersPermissionsUser(data: UsersPermissionsUserInput!, id: ID!): UsersPermissionsUserEntityResponse!
   upload(field: String, file: Upload!, info: FileInfoInput, ref: String, refId: ID): UploadFileEntityResponse!
+}
+
+type Page {
+  createdAt: DateTime
+  props: [PagePropsDynamicZone]
+  publishedAt: DateTime
+  seo: PageSeoEntityResponse
+  slug: String!
+  updatedAt: DateTime
+}
+
+type PageEntity {
+  attributes: Page
+  id: ID
+}
+
+type PageEntityResponse {
+  data: PageEntity
+}
+
+type PageEntityResponseCollection {
+  data: [PageEntity!]!
+  meta: ResponseCollectionMeta!
 }
 
 type PageSeo {
@@ -200,8 +257,10 @@ type Query {
   i18NLocale(id: ID): I18NLocaleEntityResponse
   i18NLocales(filters: I18NLocaleFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): I18NLocaleEntityResponseCollection
   me: UsersPermissionsMe
+  page(id: ID): PageEntityResponse
   pageSeo(id: ID): PageSeoEntityResponse
   pageSeos(filters: PageSeoFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): PageSeoEntityResponseCollection
+  pages(filters: PageFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): PageEntityResponseCollection
   socialMedia(id: ID): SocialMediaEntityResponse
   socialMedias(filters: SocialMediaFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): SocialMediaEntityResponseCollection
   uploadFile(id: ID): UploadFileEntityResponse
@@ -222,10 +281,10 @@ type ResponseCollectionMeta {
 
 type SocialMedia {
   createdAt: DateTime
-  link: String
-  platform: ENUM_SOCIALMEDIA_PLATFORM
+  link: String!
+  platform: ENUM_SOCIALMEDIA_PLATFORM!
   publishedAt: DateTime
-  title: String
+  title: String!
   updatedAt: DateTime
 }
 
@@ -312,10 +371,10 @@ type UploadFolderRelationResponseCollection {
 
 type UsefulResource {
   createdAt: DateTime
-  description: String
-  link: String
+  description: String!
+  link: String!
   publishedAt: DateTime
-  title: String
+  title: String!
   updatedAt: DateTime
 }
 
@@ -463,6 +522,8 @@ scalar DateTime
 "The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf)."
 scalar JSON
 
+scalar PagePropsDynamicZoneInput
+
 "The `Upload` scalar type represents a file upload."
 scalar Upload
 
@@ -592,6 +653,14 @@ input ComponentUtilsLinkInput {
   id: ID
   link: String
   text: String
+}
+
+input ComponentUtilsTechnologyFiltersInput {
+  and: [ComponentUtilsTechnologyFiltersInput]
+  link: StringFilterInput
+  not: ComponentUtilsTechnologyFiltersInput
+  or: [ComponentUtilsTechnologyFiltersInput]
+  title: StringFilterInput
 }
 
 input DateFilterInput {
@@ -755,7 +824,27 @@ input JSONFilterInput {
   startsWith: JSON
 }
 
+input PageFiltersInput {
+  and: [PageFiltersInput]
+  createdAt: DateTimeFilterInput
+  id: IDFilterInput
+  not: PageFiltersInput
+  or: [PageFiltersInput]
+  publishedAt: DateTimeFilterInput
+  seo: PageSeoFiltersInput
+  slug: StringFilterInput
+  updatedAt: DateTimeFilterInput
+}
+
+input PageInput {
+  props: [PagePropsDynamicZoneInput!]
+  publishedAt: DateTime
+  seo: ID
+  slug: String
+}
+
 input PageSeoFiltersInput {
+  Title: StringFilterInput
   and: [PageSeoFiltersInput]
   createdAt: DateTimeFilterInput
   data: ComponentSharedSeoFiltersInput
@@ -768,6 +857,7 @@ input PageSeoFiltersInput {
 }
 
 input PageSeoInput {
+  Title: String
   data: ComponentSharedSeoInput
   publishedAt: DateTime
   slug: String

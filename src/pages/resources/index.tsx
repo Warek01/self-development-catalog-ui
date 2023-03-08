@@ -3,24 +3,20 @@ import { GetStaticProps } from 'next'
 
 import type { StrapiFindResponse } from '@/types/strapi'
 import { AppLayout, Seo, UsefulResources } from '@/components'
-import {
-  apolloSsrClient,
-  pageSeoDocument,
-  usefulResourceDocument,
-  socialMediaDocument,
-} from '@/graphql'
+import { apolloSsrClient, usefulResourceDocument } from '@/graphql'
+import getPageData from '@/utils/getPageData'
+import AppRoutes from '@/constants/appRoutes'
 
 interface Props {
-  pageSeo?: PageSeoModel
-  socialMedias: StrapiFindResponse<SocialMediaModel>
+  data: PageDataModel<null>
   resources: StrapiFindResponse<UsefulResourceModel>
 }
 
-const Resources: FC<Props> = ({ socialMedias, resources, pageSeo }) => {
+const Resources: FC<Props> = ({ data, resources }) => {
   return (
     <>
-      <Seo {...pageSeo} />
-      <AppLayout socialMedias={socialMedias}>
+      <Seo {...data.seo} />
+      <AppLayout socialMedias={data.socialMedias}>
         <UsefulResources resources={resources} />
       </AppLayout>
     </>
@@ -30,33 +26,17 @@ const Resources: FC<Props> = ({ socialMedias, resources, pageSeo }) => {
 export default Resources
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const socialMediasQuery = await apolloSsrClient.query<
-    GraphqlResponse<'socialMedias', SocialMediaModel>
-  >({
-    query: socialMediaDocument.GetAllSocialMedias,
-  })
-
   const resourcesQuery = await apolloSsrClient.query<
     GraphqlResponse<'usefulResources', UsefulResourceModel>
   >({
     query: usefulResourceDocument.GetAllUsefulResources,
   })
 
-  const pageSeoQuery = await apolloSsrClient.query<
-    GraphqlResponse<'pageSeos', PageSeoModel>
-  >({
-    query: pageSeoDocument.FindPageSeo,
-    variables: {
-      slug: '/',
-    },
-  })
-
   return {
     props: {
-      socialMedias: socialMediasQuery.data.socialMedias,
+      data: await getPageData<null>(AppRoutes.resources),
       resources: resourcesQuery.data.usefulResources,
-      pageSeo: pageSeoQuery.data.pageSeos.data?.at(0)?.attributes,
     },
-    revalidate: 60,
+    revalidate: Number(process.env.REVALIDATE_TIMEOUT),
   }
 }

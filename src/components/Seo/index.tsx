@@ -2,6 +2,7 @@ import { FC, memo } from 'react'
 import Head from 'next/head'
 
 const Seo: FC<Partial<PageSeoModel>> = (props) => {
+
   if (!props?.data) {
     return null
   }

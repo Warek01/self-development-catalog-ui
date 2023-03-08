@@ -50,7 +50,7 @@ const Category: FC<Props> = ({ category }) => {
         >
           {blogs.map((blog) => (
             <li
-              key={blog.id}
+              key={`${category.title}-${blog.id}`}
               className="duration-100 ease-in-out hover:bg-black/10"
             >
               <Link
@@ -63,7 +63,7 @@ const Category: FC<Props> = ({ category }) => {
                 <div className="flex gap-3 col-span-4">
                   {blog.attributes.blog_categories?.data.map(
                     (category) => (
-                      <span className="py-1 px-3 rounded-md bg-card-bg-dark text-white text-[9px] flex items-center">
+                      <span key={category.id} className="py-1 px-3 rounded-md bg-card-bg-dark text-white text-[9px] flex items-center">
                         {category.attributes.title}
                       </span>
                     ),

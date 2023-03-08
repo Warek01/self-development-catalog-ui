@@ -14,6 +14,7 @@ import Blog from './Blog'
 import UsefulResources from './UsefulResources'
 import Modal from './Modal'
 import Seo from './Seo'
+import AboutProject from './AboutProject'
 
 export {
   Header,
@@ -30,5 +31,6 @@ export {
   Blog,
   UsefulResources,
   Modal,
-  Seo
+  Seo,
+  AboutProject,
 }

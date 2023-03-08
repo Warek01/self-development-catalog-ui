@@ -2,12 +2,13 @@ import { FC, memo, useContext } from 'react'
 import classNames from 'classnames'
 import Link from 'next/link'
 
-import responsiveContext from 'context/responsiveConext'
-import headerLinks from 'constants/headerLinks'
-import { icons, LinkIcon } from 'components'
-import socialMediaIconsMap from 'constants/socialMediaIconsMap'
-import sideMenuContext from 'context/sideMenuContext'
+import responsiveContext from '@/context/responsiveConext'
+import headerLinks from '@/constants/headerLinks'
+import { icons, LinkIcon } from '@/components'
+import socialMediaIconsMap from '@/constants/socialMediaIconsMap'
+import sideMenuContext from '@/context/sideMenuContext'
 import type SideMenuProps from './interface'
+
 
 const SideMenu: FC<SideMenuProps> = ({ socialMediaLinks }) => {
   const { isMobileView } = useContext(responsiveContext)

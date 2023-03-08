@@ -51,18 +51,22 @@ export interface StrapiFindOneResponse<T> {
 }
 
 export interface StrapiMultimediaModel {
-  name: string
-  alternativeText?: string
-  caption?: string
-  height: number
-  width: number
-  formats?: any
-  hash: string
-  ext: string
-  mime: string
-  size: number
-  url: string
-  previewUrl?: string
-  provider: string
-  provider_metadata?: any
+  data: {
+    attributes: {
+      name: string
+      alternativeText?: string
+      caption?: string
+      height: number
+      width: number
+      formats?: any
+      hash: string
+      ext: string
+      mime: string
+      size: number
+      url: string
+      previewUrl?: string
+      provider: string
+      provider_metadata?: any
+    }
+  }
 }

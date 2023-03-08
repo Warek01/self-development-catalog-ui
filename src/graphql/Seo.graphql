@@ -25,13 +25,3 @@ fragment pageSeoFields on PageSeo {
     }
   }
 }
-
-query FindPageSeo($slug: String!) {
-  pageSeos(filters: { slug: { eq: $slug } }) {
-    data {
-      attributes {
-        ...pageSeoFields
-      }
-    }
-  }
-}

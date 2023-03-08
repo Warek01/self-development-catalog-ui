@@ -6,21 +6,20 @@ import { AppLayout, CategoriesList, Seo } from '@/components'
 import {
   apolloSsrClient,
   blogCategoryDocument,
-  pageSeoDocument,
-  socialMediaDocument,
 } from '@/graphql'
+import getPageData from '@/utils/getPageData'
+import AppRoutes from '@/constants/appRoutes'
 
 interface Props {
-  pageSeo?: PageSeoModel
+  data: PageDataModel<null>
   categories: StrapiFindResponse<BlogCategoryModel>
-  socialMedias: StrapiFindResponse<SocialMediaModel>
 }
 
-const Categories: FC<Props> = ({ categories, socialMedias, pageSeo }) => {
+const Categories: FC<Props> = ({ categories, data }) => {
   return (
     <>
-      <Seo {...pageSeo} />
-      <AppLayout socialMedias={socialMedias}>
+      <Seo {...data.seo} />
+      <AppLayout socialMedias={data.socialMedias}>
         <CategoriesList categories={categories} />
       </AppLayout>
     </>
@@ -30,33 +29,17 @@ const Categories: FC<Props> = ({ categories, socialMedias, pageSeo }) => {
 export default Categories
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const socialMediasQuery = await apolloSsrClient.query<
-    GraphqlResponse<'socialMedias', SocialMediaModel>
-  >({
-    query: socialMediaDocument.GetAllSocialMedias,
-  })
-
   const categoriesQuery = await apolloSsrClient.query<
     GraphqlResponse<'blogCategories', BlogCategoryModel>
   >({
     query: blogCategoryDocument.GetAllBlogCategories,
   })
 
-  const pageSeoQuery = await apolloSsrClient.query<
-    GraphqlResponse<'pageSeos', PageSeoModel>
-  >({
-    query: pageSeoDocument.FindPageSeo,
-    variables: {
-      slug: '/',
-    },
-  })
-
   return {
     props: {
+      data: await getPageData<null>(AppRoutes.categories),
       categories: categoriesQuery.data.blogCategories,
-      socialMedias: socialMediasQuery.data.socialMedias,
-      pageSeo: pageSeoQuery.data.pageSeos.data?.at(0)?.attributes,
     },
-    revalidate: 60,
+    revalidate: Number(process.env.REVALIDATE_TIMEOUT),
   }
 }

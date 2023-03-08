@@ -1,0 +1,37 @@
+#import "./Multimedia.graphql"
+
+fragment homeComponentFields on ComponentPageComponentHome {
+  id
+  welcomeText
+  welcomeImage {
+    ...multimediaFields
+  }
+}
+
+fragment aboutComponentFields on ComponentPageComponentAbout {
+  id
+  projectTitle
+  projectDescription
+  projectTechnologies {
+    id
+    image {
+      ...multimediaFields
+    }
+    link
+    title
+  }
+  repoLink
+  authorTitle
+  authorDescription
+  authorTechnologies {
+    id
+    image {
+      ...multimediaFields
+    }
+    link
+    title
+  }
+}
+
+
+

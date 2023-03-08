@@ -8,7 +8,8 @@ module.exports = {
   images: {
     disableStaticImages: false,
     dangerouslyAllowSVG: true,
-    minimumCacheTTL: 7 * 24 * 3600,
+    minimumCacheTTL: 24 * 3600,
+    contentDispositionType: 'attachment',
     unoptimized: false,
     domains: ['localhost', 'admin.warek.site'],
   },
@@ -22,6 +23,7 @@ module.exports = {
   poweredByHeader: true,
   swcMinify: true,
   outputFileTracing: true,
+  i18n: undefined,
 
   webpack(config) {
     config.module.rules.push({

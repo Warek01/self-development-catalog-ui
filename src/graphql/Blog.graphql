@@ -22,6 +22,7 @@ query FindBlog($slug: String!) {
     slug: {eq: $slug}
   }) {
     data {
+      id
       attributes {
         ...blogFields
       }
