@@ -1,4 +1,4 @@
-import { icons } from 'components'
+import icons from '@/icons'
 
 const socialMediaIconsMap: Record<SocialMediaPlatform, IconComponent> = {
   discord: icons.Discord,

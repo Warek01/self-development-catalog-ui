@@ -36,8 +36,9 @@ import List from './List'
 import Hammer from './Hammer'
 import Pin from './Pin'
 import Quotes from './Quotes'
+import Spinner from './Spinner'
 
-export {
+export default {
   Menu,
   Close,
   Gitlab,
@@ -76,4 +77,5 @@ export {
   Hammer,
   Pin,
   Quotes,
+  Spinner,
 }

@@ -1,16 +1,12 @@
 import { FC } from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
 
-import type { StrapiEntity, StrapiFindResponse } from '@/types/strapi'
-import {
-  apolloSsrClient,
-  pageSeoDocument,
-  blogCategoryDocument,
-  socialMediaDocument,
-} from '@/graphql'
+import type { StrapiEntity } from '@/types/strapi'
+import { blogCategoryDocument } from '@/graphql'
 import { AppLayout, CategoriesList, Seo } from '@/components'
-import getPageData from '@/utils/getPageData'
+import getPageData from '@/lib/getPageData'
 import AppRoutes from '@/constants/appRoutes'
+import { apolloSsrClient } from '@/graphql/client'
 
 interface Props {
   data: PageDataModel<null>

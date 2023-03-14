@@ -21,9 +21,7 @@ fragment pageDataFields on Page {
 }
 
 query FindPageData($slug: String!) {
-  pages (filters: {
-    slug: {eq: $slug}
-  }) {
+  pages(filters: { slug: { eq: $slug } }) {
     data {
       attributes {
         ...pageDataFields

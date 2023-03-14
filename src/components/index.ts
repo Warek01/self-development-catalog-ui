@@ -1,5 +1,3 @@
-import * as icons from './icons'
-
 import Footer from './Footer'
 import Header from './Header'
 import SideMenu from './SideMenu'
@@ -11,16 +9,15 @@ import FeatureSelect from './FeatureSelect'
 import AppLayout from './AppLayout'
 import CategoriesList from './CategoriesList'
 import Blog from './Blog'
-import UsefulResources from './UsefulResources'
 import Modal from './Modal'
 import Seo from './Seo'
 import AboutProject from './AboutProject'
+import Spinner from './Spinner'
 
 export {
   Header,
   SideMenu,
   Footer,
-  icons,
   LinkIcon,
   Welcome,
   AboutPreview,
@@ -29,8 +26,8 @@ export {
   AppLayout,
   CategoriesList,
   Blog,
-  UsefulResources,
   Modal,
   Seo,
   AboutProject,
+  Spinner,
 }

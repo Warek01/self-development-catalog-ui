@@ -14,3 +14,24 @@ query GetAllUsefulResources {
     }
   }
 }
+
+query GetTotalUsefulResources {
+  usefulResources {
+    meta {
+      pagination {
+        total
+      }
+    }
+  }
+}
+
+query GetUsefulResources($start: Int!, $limit: Int!) {
+  usefulResources(pagination: { start: $start, limit: $limit }) {
+    data {
+      id
+      attributes {
+        ...usefulResourcesFields
+      }
+    }
+  }
+}

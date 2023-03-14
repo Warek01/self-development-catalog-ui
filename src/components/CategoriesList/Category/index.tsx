@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import Link from 'next/link'
 import Image from 'next/image'
 
-import determineContrastTextColor from 'utils/determineContrastColor'
+import determineContrastTextColor from 'lib/determineContrastColor'
 import AppRoutes from 'constants/appRoutes'
 
 interface Props {
@@ -61,13 +61,14 @@ const Category: FC<Props> = ({ category }) => {
                   {blog.attributes.title}
                 </span>
                 <div className="flex gap-3 col-span-4">
-                  {blog.attributes.blog_categories?.data.map(
-                    (category) => (
-                      <span key={category.id} className="py-1 px-3 rounded-md bg-card-bg-dark text-white text-[9px] flex items-center">
-                        {category.attributes.title}
-                      </span>
-                    ),
-                  )}
+                  {blog.attributes.blog_categories?.data.map((category) => (
+                    <span
+                      key={category.id}
+                      className="py-1 px-3 rounded-md bg-card-bg-dark text-white text-[9px] flex items-center"
+                    >
+                      {category.attributes.title}
+                    </span>
+                  ))}
                 </div>
               </Link>
             </li>

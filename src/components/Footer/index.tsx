@@ -1,8 +1,9 @@
 import { FC, memo } from 'react'
 
-import { icons, LinkIcon } from 'components/index'
-import socialMediaIconsMap from 'constants/socialMediaIconsMap'
-import { StrapiFindResponse } from '../../types/strapi'
+import type { StrapiFindResponse } from '@/types/strapi'
+import { LinkIcon } from '@/components/index'
+import socialMediaIconsMap from '@/constants/socialMediaIconsMap'
+import icons from '@/icons'
 
 export interface Props {
   socialMedias: StrapiFindResponse<SocialMediaModel>

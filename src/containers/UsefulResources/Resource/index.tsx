@@ -2,9 +2,10 @@ import { FC, memo } from 'react'
 import Link from 'next/link'
 import Tooltip from 'rc-tooltip'
 
-import { icons, Modal } from 'components'
+import { Modal } from 'components'
 import tooltipProps from 'constants/tooltipProps'
-import { useModal } from 'utils/hooks'
+import { useModal } from 'lib/hooks'
+import icons from '@/icons'
 
 interface Props {
   attributes: UsefulResourceModel

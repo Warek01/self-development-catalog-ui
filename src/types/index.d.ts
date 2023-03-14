@@ -5,7 +5,7 @@ import type { StrapiFindResponse } from '@/types/strapi'
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
-      STRAPI_PUBLIC_TOKEN: string
+      NEXT_PUBLIC_NEXT_PUBLIC_STRAPI_PUBLIC_TOKEN: string
       NEXT_PUBLIC_STRAPI_URL: string
       REVALIDATE_TIMEOUT: string
     }

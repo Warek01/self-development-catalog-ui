@@ -3,7 +3,7 @@ import snarkdown from 'snarkdown'
 import highlight from 'highlight.js'
 import 'highlight.js/styles/github.css'
 
-import preprocessImgSrc from '@/utils/preprocessImgSrc'
+import preprocessImgSrc from '@/lib/preprocessImgSrc'
 import Aside from '@/components/Blog/Aside'
 import style from './style.module.scss'
 

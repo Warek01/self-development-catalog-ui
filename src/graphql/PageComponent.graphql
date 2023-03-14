@@ -32,6 +32,3 @@ fragment aboutComponentFields on ComponentPageComponentAbout {
     title
   }
 }
-
-
-

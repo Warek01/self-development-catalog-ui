@@ -42,9 +42,7 @@ query GetAllBlogCategories {
 }
 
 query FindBlogCategory($slug: String!) {
-  blogCategories(filters: {
-    slug: {eq: $slug}
-  }) {
+  blogCategories(filters: { slug: { eq: $slug } }) {
     data {
       id
       attributes {
@@ -64,4 +62,3 @@ query GetAllBlogCategoriesSlugs {
     }
   }
 }
-

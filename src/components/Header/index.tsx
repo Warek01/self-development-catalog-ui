@@ -2,11 +2,11 @@ import { FC, memo, useCallback, useContext } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
-import responsiveContext from 'context/responsiveConext'
-import headerLinks from 'constants/headerLinks'
-import { icons } from 'components/index'
-import AppRoutes from 'constants/appRoutes'
-import sideMenuContext from 'context/sideMenuContext'
+import responsiveContext from '@/contexts/responsiveConext'
+import headerLinks from '@/constants/headerLinks'
+import AppRoutes from '@/constants/appRoutes'
+import sideMenuContext from '@/contexts/sideMenuContext'
+import icons from '@/icons'
 
 const Header: FC = () => {
   const { isMobileView } = useContext(responsiveContext)

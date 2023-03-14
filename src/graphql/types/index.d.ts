@@ -19,6 +19,8 @@ declare module '*/SocialMedia.graphql' {
 
 declare module '*/UsefulResource.graphql' {
   export const GetAllUsefulResources: any
+  export const GetUsefulResources: any
+  export const GetTotalUsefulResources: any
 }
 
 declare module '*/PageData.graphql' {

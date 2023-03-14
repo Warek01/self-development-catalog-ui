@@ -2,12 +2,10 @@ import { FC } from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
 
 import { AppLayout, Blog, Seo } from '@/components'
-import {
-  apolloSsrClient,
-  blogDocument,
-} from '@/graphql'
+import { blogDocument } from '@/graphql'
 import AppRoutes from '@/constants/appRoutes'
-import getPageData from '@/utils/getPageData'
+import getPageData from '@/lib/getPageData'
+import { apolloSsrClient } from '@/graphql/client'
 
 interface Props {
   data: PageDataModel<null>
