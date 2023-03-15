@@ -5,7 +5,7 @@ import type { StrapiFindResponse } from '@/types/strapi'
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
-      STRAPI_PUBLIC_TOKEN: string
+      NEXT_PUBLIC_NEXT_PUBLIC_STRAPI_PUBLIC_TOKEN: string
       NEXT_PUBLIC_STRAPI_URL: string
       REVALIDATE_TIMEOUT: string
     }
@@ -30,6 +30,8 @@ declare global {
   type GraphqlResponse<T1 extends string | string[], T2 extends object> = {
     [keys in T1]: StrapiFindResponse<T2>
   }
+
+  type DisplayBreakpoints = '2xl' | 'xl' | 'lg' | 'md' | 'sm'
 }
 
 export {}

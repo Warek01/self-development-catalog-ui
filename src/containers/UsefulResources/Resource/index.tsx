@@ -2,17 +2,18 @@ import { FC, memo } from 'react'
 import Link from 'next/link'
 import Tooltip from 'rc-tooltip'
 
-import { icons, Modal } from 'components'
+import { Modal } from 'components'
 import tooltipProps from 'constants/tooltipProps'
-import { useModal } from 'utils/hooks'
+import { useModal } from 'lib/hooks'
+import icons from '@/icons'
 
 interface Props {
   attributes: UsefulResourceModel
   isFavorite: boolean
-  onFavClick: () => void
+  onFavoriteClick: () => void
 }
 
-const Resource: FC<Props> = ({ attributes, onFavClick, isFavorite }) => {
+const Resource: FC<Props> = ({ attributes, onFavoriteClick, isFavorite }) => {
   const [showModal, setShowModal] = useModal()
 
   return (
@@ -44,7 +45,7 @@ const Resource: FC<Props> = ({ attributes, onFavClick, isFavorite }) => {
             overlay="Toggle favorite"
           >
             <button
-              onClick={onFavClick}
+              onClick={onFavoriteClick}
               className="hover:bg-transparent"
             >
               <icons.Pin
@@ -84,6 +85,6 @@ const Resource: FC<Props> = ({ attributes, onFavClick, isFavorite }) => {
 export default memo(Resource, (oldProps, newProps) => {
   return (
     oldProps.isFavorite === newProps.isFavorite &&
-    oldProps.onFavClick === newProps.onFavClick
+    oldProps.onFavoriteClick === newProps.onFavoriteClick
   )
 })

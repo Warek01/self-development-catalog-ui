@@ -2,7 +2,7 @@ import { FC, memo } from 'react'
 import Image from 'next/image'
 import classNames from 'classnames'
 
-import { useRenderState } from '@/utils/hooks'
+import { useRenderState } from '@/lib/hooks'
 import type { StrapiMultimediaModel } from '@/types/strapi'
 import style from './style.module.scss'
 
@@ -32,7 +32,10 @@ const Welcome: FC<Props> = ({ welcomeTitle, welcomeImage }) => {
       </div>
       <div className="flex items-center absolute right-12">
         <Image
-          src={process.env.NEXT_PUBLIC_STRAPI_URL + welcomeImage.data.attributes.url}
+          src={
+            process.env.NEXT_PUBLIC_STRAPI_URL +
+            welcomeImage.data.attributes.url
+          }
           alt="Shapes"
           width={200}
           height={200}

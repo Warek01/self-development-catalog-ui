@@ -9,11 +9,11 @@ import 'rc-tooltip/assets/bootstrap_white.css'
 import 'styles/globals.scss'
 
 // Local imports
-import responsiveContext from '@/context/responsiveConext'
+import responsiveContext from '@/contexts/responsiveConext'
 import sideMenuContext, {
   SideMenuContextProps,
-} from '@/context/sideMenuContext'
-import { apolloSsrClient } from '@/graphql'
+} from '@/contexts/sideMenuContext'
+import { apolloClient } from '@/graphql/client'
 
 const App = ({ Component, pageProps }: AppProps) => {
   const [isMobileView, setIsMobileView] = useState<boolean>(false)
@@ -42,7 +42,7 @@ const App = ({ Component, pageProps }: AppProps) => {
       <Head>
         <title>Self Dev</title>
       </Head>
-      <ApolloProvider client={apolloSsrClient}>
+      <ApolloProvider client={apolloClient}>
         <responsiveContext.Provider value={{ isMobileView }}>
           <sideMenuContext.Provider value={sideMenuContextValue}>
             <div id="modal-root" />

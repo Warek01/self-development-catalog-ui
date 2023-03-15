@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { GetStaticProps } from 'next'
 
 import { AboutProject, AppLayout, Seo } from '@/components'
-import getPageData from '@/utils/getPageData'
+import getPageData from '@/lib/getPageData'
 import AppRoutes from '@/constants/appRoutes'
 
 interface AboutProps {

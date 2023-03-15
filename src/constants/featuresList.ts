@@ -1,4 +1,4 @@
-import { icons } from 'components'
+import icons from '@/icons'
 import AppRoutes from './appRoutes'
 
 interface Feature {

@@ -5,16 +5,46 @@ schema {
   mutation: Mutation
 }
 
-union GenericMorph = Blog | BlogCategory | ComponentPageComponentAbout | ComponentPageComponentHome | ComponentSharedSeo | ComponentSharedSeoImage | ComponentUtilsLink | ComponentUtilsTechnology | I18NLocale | Page | PageSeo | SocialMedia | UploadFile | UploadFolder | UsefulResource | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser
+union GenericMorph =
+    Blog
+  | BlogCategory
+  | ComponentPageComponentAbout
+  | ComponentPageComponentHome
+  | ComponentSharedSeo
+  | ComponentSharedSeoImage
+  | ComponentUtilsLink
+  | ComponentUtilsTechnology
+  | I18NLocale
+  | Page
+  | PageSeo
+  | SocialMedia
+  | UploadFile
+  | UploadFolder
+  | UsefulResource
+  | UsersPermissionsPermission
+  | UsersPermissionsRole
+  | UsersPermissionsUser
 
-union PagePropsDynamicZone = ComponentPageComponentAbout | ComponentPageComponentHome | Error
+union PagePropsDynamicZone =
+    ComponentPageComponentAbout
+  | ComponentPageComponentHome
+  | Error
 
 type Blog {
-  blog_categories(filters: BlogCategoryFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): BlogCategoryRelationResponseCollection
+  blog_categories(
+    filters: BlogCategoryFiltersInput
+    pagination: PaginationArg = {}
+    publicationState: PublicationState = LIVE
+    sort: [String] = []
+  ): BlogCategoryRelationResponseCollection
   content: String
   createdAt: DateTime
   date: Date!
-  links(filters: ComponentUtilsLinkFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentUtilsLink]
+  links(
+    filters: ComponentUtilsLinkFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): [ComponentUtilsLink]
   publishedAt: DateTime
   slug: String!
   title: String!
@@ -22,7 +52,12 @@ type Blog {
 }
 
 type BlogCategory {
-  blogs(filters: BlogFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): BlogRelationResponseCollection
+  blogs(
+    filters: BlogFiltersInput
+    pagination: PaginationArg = {}
+    publicationState: PublicationState = LIVE
+    sort: [String] = []
+  ): BlogRelationResponseCollection
   color: String
   createdAt: DateTime
   icon: UploadFileEntityResponse!
@@ -70,11 +105,19 @@ type BlogRelationResponseCollection {
 
 type ComponentPageComponentAbout {
   authorDescription: String
-  authorTechnologies(filters: ComponentUtilsTechnologyFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentUtilsTechnology]
+  authorTechnologies(
+    filters: ComponentUtilsTechnologyFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): [ComponentUtilsTechnology]
   authorTitle: String
   id: ID!
   projectDescription: String
-  projectTechnologies(filters: ComponentUtilsTechnologyFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentUtilsTechnology]
+  projectTechnologies(
+    filters: ComponentUtilsTechnologyFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): [ComponentUtilsTechnology]
   projectTitle: String
   repoLink: String
 }
@@ -145,7 +188,11 @@ type I18NLocaleEntityResponseCollection {
 
 type Mutation {
   "Change user password. Confirm with the current password."
-  changePassword(currentPassword: String!, password: String!, passwordConfirmation: String!): UsersPermissionsLoginPayload
+  changePassword(
+    currentPassword: String!
+    password: String!
+    passwordConfirmation: String!
+  ): UsersPermissionsLoginPayload
   createBlog(data: BlogInput!): BlogEntityResponse
   createBlogCategory(data: BlogCategoryInput!): BlogCategoryEntityResponse
   createPage(data: PageInput!): PageEntityResponse
@@ -155,9 +202,13 @@ type Mutation {
   createUploadFolder(data: UploadFolderInput!): UploadFolderEntityResponse
   createUsefulResource(data: UsefulResourceInput!): UsefulResourceEntityResponse
   "Create a new role"
-  createUsersPermissionsRole(data: UsersPermissionsRoleInput!): UsersPermissionsCreateRolePayload
+  createUsersPermissionsRole(
+    data: UsersPermissionsRoleInput!
+  ): UsersPermissionsCreateRolePayload
   "Create a new user"
-  createUsersPermissionsUser(data: UsersPermissionsUserInput!): UsersPermissionsUserEntityResponse!
+  createUsersPermissionsUser(
+    data: UsersPermissionsUserInput!
+  ): UsersPermissionsUserEntityResponse!
   deleteBlog(id: ID!): BlogEntityResponse
   deleteBlogCategory(id: ID!): BlogCategoryEntityResponse
   deletePage(id: ID!): PageEntityResponse
@@ -175,26 +226,56 @@ type Mutation {
   "Request a reset password token"
   forgotPassword(email: String!): UsersPermissionsPasswordPayload
   login(input: UsersPermissionsLoginInput!): UsersPermissionsLoginPayload!
-  multipleUpload(field: String, files: [Upload]!, ref: String, refId: ID): [UploadFileEntityResponse]!
+  multipleUpload(
+    field: String
+    files: [Upload]!
+    ref: String
+    refId: ID
+  ): [UploadFileEntityResponse]!
   "Register a user"
   register(input: UsersPermissionsRegisterInput!): UsersPermissionsLoginPayload!
   removeFile(id: ID!): UploadFileEntityResponse
   "Reset user password. Confirm with a code (resetToken from forgotPassword)"
-  resetPassword(code: String!, password: String!, passwordConfirmation: String!): UsersPermissionsLoginPayload
+  resetPassword(
+    code: String!
+    password: String!
+    passwordConfirmation: String!
+  ): UsersPermissionsLoginPayload
   updateBlog(data: BlogInput!, id: ID!): BlogEntityResponse
-  updateBlogCategory(data: BlogCategoryInput!, id: ID!): BlogCategoryEntityResponse
+  updateBlogCategory(
+    data: BlogCategoryInput!
+    id: ID!
+  ): BlogCategoryEntityResponse
   updateFileInfo(id: ID!, info: FileInfoInput): UploadFileEntityResponse!
   updatePage(data: PageInput!, id: ID!): PageEntityResponse
   updatePageSeo(data: PageSeoInput!, id: ID!): PageSeoEntityResponse
   updateSocialMedia(data: SocialMediaInput!, id: ID!): SocialMediaEntityResponse
   updateUploadFile(data: UploadFileInput!, id: ID!): UploadFileEntityResponse
-  updateUploadFolder(data: UploadFolderInput!, id: ID!): UploadFolderEntityResponse
-  updateUsefulResource(data: UsefulResourceInput!, id: ID!): UsefulResourceEntityResponse
+  updateUploadFolder(
+    data: UploadFolderInput!
+    id: ID!
+  ): UploadFolderEntityResponse
+  updateUsefulResource(
+    data: UsefulResourceInput!
+    id: ID!
+  ): UsefulResourceEntityResponse
   "Update an existing role"
-  updateUsersPermissionsRole(data: UsersPermissionsRoleInput!, id: ID!): UsersPermissionsUpdateRolePayload
+  updateUsersPermissionsRole(
+    data: UsersPermissionsRoleInput!
+    id: ID!
+  ): UsersPermissionsUpdateRolePayload
   "Update an existing user"
-  updateUsersPermissionsUser(data: UsersPermissionsUserInput!, id: ID!): UsersPermissionsUserEntityResponse!
-  upload(field: String, file: Upload!, info: FileInfoInput, ref: String, refId: ID): UploadFileEntityResponse!
+  updateUsersPermissionsUser(
+    data: UsersPermissionsUserInput!
+    id: ID!
+  ): UsersPermissionsUserEntityResponse!
+  upload(
+    field: String
+    file: Upload!
+    info: FileInfoInput
+    ref: String
+    refId: ID
+  ): UploadFileEntityResponse!
 }
 
 type Page {
@@ -251,28 +332,78 @@ type Pagination {
 
 type Query {
   blog(id: ID): BlogEntityResponse
-  blogCategories(filters: BlogCategoryFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): BlogCategoryEntityResponseCollection
+  blogCategories(
+    filters: BlogCategoryFiltersInput
+    pagination: PaginationArg = {}
+    publicationState: PublicationState = LIVE
+    sort: [String] = []
+  ): BlogCategoryEntityResponseCollection
   blogCategory(id: ID): BlogCategoryEntityResponse
-  blogs(filters: BlogFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): BlogEntityResponseCollection
+  blogs(
+    filters: BlogFiltersInput
+    pagination: PaginationArg = {}
+    publicationState: PublicationState = LIVE
+    sort: [String] = []
+  ): BlogEntityResponseCollection
   i18NLocale(id: ID): I18NLocaleEntityResponse
-  i18NLocales(filters: I18NLocaleFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): I18NLocaleEntityResponseCollection
+  i18NLocales(
+    filters: I18NLocaleFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): I18NLocaleEntityResponseCollection
   me: UsersPermissionsMe
   page(id: ID): PageEntityResponse
   pageSeo(id: ID): PageSeoEntityResponse
-  pageSeos(filters: PageSeoFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): PageSeoEntityResponseCollection
-  pages(filters: PageFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): PageEntityResponseCollection
+  pageSeos(
+    filters: PageSeoFiltersInput
+    pagination: PaginationArg = {}
+    publicationState: PublicationState = LIVE
+    sort: [String] = []
+  ): PageSeoEntityResponseCollection
+  pages(
+    filters: PageFiltersInput
+    pagination: PaginationArg = {}
+    publicationState: PublicationState = LIVE
+    sort: [String] = []
+  ): PageEntityResponseCollection
   socialMedia(id: ID): SocialMediaEntityResponse
-  socialMedias(filters: SocialMediaFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): SocialMediaEntityResponseCollection
+  socialMedias(
+    filters: SocialMediaFiltersInput
+    pagination: PaginationArg = {}
+    publicationState: PublicationState = LIVE
+    sort: [String] = []
+  ): SocialMediaEntityResponseCollection
   uploadFile(id: ID): UploadFileEntityResponse
-  uploadFiles(filters: UploadFileFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UploadFileEntityResponseCollection
+  uploadFiles(
+    filters: UploadFileFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): UploadFileEntityResponseCollection
   uploadFolder(id: ID): UploadFolderEntityResponse
-  uploadFolders(filters: UploadFolderFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UploadFolderEntityResponseCollection
+  uploadFolders(
+    filters: UploadFolderFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): UploadFolderEntityResponseCollection
   usefulResource(id: ID): UsefulResourceEntityResponse
-  usefulResources(filters: UsefulResourceFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): UsefulResourceEntityResponseCollection
+  usefulResources(
+    filters: UsefulResourceFiltersInput
+    pagination: PaginationArg = {}
+    publicationState: PublicationState = LIVE
+    sort: [String] = []
+  ): UsefulResourceEntityResponseCollection
   usersPermissionsRole(id: ID): UsersPermissionsRoleEntityResponse
-  usersPermissionsRoles(filters: UsersPermissionsRoleFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UsersPermissionsRoleEntityResponseCollection
+  usersPermissionsRoles(
+    filters: UsersPermissionsRoleFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): UsersPermissionsRoleEntityResponseCollection
   usersPermissionsUser(id: ID): UsersPermissionsUserEntityResponse
-  usersPermissionsUsers(filters: UsersPermissionsUserFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UsersPermissionsUserEntityResponseCollection
+  usersPermissionsUsers(
+    filters: UsersPermissionsUserFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): UsersPermissionsUserEntityResponseCollection
 }
 
 type ResponseCollectionMeta {
@@ -341,9 +472,17 @@ type UploadFileRelationResponseCollection {
 }
 
 type UploadFolder {
-  children(filters: UploadFolderFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UploadFolderRelationResponseCollection
+  children(
+    filters: UploadFolderFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): UploadFolderRelationResponseCollection
   createdAt: DateTime
-  files(filters: UploadFileFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UploadFileRelationResponseCollection
+  files(
+    filters: UploadFileFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): UploadFileRelationResponseCollection
   name: String!
   parent: UploadFolderEntityResponse
   path: String!
@@ -445,10 +584,18 @@ type UsersPermissionsRole {
   createdAt: DateTime
   description: String
   name: String!
-  permissions(filters: UsersPermissionsPermissionFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UsersPermissionsPermissionRelationResponseCollection
+  permissions(
+    filters: UsersPermissionsPermissionFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): UsersPermissionsPermissionRelationResponseCollection
   type: String
   updatedAt: DateTime
-  users(filters: UsersPermissionsUserFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UsersPermissionsUserRelationResponseCollection
+  users(
+    filters: UsersPermissionsUserFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): UsersPermissionsUserRelationResponseCollection
 }
 
 type UsersPermissionsRoleEntity {

@@ -1,10 +1,12 @@
 import { FC, memo, PropsWithChildren } from 'react'
 import classNames from 'classnames'
 import { Epilogue } from '@next/font/google'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
+import toastDefaultProps from '@/constants/toastDefaultProps'
+import { Footer, Header, SideMenu } from '@/components'
 import type { AppLayoutProps } from './interface'
-import { Footer, Header, SideMenu } from 'components'
-
 
 const epilogue = Epilogue({
   variable: '--font-epilogue',
@@ -23,6 +25,7 @@ const AppLayout: FC<PropsWithChildren<AppLayoutProps>> = ({
 }) => {
   return (
     <>
+      <ToastContainer {...toastDefaultProps} />
       <SideMenu socialMediaLinks={socialMedias} />
       <main
         className={classNames(

@@ -10,9 +10,10 @@ import {
   Seo,
   Welcome,
 } from '@/components'
-import { apolloSsrClient, blogCategoryDocument } from '@/graphql'
-import getPageData from '@/utils/getPageData'
+import { blogCategoryDocument } from '@/graphql'
+import getPageData from '@/lib/getPageData'
 import AppRoutes from '@/constants/appRoutes'
+import { apolloSsrClient } from '@/graphql/client'
 
 interface HomePageProps {
   welcomeText: string

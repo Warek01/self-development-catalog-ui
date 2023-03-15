@@ -1,23 +1,24 @@
 import { FC } from 'react'
 import { GetStaticProps } from 'next'
 
-import type { StrapiFindResponse } from '@/types/strapi'
-import { AppLayout, Seo, UsefulResources } from '@/components'
-import { apolloSsrClient, usefulResourceDocument } from '@/graphql'
-import getPageData from '@/utils/getPageData'
+import { AppLayout, Seo } from '@/components'
+import getPageData from '@/lib/getPageData'
 import AppRoutes from '@/constants/appRoutes'
+import { UsefulResources } from '@/containers'
+import { usefulResourceDocument } from '@/graphql'
+import { apolloSsrClient } from '@/graphql/client'
 
 interface Props {
+  totalUsefulResources: number
   data: PageDataModel<null>
-  resources: StrapiFindResponse<UsefulResourceModel>
 }
 
-const Resources: FC<Props> = ({ data, resources }) => {
+const Resources: FC<Props> = ({ data, totalUsefulResources }) => {
   return (
     <>
       <Seo {...data.seo} />
       <AppLayout socialMedias={data.socialMedias}>
-        <UsefulResources resources={resources} />
+        <UsefulResources totalUsefulResources={totalUsefulResources} />
       </AppLayout>
     </>
   )
@@ -26,16 +27,17 @@ const Resources: FC<Props> = ({ data, resources }) => {
 export default Resources
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const resourcesQuery = await apolloSsrClient.query<
-    GraphqlResponse<'usefulResources', UsefulResourceModel>
-  >({
-    query: usefulResourceDocument.GetAllUsefulResources,
+  const totalUsefulResourcesQuery = await apolloSsrClient.query<{
+    usefulResources: { meta: { pagination: { total: number } } }
+  }>({
+    query: usefulResourceDocument.GetTotalUsefulResources,
   })
 
   return {
     props: {
+      totalUsefulResources:
+        totalUsefulResourcesQuery.data.usefulResources.meta.pagination.total,
       data: await getPageData<null>(AppRoutes.resources),
-      resources: resourcesQuery.data.usefulResources,
     },
     revalidate: Number(process.env.REVALIDATE_TIMEOUT),
   }

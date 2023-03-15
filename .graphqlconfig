@@ -6,7 +6,7 @@
       "Admin GraphQL Endpoint": {
         "url": "${env:NEXT_PUBLIC_STRAPI_URL}/graphql",
         "headers": {
-          "Authorization": "Bearer ${env:STRAPI_PUBLIC_TOKEN}"
+          "Authorization": "Bearer ${env:NEXT_PUBLIC_STRAPI_PUBLIC_TOKEN}"
         },
         "introspect": true
       }
