@@ -1,16 +1,16 @@
-import { FC, useCallback, useMemo } from 'react'
+import { FC, useCallback, useEffect, useMemo, useState } from 'react'
 import { useQuery } from '@apollo/client'
 import { toast } from 'react-toastify'
 
-import { useLocalStorage } from '@/lib/hooks'
+import { useLocalStorage, useResponsiveCallback } from '@/lib/hooks'
 import { withInfiniteScroll } from '@/hocs'
 import { usefulResourceDocument } from '@/graphql'
 import useAbortController from '@/lib/hooks/useAbortController'
+import displayBreakpoints from '@/constants/displayBreakpoints'
 import type { ResourcesContextProps, UsefulResourcesProps } from './interface'
 import ResourcesList from './ResourcesList'
 import usefulResourcesContext from './usefulResourcesContext'
-
-const FETCH_LIMIT = 3
+import FavoriteResourcesList from './FavoriteResourcesList'
 
 const UsefulResources: FC<UsefulResourcesProps> = ({
   totalUsefulResources,
@@ -21,6 +21,9 @@ const UsefulResources: FC<UsefulResourcesProps> = ({
     [],
   )
 
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [fetchLimit, setFetchLimit] = useState<number>(1)
+
   const resourcesContextValue = useMemo<ResourcesContextProps>(
     () => ({
       favResourcesIds,
@@ -29,18 +32,79 @@ const UsefulResources: FC<UsefulResourcesProps> = ({
     [favResourcesIds, setFavResourcesIds],
   )
 
-  const resourcesQuery = useQuery<
+  const usefulResourcesQuery = useQuery<
     GraphqlResponse<'usefulResources', UsefulResourceModel>,
     { start: number; limit: number }
   >(usefulResourceDocument.GetUsefulResources, {
     variables: {
       start: 0,
-      limit: FETCH_LIMIT,
+      limit: fetchLimit,
     },
-    fetchPolicy: 'cache-and-network',
-    errorPolicy: 'all',
-    initialFetchPolicy: 'cache-and-network',
-    nextFetchPolicy: 'cache-and-network',
+    context: {
+      fetchOptions: {
+        signal,
+      },
+    },
+    onCompleted() {
+      setIsLoading(false)
+    },
+    onError(error) {
+      console.error(error)
+      toast('Something went wrong', {
+        type: 'error',
+      })
+    },
+  })
+
+  const handleLoadMoreResources = useCallback(() => {
+    const length = usefulResourcesQuery.data?.usefulResources.data.length
+
+    if (
+      typeof length !== 'number' ||
+      usefulResourcesQuery.loading ||
+      isLoading
+    ) {
+      return
+    }
+
+    setIsLoading(true)
+    usefulResourcesQuery.fetchMore({
+      updateQuery: (previousQueryResult, options) => {
+        if (!options.fetchMoreResult) {
+          return previousQueryResult
+        }
+
+        return {
+          usefulResources: {
+            data: [
+              ...previousQueryResult.usefulResources.data,
+              ...options.fetchMoreResult.usefulResources.data,
+            ],
+          },
+        }
+      },
+      variables: {
+        start: length,
+        limit: fetchLimit,
+      },
+    })
+  }, [usefulResourcesQuery, isLoading, fetchLimit])
+
+  const ResourcesListWithInfiniteScroll = withInfiniteScroll(ResourcesList, {
+    threshold: 0.75,
+    action: handleLoadMoreResources,
+    hasMore:
+      (usefulResourcesQuery.data?.usefulResources.data.length ?? 0) <
+      totalUsefulResources,
+  })
+
+  const favoriteUsefulResourcesQuery = useQuery<
+    GraphqlResponse<'usefulResources', UsefulResourceModel>,
+    { ids: number[] }
+  >(usefulResourceDocument.FindUsefulResources, {
+    variables: {
+      ids: favResourcesIds,
+    },
     context: {
       fetchOptions: {
         signal,
@@ -48,49 +112,31 @@ const UsefulResources: FC<UsefulResourcesProps> = ({
     },
   })
 
-  if (resourcesQuery.error) {
-    console.error(resourcesQuery.error)
-    toast('Something went wrong', {
-      type: 'error',
-    })
-  }
+  const handleRemoveFromFavorites = useCallback(
+    (id: number) => {
+      const filteredIds = favResourcesIds.filter((favId) => favId !== id)
+      setFavResourcesIds(filteredIds)
+      favoriteUsefulResourcesQuery.refetch({
+        ids: filteredIds,
+      })
+    },
+    [setFavResourcesIds, favoriteUsefulResourcesQuery, favResourcesIds],
+  )
 
-  const hasMore =
-    resourcesQuery.data?.usefulResources.data.length !== totalUsefulResources
-
-  const handleLoadMoreResources = useCallback(() => {
-    const length = resourcesQuery.data?.usefulResources.data.length
-
-    if (typeof length !== 'number') {
-      return
-    }
-
-    resourcesQuery.fetchMore({
-      variables: {
-        start: length,
-        limit: FETCH_LIMIT,
-      },
-      updateQuery: (prevResult, { fetchMoreResult }) => {
-        if (!fetchMoreResult) {
-          return prevResult
-        }
-        return {
-          usefulResources: {
-            data: [
-              ...prevResult.usefulResources.data,
-              ...fetchMoreResult.usefulResources.data,
-            ],
-          },
-        }
-      },
-    })
-  }, [resourcesQuery])
-
-  const ResourcesListWithInfiniteScroll = withInfiniteScroll(ResourcesList, {
-    threshold: 0.5,
-    action: handleLoadMoreResources,
-    hasMore,
+  useResponsiveCallback({
+    md: () => setFetchLimit(2),
+    xl: () => setFetchLimit(3),
   })
+
+  useEffect(() => {
+    setFetchLimit(
+      document.body.clientWidth > displayBreakpoints.xl
+        ? 3
+        : document.body.clientWidth > displayBreakpoints.md
+        ? 2
+        : 1,
+    )
+  }, [])
 
   return (
     <usefulResourcesContext.Provider value={resourcesContextValue}>
@@ -98,10 +144,17 @@ const UsefulResources: FC<UsefulResourcesProps> = ({
         <header className="pl-12 md:pl-0 pb-6 md:pb-0 text-2xl font-semibold">
           Useful resources
         </header>
-        <main className="">
+        <main>
+          <FavoriteResourcesList
+            resourcesLength={favResourcesIds.length}
+            onFavoriteClick={handleRemoveFromFavorites}
+            resources={
+              favoriteUsefulResourcesQuery.data?.usefulResources.data ?? []
+            }
+          />
           <ResourcesListWithInfiniteScroll
-            resources={resourcesQuery.data?.usefulResources.data ?? []}
-            isLoading={hasMore}
+            resources={usefulResourcesQuery.data?.usefulResources.data ?? []}
+            isLoading={isLoading}
           />
         </main>
       </div>

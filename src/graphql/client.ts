@@ -32,13 +32,7 @@ export const apolloSsrClient = new ApolloClient({
 })
 
 export const apolloClient = new ApolloClient({
-  cache: new InMemoryCache({
-    typePolicies: {
-      Query: {
-        fields: {},
-      },
-    },
-  }),
+  cache: new InMemoryCache(),
   uri: process.env.NEXT_PUBLIC_STRAPI_URL + '/graphql',
   headers: {
     Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI_PUBLIC_TOKEN}`,
@@ -52,7 +46,7 @@ export const apolloClient = new ApolloClient({
     query: {
       notifyOnNetworkStatusChange: false,
       errorPolicy: 'all',
-      fetchPolicy: 'cache-first',
+      fetchPolicy: 'network-only',
     },
   },
 })

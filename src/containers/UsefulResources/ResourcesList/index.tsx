@@ -23,7 +23,7 @@ const ResourcesList: FC<Props> = ({ resources, lastElementRef, isLoading }) => {
         <Resource
           attributes={attributes}
           isFavorite={favResourcesIds.includes(id)}
-          onFavClick={() =>
+          onFavoriteClick={() =>
             setFavResourcesIds((list) =>
               list.includes(id)
                 ? list.filter((favId) => favId !== id)
@@ -45,7 +45,7 @@ const ResourcesList: FC<Props> = ({ resources, lastElementRef, isLoading }) => {
         <Resource
           attributes={lastResource.attributes}
           isFavorite={favResourcesIds.includes(lastResource.id)}
-          onFavClick={() =>
+          onFavoriteClick={() =>
             setFavResourcesIds((list) =>
               list.includes(lastResource.id)
                 ? list.filter((favId) => favId !== lastResource.id)
@@ -58,7 +58,7 @@ const ResourcesList: FC<Props> = ({ resources, lastElementRef, isLoading }) => {
   }
 
   return (
-    <ul className="grid grid-cols-1 px-12 gap-12 md:px-0 md:grid-cols-3 lg:grid-cols-4 md:gap-6">
+    <ul className="grid grid-cols-1 px-12 gap-12 md:px-0 md:grid-cols-2 lg:grid-cols-3 md:gap-6">
       {resourcesElements}
 
       {isLoading ? (

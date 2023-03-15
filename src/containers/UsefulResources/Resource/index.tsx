@@ -10,10 +10,10 @@ import icons from '@/icons'
 interface Props {
   attributes: UsefulResourceModel
   isFavorite: boolean
-  onFavClick: () => void
+  onFavoriteClick: () => void
 }
 
-const Resource: FC<Props> = ({ attributes, onFavClick, isFavorite }) => {
+const Resource: FC<Props> = ({ attributes, onFavoriteClick, isFavorite }) => {
   const [showModal, setShowModal] = useModal()
 
   return (
@@ -45,7 +45,7 @@ const Resource: FC<Props> = ({ attributes, onFavClick, isFavorite }) => {
             overlay="Toggle favorite"
           >
             <button
-              onClick={onFavClick}
+              onClick={onFavoriteClick}
               className="hover:bg-transparent"
             >
               <icons.Pin
@@ -85,6 +85,6 @@ const Resource: FC<Props> = ({ attributes, onFavClick, isFavorite }) => {
 export default memo(Resource, (oldProps, newProps) => {
   return (
     oldProps.isFavorite === newProps.isFavorite &&
-    oldProps.onFavClick === newProps.onFavClick
+    oldProps.onFavoriteClick === newProps.onFavoriteClick
   )
 })

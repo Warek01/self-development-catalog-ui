@@ -37,6 +37,7 @@ import Hammer from './Hammer'
 import Pin from './Pin'
 import Quotes from './Quotes'
 import Spinner from './Spinner'
+import Star from './Star'
 
 export default {
   Menu,
@@ -78,4 +79,5 @@ export default {
   Pin,
   Quotes,
   Spinner,
+  Star,
 }

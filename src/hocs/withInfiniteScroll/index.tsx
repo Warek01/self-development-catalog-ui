@@ -37,6 +37,7 @@ const withInfiniteScroll = <
 
             if (entry.isIntersecting && hasMore) {
               action()
+              observer.disconnect()
             }
           },
           { threshold },

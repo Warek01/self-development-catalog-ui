@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import Link from 'next/link'
 
 import { useRenderState } from '@/lib/hooks'
-import { icons } from '@/components/index'
+import icons from '@/icons'
 
 const iconSize = 56
 

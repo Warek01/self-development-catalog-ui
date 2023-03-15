@@ -30,6 +30,8 @@ declare global {
   type GraphqlResponse<T1 extends string | string[], T2 extends object> = {
     [keys in T1]: StrapiFindResponse<T2>
   }
+
+  type DisplayBreakpoints = '2xl' | 'xl' | 'lg' | 'md' | 'sm'
 }
 
 export {}
