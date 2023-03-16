@@ -1,23 +1,66 @@
 import { FC } from 'react'
+import Link from 'next/link'
+import Image from 'next/image'
+import Tooltip from 'rc-tooltip'
 
-interface Props {
-  projectTitle: string
-  projectDescription: string
-  projectTechnologies: unknown
-  repoLink: string
-}
+import tooltipProps from '@/constants/tooltipProps'
+import icons from '@/icons'
+import type { AboutProjectProps } from './interface'
 
-const AboutProject: FC<Props> = ({
+const TECHNOLOGY_ICON_SIZE = 48
+
+const AboutProject: FC<AboutProjectProps> = ({
   projectTechnologies,
   projectTitle,
   projectDescription,
   repoLink,
 }) => {
+  const projectTechnologiesElements: JSX.Element[] = projectTechnologies.map(
+    ({ link, image, title }, index) => (
+      <li key={index}>
+        <Tooltip
+          {...tooltipProps}
+          overlay={title}
+        >
+          <Link
+            href={link}
+            className="flex items-center justify-center"
+          >
+            <Image
+              src={
+                process.env.NEXT_PUBLIC_STRAPI_URL + image.data.attributes.url
+              }
+              alt={title}
+              quality={100}
+              priority={false}
+              width={TECHNOLOGY_ICON_SIZE}
+              height={TECHNOLOGY_ICON_SIZE}
+            />
+          </Link>
+        </Tooltip>
+      </li>
+    ),
+  )
+
   return (
-    <main className="my-24">
-      <h1 className="text-lg md:text-xl lg:text-2xl xl:text-3xl">
-        {projectTitle}
-      </h1>
+    <main className="my-24 flex flex-col gap-12">
+      <h1 className="text-xl lg:text-2xl xl:text-3xl">{projectTitle}</h1>
+      <h3
+        className="whitespace-pre-line text-lg"
+        dangerouslySetInnerHTML={{ __html: projectDescription }}
+      />
+      <nav className="flex gap-3 items-center">
+        <icons.Github
+          width={24}
+          height={24}
+          className="fill-black"
+        />
+        <Link href={repoLink}>Repository</Link>
+      </nav>
+      <ul className="flex flex-row gap-12 flex-wrap items-center">
+        <span className="font-semibold text-lg">Project technologies:</span>
+        {projectTechnologiesElements}
+      </ul>
     </main>
   )
 }

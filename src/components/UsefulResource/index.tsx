@@ -2,9 +2,9 @@ import { FC, memo } from 'react'
 import Link from 'next/link'
 import Tooltip from 'rc-tooltip'
 
-import { Modal } from 'components'
-import tooltipProps from 'constants/tooltipProps'
-import { useModal } from 'lib/hooks'
+import { Modal } from '@/components'
+import tooltipProps from '@/constants/tooltipProps'
+import { useModal } from '@/lib/hooks'
 import icons from '@/icons'
 
 interface Props {

@@ -7,10 +7,9 @@ import { withInfiniteScroll } from '@/hocs'
 import { usefulResourceDocument } from '@/graphql'
 import useAbortController from '@/lib/hooks/useAbortController'
 import displayBreakpoints from '@/constants/displayBreakpoints'
+import { FavoriteResourcesList, UsefulResourcesList } from '@/components'
 import type { ResourcesContextProps, UsefulResourcesProps } from './interface'
-import ResourcesList from './ResourcesList'
 import usefulResourcesContext from './usefulResourcesContext'
-import FavoriteResourcesList from './FavoriteResourcesList'
 
 const UsefulResources: FC<UsefulResourcesProps> = ({
   totalUsefulResources,
@@ -50,7 +49,7 @@ const UsefulResources: FC<UsefulResourcesProps> = ({
     },
     onError(error) {
       console.error(error)
-      toast('Something went wrong', {
+      toast('Error loading resources', {
         type: 'error',
       })
     },
@@ -90,13 +89,16 @@ const UsefulResources: FC<UsefulResourcesProps> = ({
     })
   }, [usefulResourcesQuery, isLoading, fetchLimit])
 
-  const ResourcesListWithInfiniteScroll = withInfiniteScroll(ResourcesList, {
-    threshold: 0.75,
-    action: handleLoadMoreResources,
-    hasMore:
-      (usefulResourcesQuery.data?.usefulResources.data.length ?? 0) <
-      totalUsefulResources,
-  })
+  const ResourcesListWithInfiniteScroll = withInfiniteScroll(
+    UsefulResourcesList,
+    {
+      threshold: 0.75,
+      action: handleLoadMoreResources,
+      hasMore:
+        (usefulResourcesQuery.data?.usefulResources.data.length ?? 0) <
+        totalUsefulResources,
+    },
+  )
 
   const favoriteUsefulResourcesQuery = useQuery<
     GraphqlResponse<'usefulResources', UsefulResourceModel>,
@@ -109,6 +111,12 @@ const UsefulResources: FC<UsefulResourcesProps> = ({
       fetchOptions: {
         signal,
       },
+    },
+    onError(error) {
+      console.error(error)
+      toast('Error loading favorites', {
+        type: 'error',
+      })
     },
   })
 

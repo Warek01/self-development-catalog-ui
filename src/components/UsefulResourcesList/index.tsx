@@ -3,8 +3,8 @@ import { FC, memo, useContext } from 'react'
 import type { StrapiEntity } from '@/types/strapi'
 import type { WithInfiniteScrollProps } from '@/hocs/withInfiniteScroll/interface'
 import { Spinner } from '@/components'
-import usefulResourcesContext from '../usefulResourcesContext'
-import Resource from '../Resource'
+import usefulResourcesContext from '../../containers/UsefulResources/usefulResourcesContext'
+import Resource from '../UsefulResource'
 
 interface Props extends WithInfiniteScrollProps {
   resources: StrapiEntity<UsefulResourceModel>[]

@@ -1,10 +1,10 @@
 import { ComponentType, FC, useEffect, useMemo, useRef } from 'react'
 
 import type {
-  WithInfiniteScrollReturnType,
-  WithInfiniteScrollProps,
-  WithInfiniteScrollOptions,
   RefObjectType,
+  WithInfiniteScrollOptions,
+  WithInfiniteScrollProps,
+  WithInfiniteScrollReturnType,
 } from './interface'
 
 const withInfiniteScroll = <

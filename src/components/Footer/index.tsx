@@ -50,4 +50,4 @@ const Footer: FC<Props> = ({ socialMedias }) => {
   )
 }
 
-export default memo(Footer)
+export default memo(Footer, () => true)

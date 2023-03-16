@@ -1,9 +1,5 @@
 import type { SocialMediaPlatform } from './index'
-import type {
-  StrapiFindOneResponse,
-  StrapiFindResponse,
-  StrapiMultimediaModel,
-} from './strapi'
+import type { StrapiFindResponse, StrapiMultimediaModel } from './strapi'
 
 declare global {
   interface BlogModel {
