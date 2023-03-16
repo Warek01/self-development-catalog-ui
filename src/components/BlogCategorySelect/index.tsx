@@ -1,7 +1,7 @@
-import { FC } from 'react'
+import { FC, memo } from 'react'
 
 import type { StrapiFindResponse } from 'types/strapi'
-import Category from './Category'
+import Category from '../BlogCategoryPreview'
 
 interface Props {
   categories: StrapiFindResponse<BlogCategoryModel>
@@ -29,4 +29,4 @@ const CategorySelect: FC<Props> = ({ categories }) => {
   )
 }
 
-export default CategorySelect
+export default memo(CategorySelect)

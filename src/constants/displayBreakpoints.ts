@@ -1,4 +1,4 @@
-const  displayBreakpoints: Record<DisplayBreakpoints, number> = {
+const displayBreakpoints: Record<DisplayBreakpoints, number> = {
   sm: 640,
   md: 768,
   lg: 1024,

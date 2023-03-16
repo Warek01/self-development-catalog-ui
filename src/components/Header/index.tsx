@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 import responsiveContext from '@/contexts/responsiveConext'
 import headerLinks from '@/constants/headerLinks'
-import AppRoutes from '@/constants/appRoutes'
+import AppRoutes from '@/constants/AppRoutes'
 import sideMenuContext from '@/contexts/sideMenuContext'
 import icons from '@/icons'
 
@@ -23,7 +23,7 @@ const Header: FC = () => {
   return (
     <header className="flex justify-between py-6 max-h-20">
       <Link
-        href={AppRoutes.home}
+        href={AppRoutes.Home}
         className="flex gap-6 items-center font-semibold text-lg md:text-xl text-black"
       >
         <Image

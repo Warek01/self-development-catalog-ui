@@ -1,9 +1,8 @@
 import { FC, memo } from 'react'
 
+import type { StrapiEntity } from '@/types/strapi'
 import icons from '@/icons'
-import { StrapiEntity } from '@/types/strapi'
-import { Spinner } from '@/components'
-import Resource from '@/containers/UsefulResources/Resource'
+import { Spinner, UsefulResource } from '@/components'
 
 interface Props {
   resources: StrapiEntity<UsefulResourceModel>[]
@@ -45,7 +44,7 @@ const FavoriteResourcesList: FC<Props> = ({
       <ul className="grid grid-cols-1 px-12 gap-12 md:px-0 md:grid-cols-2 lg:grid-cols-3 md:gap-6">
         {resources.map(({ id, attributes }) => (
           <li key={id}>
-            <Resource
+            <UsefulResource
               attributes={attributes}
               isFavorite={true}
               onFavoriteClick={() => onFavoriteClick(id)}

@@ -3,8 +3,8 @@ import { FC, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import classNames from 'classnames'
 import Image from 'next/image'
 
-import AppRoutes from 'constants/appRoutes'
-import responsiveContext from 'contexts/responsiveConext'
+import AppRoutes from '@/constants/AppRoutes'
+import responsiveContext from '@/contexts/responsiveConext'
 
 interface Props {
   attributes: BlogCategoryModel
@@ -72,7 +72,7 @@ const Category: FC<Props> = ({ attributes, isFirst, isEven, id }) => {
           </p>
         )}
         <Link
-          href={`${AppRoutes.categories}/${attributes.slug}`}
+          href={`${AppRoutes.Categories}/${attributes.slug}`}
           className="relative flex-1 z-20 overflow-hidden z-20 peer group"
           style={{ backgroundColor: attributes.color }}
         >

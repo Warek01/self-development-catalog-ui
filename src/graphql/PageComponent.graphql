@@ -21,14 +21,4 @@ fragment aboutComponentFields on ComponentPageComponentAbout {
     title
   }
   repoLink
-  authorTitle
-  authorDescription
-  authorTechnologies {
-    id
-    image {
-      ...multimediaFields
-    }
-    link
-    title
-  }
 }

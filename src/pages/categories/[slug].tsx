@@ -5,7 +5,7 @@ import type { StrapiEntity } from '@/types/strapi'
 import { blogCategoryDocument } from '@/graphql'
 import { AppLayout, CategoriesList, Seo } from '@/components'
 import getPageData from '@/lib/getPageData'
-import AppRoutes from '@/constants/appRoutes'
+import AppRoutes from '@/constants/AppRoutes'
 import { apolloSsrClient } from '@/graphql/client'
 
 interface Props {
@@ -50,7 +50,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
     ? {
         props: {
           category,
-          data: await getPageData<null>(AppRoutes.categories),
+          data: await getPageData<null>(AppRoutes.Categories),
         },
         revalidate: Number(process.env.REVALIDATE_TIMEOUT),
       }

@@ -3,7 +3,7 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 
 import { AppLayout, Blog, Seo } from '@/components'
 import { blogDocument } from '@/graphql'
-import AppRoutes from '@/constants/appRoutes'
+import AppRoutes from '@/constants/AppRoutes'
 import getPageData from '@/lib/getPageData'
 import { apolloSsrClient } from '@/graphql/client'
 
@@ -44,7 +44,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
   return blogQuery.data.blogs.data?.at(0)
     ? {
         props: {
-          data: await getPageData<null>(AppRoutes.blogs),
+          data: await getPageData<null>(AppRoutes.Blogs),
           blog: blogQuery.data.blogs.data[0].attributes,
         },
         revalidate: Number(process.env.REVALIDATE_TIMEOUT),

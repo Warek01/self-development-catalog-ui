@@ -12,7 +12,7 @@ import {
 } from '@/components'
 import { blogCategoryDocument } from '@/graphql'
 import getPageData from '@/lib/getPageData'
-import AppRoutes from '@/constants/appRoutes'
+import AppRoutes from '@/constants/AppRoutes'
 import { apolloSsrClient } from '@/graphql/client'
 
 interface HomePageProps {
@@ -53,7 +53,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 
   return {
     props: {
-      data: await getPageData<HomePageProps>(AppRoutes.home),
+      data: await getPageData<HomePageProps>(AppRoutes.Home),
       categories: blogCategoriesQuery.data.blogCategories,
     },
     revalidate: Number(process.env.REVALIDATE_TIMEOUT),

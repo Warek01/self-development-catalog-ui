@@ -1,12 +1,12 @@
 import { FC, memo } from 'react'
 import classNames from 'classnames'
+import Link from 'next/link'
 
 import type { StrapiEntity, StrapiFindResponse } from '@/types/strapi'
 import { useRenderState } from '@/lib/hooks'
 import { isStrapiEntity } from '@/lib/guards'
-import Category from './Category'
-import Link from 'next/link'
-import appRoutes from '@/constants/appRoutes'
+import { BlogCategory } from '@/components'
+import AppRoutes from '@/constants/AppRoutes'
 
 interface Props {
   categories:
@@ -26,12 +26,12 @@ const CategoriesList: FC<Props> = ({ categories }) => {
       {isStrapiEntity(categories) ? (
         <>
           <Link
-            href={appRoutes.categories}
+            href={AppRoutes.Categories}
             className="text-2xl md:text-xl"
           >
             All Categories
           </Link>
-          <Category category={categories.attributes} />
+          <BlogCategory category={categories.attributes} />
         </>
       ) : (
         <>
@@ -39,7 +39,7 @@ const CategoriesList: FC<Props> = ({ categories }) => {
           <ul className="my-6">
             {categories.data.map((category) => (
               <li key={category.id}>
-                <Category category={category.attributes} />
+                <BlogCategory category={category.attributes} />
               </li>
             ))}
           </ul>
