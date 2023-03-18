@@ -2,32 +2,32 @@ import { FC, memo, useCallback, useContext } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
-import responsiveContext from '@/contexts/responsiveConext'
 import headerLinks from '@/constants/headerLinks'
 import AppRoutes from '@/constants/AppRoutes'
-import sideMenuContext from '@/contexts/sideMenuContext'
 import icons from '@/icons'
+import { mobileViewContext, sideMenuContext, themeContext } from '@/contexts'
 
 const Header: FC = () => {
-  const { isMobileView } = useContext(responsiveContext)
+  const { isMobile } = useContext(mobileViewContext)
   const { isOpen, open } = useContext(sideMenuContext)
+  const { isDark, toggle } = useContext(themeContext)
 
   const handleOpenMenu = useCallback(() => {
-    if (!isMobileView) {
+    if (!isMobile) {
       return
     }
 
     open()
-  }, [isOpen, isMobileView])
+  }, [isOpen, isMobile])
 
   return (
     <header className="flex justify-between py-6 max-h-20">
       <Link
         href={AppRoutes.Home}
-        className="flex gap-6 items-center font-semibold text-lg md:text-xl text-black"
+        className="flex gap-6 items-center font-semibold text-lg md:text-xl"
       >
         <Image
-          src="/Logo.png"
+          src="/Logo.webp"
           alt="Logo"
           priority={true}
           width={32}
@@ -40,7 +40,23 @@ const Header: FC = () => {
         <span className="inline-block md:hidden">Self-Dev</span>
       </Link>
       <div className="flex items-center">
-        {isMobileView ? (
+        <button
+          onClick={() => toggle()}
+          className="p-2 rounded-lg mr-12"
+        >
+          {isDark ? (
+            <icons.Moon
+              width={25}
+              height={25}
+            />
+          ) : (
+            <icons.Sun
+              width={25}
+              height={25}
+            />
+          )}
+        </button>
+        {isMobile ? (
           <button
             onClick={handleOpenMenu}
             className="p-2 rounded-lg"
@@ -56,7 +72,6 @@ const Header: FC = () => {
               <Link
                 href={link.href}
                 key={link.text}
-                className="text-black"
               >
                 {link.text}
               </Link>

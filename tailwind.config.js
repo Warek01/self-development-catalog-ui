@@ -13,6 +13,9 @@ module.exports = {
         'heading-green': '#009379',
         'pink-bg': '#F9E6F0',
         'link-blue': '#3498db',
+
+        'dark-black': '#2C3333',
+        'dark-white': '#E3F6FF'
       },
       spacing: {
         xs: '20rem',

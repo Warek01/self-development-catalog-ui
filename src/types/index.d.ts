@@ -31,7 +31,7 @@ declare global {
     [keys in T1]: StrapiFindResponse<T2>
   }
 
-  type DisplayBreakpoints = '2xl' | 'xl' | 'lg' | 'md' | 'sm'
+  type DisplayBreakpoint = '2xl' | 'Xl' | 'Lg' | 'Md' | 'Sm'
 }
 
 export {}

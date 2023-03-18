@@ -1,10 +1,6 @@
 import { createContext } from 'react'
 
-export interface SideMenuContextProps {
-  open: () => void
-  close: () => void
-  isOpen: boolean
-}
+import type { SideMenuContextProps } from './interface'
 
 const sideMenuContext = createContext<SideMenuContextProps>({
   close: () => null,

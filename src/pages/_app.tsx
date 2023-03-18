@@ -1,56 +1,30 @@
 // Imports
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { AppProps } from 'next/app'
 import { ApolloProvider } from '@apollo/client'
-import Head from 'next/head'
 import 'rc-tooltip/assets/bootstrap_white.css'
 
 // Side effects
-import 'styles/globals.scss'
+import '@/styles/globals.sass'
 
 // Local imports
-import responsiveContext from '@/contexts/responsiveConext'
-import sideMenuContext, {
-  SideMenuContextProps,
-} from '@/contexts/sideMenuContext'
 import { apolloClient } from '@/graphql/client'
+import ThemeContextProvider from '@/contexts/theme/Provider'
+import SideMenuContextProvider from '@/contexts/sideMenu/Provider'
+import MobileViewContextProvider from '@/contexts/mobileViewContext/Provider'
 
 const App = ({ Component, pageProps }: AppProps) => {
-  const [isMobileView, setIsMobileView] = useState<boolean>(false)
-  const [isSideMenuOpen, setIsSideMenuOpen] = useState<boolean>(false)
-
-  const sideMenuContextValue = useMemo<SideMenuContextProps>(
-    () => ({
-      isOpen: isSideMenuOpen,
-      open: () => setIsSideMenuOpen(true),
-      close: () => setIsSideMenuOpen(false),
-    }),
-    [isSideMenuOpen],
-  )
-
-  useEffect(() => {
-    const mediaQuery = matchMedia('(width < 768px)')
-
-    setIsMobileView(mediaQuery.matches)
-    mediaQuery.addEventListener('change', ({ matches }) =>
-      setIsMobileView(matches),
-    )
-  }, [])
-
   return (
-    <>
-      <Head>
-        <title>Self Dev</title>
-      </Head>
-      <ApolloProvider client={apolloClient}>
-        <responsiveContext.Provider value={{ isMobileView }}>
-          <sideMenuContext.Provider value={sideMenuContextValue}>
+    <ApolloProvider client={apolloClient}>
+      <ThemeContextProvider>
+        <MobileViewContextProvider>
+          <SideMenuContextProvider>
             <div id="modal-root" />
             <Component {...pageProps} />
-          </sideMenuContext.Provider>
-        </responsiveContext.Provider>
-      </ApolloProvider>
-    </>
+          </SideMenuContextProvider>
+        </MobileViewContextProvider>
+      </ThemeContextProvider>
+    </ApolloProvider>
   )
 }
 

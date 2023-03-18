@@ -5,7 +5,7 @@ import 'highlight.js/styles/github.css'
 
 import preprocessImgSrc from '@/lib/preprocessImgSrc'
 import Aside from '@/components/Blog/Aside'
-import style from './style.module.scss'
+import style from './style.module.sass'
 
 interface Props {
   blog: BlogModel

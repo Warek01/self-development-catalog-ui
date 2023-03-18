@@ -18,7 +18,7 @@ const LinkIcon: FC<Props> = ({ Icon, size, href, className }) => {
       <Icon
         width={size}
         height={size}
-        className="group-hover:fill-black/70 fill-black"
+        className="group-hover:fill-black/70 dark:group-hover:fill-dark-white/70 fill-black dark:fill-dark-white"
       />
     </Link>
   )
