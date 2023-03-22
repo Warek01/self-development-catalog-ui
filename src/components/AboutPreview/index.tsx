@@ -11,7 +11,7 @@ const AboutPreview: FC = () => {
   const isRendered = useRenderState(100)
 
   return (
-    <div className="mx-auto my-8 border-y border-y border-y-black/20 dark:border-y-dark-white/20">
+    <div className="my-8 border-y border-y border-y-black/20 dark:border-y-dark-white/20">
       <Link
         href="/about"
         className={classNames(

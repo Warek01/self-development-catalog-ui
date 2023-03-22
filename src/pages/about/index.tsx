@@ -2,9 +2,10 @@ import { FC } from 'react'
 import { GetStaticProps } from 'next'
 
 import type { AboutProjectProps } from '@/components/AboutProject/interface'
-import { AboutProject, AppLayout, Seo } from '@/components'
+import { AboutProject, Seo } from '@/components'
 import getPageData from '@/lib/getPageData'
 import AppRoutes from '@/constants/AppRoutes'
+import { AppLayout } from '@/containers'
 
 interface Props {
   data: PageDataModel<AboutProjectProps>

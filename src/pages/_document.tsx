@@ -8,7 +8,6 @@ export default function Document() {
           rel="favicon"
           href="/favicon.png"
         />
-        <title>Self Dev</title>
       </Head>
       <body>
         <Main />

@@ -17,7 +17,7 @@ const SideMenu: FC<SideMenuProps> = ({ socialMediaLinks }) => {
     <aside
       className={classNames(
         'fixed h-full max-w-[100vw] duration-200 w-72 right-0 top-0 z-50 transform-gpu transform',
-        'bg-white border-l border-black/20 flex flex-col items-center py-6',
+        'bg-white dark:bg-dark-black border-l border-black/20 flex flex-col items-center py-6',
         {
           'translate-x-full pointer-events-none': !isOpen,
         },
@@ -31,6 +31,7 @@ const SideMenu: FC<SideMenuProps> = ({ socialMediaLinks }) => {
           <icons.Close
             width={32}
             height={32}
+            className="fill-black dark:fill-dark-white"
           />
         </button>
       </div>

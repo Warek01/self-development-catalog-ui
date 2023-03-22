@@ -8,8 +8,9 @@ const MobileViewContextProvider: FC<PropsWithChildren> = ({ children }) => {
   const [isMobileView, setIsMobileView] = useState<boolean>(false)
 
   useBreakpointCallback({
-    Md: ({ matches }) => {
-      setIsMobileView(matches)
+    Lg: {
+      callback: ({ matches }) => setIsMobileView(matches),
+      initCall: true,
     },
   })
 

@@ -6,7 +6,6 @@ import Welcome from './Welcome'
 import AboutPreview from './AboutPreview'
 import CategorySelect from './BlogCategorySelect'
 import FeatureSelect from './FeatureSelect'
-import AppLayout from '../containers/AppLayout'
 import CategoriesList from './BlogCategoriesList'
 import Blog from './Blog'
 import Modal from './Modal'
@@ -28,7 +27,6 @@ export {
   AboutPreview,
   CategorySelect,
   FeatureSelect,
-  AppLayout,
   CategoriesList,
   Blog,
   Modal,

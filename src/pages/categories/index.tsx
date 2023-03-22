@@ -2,11 +2,12 @@ import React, { FC } from 'react'
 import { GetStaticProps } from 'next'
 
 import type { StrapiFindResponse } from 'types/strapi'
-import { AppLayout, CategoriesList, Seo } from '@/components'
+import { CategoriesList, Seo } from '@/components'
 import { blogCategoryDocument } from '@/graphql'
 import getPageData from '@/lib/getPageData'
 import AppRoutes from '@/constants/AppRoutes'
 import { apolloSsrClient } from '@/graphql/client'
+import { AppLayout } from '@/containers'
 
 interface Props {
   data: PageDataModel<null>

@@ -1,6 +1,5 @@
 // Imports
-import { useEffect, useState } from 'react'
-import type { AppProps } from 'next/app'
+import type { AppProps, AppType } from 'next/app'
 import { ApolloProvider } from '@apollo/client'
 import 'rc-tooltip/assets/bootstrap_white.css'
 
@@ -12,19 +11,26 @@ import { apolloClient } from '@/graphql/client'
 import ThemeContextProvider from '@/contexts/theme/Provider'
 import SideMenuContextProvider from '@/contexts/sideMenu/Provider'
 import MobileViewContextProvider from '@/contexts/mobileViewContext/Provider'
+import Head from 'next/head'
 
-const App = ({ Component, pageProps }: AppProps) => {
+const App: AppType<AppProps<null>> = ({ Component, pageProps }) => {
   return (
-    <ApolloProvider client={apolloClient}>
-      <ThemeContextProvider>
-        <MobileViewContextProvider>
-          <SideMenuContextProvider>
-            <div id="modal-root" />
-            <Component {...pageProps} />
-          </SideMenuContextProvider>
-        </MobileViewContextProvider>
-      </ThemeContextProvider>
-    </ApolloProvider>
+    <>
+      <Head>
+        <title>Self Dev</title>
+      </Head>
+
+      <ApolloProvider client={apolloClient}>
+        <ThemeContextProvider>
+          <MobileViewContextProvider>
+            <SideMenuContextProvider>
+              <div id="modal-root" />
+              <Component {...pageProps} />
+            </SideMenuContextProvider>
+          </MobileViewContextProvider>
+        </ThemeContextProvider>
+      </ApolloProvider>
+    </>
   )
 }
 

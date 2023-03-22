@@ -4,11 +4,11 @@ import Link from 'next/link'
 const Aside: FC<BlogModel> = ({ title, links, blog_categories, date }) => {
   return (
     <aside className="flex flex-col text-lg items-start justify-self-stretch pl-12 flex-1 lg:border-l lg:border-solid lg:border-black/10">
-      <section className="lg:sticky top-0 lg:pt-12 w-full bg-white">
+      <section className="lg:sticky top-0 lg:pt-12 w-full bg-white dark:bg-dark-black">
         <h1 className="font-bold text-xl md:text-2xl lg:text-3xl xl:text-4xl">
           {title}
         </h1>
-        <h4 className="text-lg text-gray-600">
+        <h4 className="text-lg text-gray-600 dark:text-gray-400">
           {new Date(date).toLocaleDateString('en-EN', {
             dateStyle: 'medium',
           })}
@@ -32,7 +32,7 @@ const Aside: FC<BlogModel> = ({ title, links, blog_categories, date }) => {
           {blog_categories?.data.map((category, index) => (
             <li
               key={index}
-              className="bg-card-bg-dark px-3 py-2 rounded-md text-white text-sm"
+              className="bg-card-bg-dark dark:bg-dark-white px-3 py-2 rounded-md text-white dark:text-dark-black text-sm"
             >
               {category.attributes.title}
             </li>

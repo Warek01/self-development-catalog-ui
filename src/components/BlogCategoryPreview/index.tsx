@@ -1,5 +1,13 @@
 import Link from 'next/link'
-import { FC, memo, useContext, useEffect, useMemo, useRef, useState } from 'react'
+import {
+  FC,
+  memo,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 import classNames from 'classnames'
 import Image from 'next/image'
 
@@ -73,11 +81,13 @@ const Category: FC<Props> = ({ attributes, isFirst, isEven }) => {
         )}
         <Link
           href={`${AppRoutes.Categories}/${attributes.slug}`}
-          className="relative flex-1 z-20 overflow-hidden z-20 peer group"
+          className="relative flex-1 z-20 overflow-hidden z-20 peer group rounded-2xl"
           style={{ backgroundColor: attributes.color }}
         >
-          <p className="pl-2 absolute bottom-0 flex justify-start font-bold text-3xl transform
-          group-hover:translate-y-0 translate-y-full text-white dark:text-dark-black ease-in-out">
+          <p
+            className="pl-2 absolute bottom-0 flex justify-start font-bold text-3xl transform
+          group-hover:translate-y-0 translate-y-full text-white dark:text-dark-black ease-in-out"
+          >
             {attributes.title}
           </p>
           <Image
