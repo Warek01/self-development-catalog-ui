@@ -1,7 +1,7 @@
 import { FC } from 'react'
 
 import icons from '@/icons'
-import style from './style.module.scss'
+import style from './style.module.sass'
 
 interface Props {
   size?: number

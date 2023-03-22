@@ -37,11 +37,7 @@ query GetUsefulResources($start: Int!, $limit: Int!) {
 }
 
 query FindUsefulResources($ids: [ID!]!) {
-  usefulResources(
-    filters: {
-      id: { in: $ids }
-    }
-  ) {
+  usefulResources(filters: { id: { in: $ids } }) {
     data {
       id
       attributes {

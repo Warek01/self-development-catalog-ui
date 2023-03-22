@@ -11,7 +11,7 @@ const AboutPreview: FC = () => {
   const isRendered = useRenderState(100)
 
   return (
-    <div className="mx-auto my-8 border-y border-y border-y-black/20">
+    <div className="my-8 border-y border-y border-y-black/20 dark:border-y-dark-white/20">
       <Link
         href="/about"
         className={classNames(
@@ -57,7 +57,7 @@ const AboutPreview: FC = () => {
           />
         </div>
         <p
-          className="uppercase text-3xl font-medium absolute tracking-widest -translate-y-full text-black
+          className="uppercase text-3xl font-medium absolute tracking-widest -translate-y-full
             -bottom-[200px] group-hover:bottom-0 duration-500 ease-in-out"
         >
           About

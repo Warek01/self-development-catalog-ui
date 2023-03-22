@@ -1,10 +1,10 @@
 import { FC } from 'react'
 import { GetStaticProps } from 'next'
 
-import { AppLayout, Seo } from '@/components'
+import { Seo } from '@/components'
 import getPageData from '@/lib/getPageData'
 import AppRoutes from '@/constants/AppRoutes'
-import { UsefulResources } from '@/containers'
+import { AppLayout, UsefulResources } from '@/containers'
 import { usefulResourceDocument } from '@/graphql'
 import { apolloSsrClient } from '@/graphql/client'
 

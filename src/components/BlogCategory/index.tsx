@@ -1,5 +1,4 @@
 import { FC, memo, useMemo } from 'react'
-import classNames from 'classnames'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -17,15 +16,15 @@ const Category: FC<Props> = ({ category }) => {
   )
 
   const headerTextColor = determineContrastTextColor(category.color)
-    ? 'text-black'
-    : 'text-white'
+    ? 'text-black dark:text-dark-black'
+    : 'text-white dark:text-dark-white'
 
   const blogElements: JSX.Element[] = useMemo(
     () =>
       blogs.map((blog) => (
         <li
           key={`${category.title}-${blog.id}`}
-          className="duration-100 ease-in-out hover:bg-black/10"
+          className="duration-100 ease-in-out rounded-xl bg-black/10 hover:bg-black/20 dark:bg-dark-white/5 dark:hover:bg-dark-white/10"
         >
           <Link
             href={`${AppRoutes.Blogs}/${blog.attributes.slug}`}
@@ -38,7 +37,7 @@ const Category: FC<Props> = ({ category }) => {
               {blog.attributes.blog_categories?.data.map((category) => (
                 <span
                   key={category.id}
-                  className="py-1 px-3 rounded-md bg-card-bg-dark text-white text-sm md:text-[10px] flex justify-center items-center"
+                  className="py-1 px-3 rounded-md bg-card-bg-dark dark:bg-dark-white text-white dark:text-dark-black text-sm md:text-[10px] flex justify-center items-center"
                 >
                   {category.attributes.title}
                 </span>
@@ -54,9 +53,9 @@ const Category: FC<Props> = ({ category }) => {
     <div>
       <header
         style={{ backgroundColor: category.color }}
-        className={classNames('flex flex-col p-3', headerTextColor)}
+        className='flex flex-col p-3 rounded-xl'
       >
-        <span className="flex items-center justify-start gap-4 text-xl">
+        <span className={`flex items-center justify-start gap-4 text-xl ${headerTextColor}`}>
           <Image
             src={
               process.env.NEXT_PUBLIC_STRAPI_URL +
@@ -71,7 +70,7 @@ const Category: FC<Props> = ({ category }) => {
           />
           {category.title}
         </span>
-        <span className="text-md mt-3">
+        <span className={`text-md mt-3 ${headerTextColor}`}>
           {blogs.length} {blogs.length === 1 ? 'blog' : 'blogs'}
         </span>
       </header>

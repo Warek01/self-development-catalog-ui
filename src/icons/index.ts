@@ -38,6 +38,8 @@ import Pin from './Pin'
 import Quotes from './Quotes'
 import Spinner from './Spinner'
 import Star from './Star'
+import Sun from './Sun'
+import Moon from './Moon'
 
 export default {
   Menu,
@@ -80,4 +82,6 @@ export default {
   Quotes,
   Spinner,
   Star,
+  Sun,
+  Moon,
 }

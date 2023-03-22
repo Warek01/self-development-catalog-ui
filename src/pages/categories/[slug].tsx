@@ -3,10 +3,11 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 
 import type { StrapiEntity } from '@/types/strapi'
 import { blogCategoryDocument } from '@/graphql'
-import { AppLayout, CategoriesList, Seo } from '@/components'
+import { CategoriesList, Seo } from '@/components'
 import getPageData from '@/lib/getPageData'
 import AppRoutes from '@/constants/AppRoutes'
 import { apolloSsrClient } from '@/graphql/client'
+import { AppLayout } from '@/containers'
 
 interface Props {
   data: PageDataModel<null>

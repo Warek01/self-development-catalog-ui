@@ -6,7 +6,7 @@ export default function Document() {
       <Head>
         <link
           rel="favicon"
-          href="/favicon.ico"
+          href="/favicon.png"
         />
       </Head>
       <body>

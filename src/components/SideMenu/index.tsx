@@ -2,23 +2,22 @@ import { FC, memo, useContext } from 'react'
 import classNames from 'classnames'
 import Link from 'next/link'
 
-import responsiveContext from '@/contexts/responsiveConext'
 import headerLinks from '@/constants/headerLinks'
 import { LinkIcon } from '@/components'
 import socialMediaIconsMap from '@/constants/socialMediaIconsMap'
-import sideMenuContext from '@/contexts/sideMenuContext'
 import icons from '@/icons'
-import type SideMenuProps from './interface'
+import { mobileViewContext, sideMenuContext } from '@/contexts'
+import type { SideMenuProps } from './interface'
 
 const SideMenu: FC<SideMenuProps> = ({ socialMediaLinks }) => {
-  const { isMobileView } = useContext(responsiveContext)
+  const { isMobile } = useContext(mobileViewContext)
   const { isOpen, close } = useContext(sideMenuContext)
 
-  return isMobileView ? (
+  return isMobile ? (
     <aside
       className={classNames(
         'fixed h-full max-w-[100vw] duration-200 w-72 right-0 top-0 z-50 transform-gpu transform',
-        'bg-white border-l border-black/20 flex flex-col items-center py-6',
+        'bg-white dark:bg-dark-black border-l border-black/20 flex flex-col items-center py-6',
         {
           'translate-x-full pointer-events-none': !isOpen,
         },
@@ -32,6 +31,7 @@ const SideMenu: FC<SideMenuProps> = ({ socialMediaLinks }) => {
           <icons.Close
             width={32}
             height={32}
+            className="fill-black dark:fill-dark-white"
           />
         </button>
       </div>

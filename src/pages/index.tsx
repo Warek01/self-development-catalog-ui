@@ -4,7 +4,6 @@ import { GetStaticProps } from 'next'
 import type { StrapiFindResponse, StrapiMultimediaModel } from '@/types/strapi'
 import {
   AboutPreview,
-  AppLayout,
   CategorySelect,
   FeatureSelect,
   Seo,
@@ -14,6 +13,7 @@ import { blogCategoryDocument } from '@/graphql'
 import getPageData from '@/lib/getPageData'
 import AppRoutes from '@/constants/AppRoutes'
 import { apolloSsrClient } from '@/graphql/client'
+import { AppLayout } from '@/containers'
 
 interface HomePageProps {
   welcomeText: string

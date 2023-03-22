@@ -1,11 +1,11 @@
-import { FC } from 'react'
+import { FC, memo, useContext, useMemo } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import Tooltip from 'rc-tooltip'
 
-import tooltipProps from '@/constants/tooltipProps'
 import icons from '@/icons'
+import { CustomTooltip } from '@/containers'
 import type { AboutProjectProps } from './interface'
+import { themeContext } from '@/contexts'
 
 const TECHNOLOGY_ICON_SIZE = 48
 
@@ -15,31 +15,33 @@ const AboutProject: FC<AboutProjectProps> = ({
   projectDescription,
   repoLink,
 }) => {
-  const projectTechnologiesElements: JSX.Element[] = projectTechnologies.map(
-    ({ link, image, title }, index) => (
-      <li key={index}>
-        <Tooltip
-          {...tooltipProps}
-          overlay={title}
-        >
-          <Link
-            href={link}
-            className="flex items-center justify-center"
-          >
-            <Image
-              src={
-                process.env.NEXT_PUBLIC_STRAPI_URL + image.data.attributes.url
-              }
-              alt={title}
-              quality={100}
-              priority={false}
-              width={TECHNOLOGY_ICON_SIZE}
-              height={TECHNOLOGY_ICON_SIZE}
-            />
-          </Link>
-        </Tooltip>
-      </li>
-    ),
+  const { isDark } = useContext(themeContext)
+
+  const projectTechnologiesElements = useMemo<JSX.Element[]>(
+    () =>
+      projectTechnologies.map(({ link, image, title }, index) => (
+        <li key={index}>
+          <CustomTooltip text={title}>
+            <Link
+              href={link}
+              className="flex items-center justify-center"
+            >
+              <Image
+                src={
+                  process.env.NEXT_PUBLIC_STRAPI_URL + image.data.attributes.url
+                }
+                alt={title}
+                quality={100}
+                priority={false}
+                width={TECHNOLOGY_ICON_SIZE}
+                height={TECHNOLOGY_ICON_SIZE}
+                style={{ filter: isDark ? 'brightness(0) invert(1)' : '' }}
+              />
+            </Link>
+          </CustomTooltip>
+        </li>
+      )),
+    [isDark],
   )
 
   return (
@@ -65,4 +67,4 @@ const AboutProject: FC<AboutProjectProps> = ({
   )
 }
 
-export default AboutProject
+export default memo(AboutProject, () => true)

@@ -2,11 +2,11 @@ import { FC, useCallback, useEffect, useMemo, useState } from 'react'
 import { useQuery } from '@apollo/client'
 import { toast } from 'react-toastify'
 
-import { useLocalStorage, useResponsiveCallback } from '@/lib/hooks'
+import { useLocalStorage, useBreakpointCallback } from '@/lib/hooks'
 import { withInfiniteScroll } from '@/hocs'
 import { usefulResourceDocument } from '@/graphql'
 import useAbortController from '@/lib/hooks/useAbortController'
-import displayBreakpoints from '@/constants/displayBreakpoints'
+import Breakpoint from '@/constants/Breakpoint'
 import { FavoriteResourcesList, UsefulResourcesList } from '@/components'
 import type { ResourcesContextProps, UsefulResourcesProps } from './interface'
 import usefulResourcesContext from './usefulResourcesContext'
@@ -131,16 +131,16 @@ const UsefulResources: FC<UsefulResourcesProps> = ({
     [setFavResourcesIds, favoriteUsefulResourcesQuery, favResourcesIds],
   )
 
-  useResponsiveCallback({
-    md: () => setFetchLimit(2),
-    xl: () => setFetchLimit(3),
+  useBreakpointCallback({
+    Md: () => setFetchLimit(2),
+    Xl: () => setFetchLimit(3),
   })
 
   useEffect(() => {
     setFetchLimit(
-      document.body.clientWidth > displayBreakpoints.xl
+      document.body.clientWidth > Breakpoint.Xl
         ? 3
-        : document.body.clientWidth > displayBreakpoints.md
+        : document.body.clientWidth > Breakpoint.Md
         ? 2
         : 1,
     )

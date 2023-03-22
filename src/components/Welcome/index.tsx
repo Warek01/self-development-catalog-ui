@@ -4,7 +4,7 @@ import classNames from 'classnames'
 
 import { useRenderState } from '@/lib/hooks'
 import type { StrapiMultimediaModel } from '@/types/strapi'
-import style from './style.module.scss'
+import style from './style.module.sass'
 
 interface Props {
   welcomeTitle: string
