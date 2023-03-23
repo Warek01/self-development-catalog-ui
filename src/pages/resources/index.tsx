@@ -3,7 +3,7 @@ import { GetStaticProps } from 'next'
 
 import { Seo } from '@/components'
 import getPageData from '@/lib/getPageData'
-import AppRoutes from '@/constants/AppRoutes'
+import AppRoute from '@/constants/AppRoute'
 import { AppLayout, UsefulResources } from '@/containers'
 import { usefulResourceDocument } from '@/graphql'
 import { apolloSsrClient } from '@/graphql/client'
@@ -37,7 +37,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
     props: {
       totalUsefulResources:
         totalUsefulResourcesQuery.data.usefulResources.meta.pagination.total,
-      data: await getPageData<null>(AppRoutes.Resources),
+      data: await getPageData<null>(AppRoute.Resources),
     },
     revalidate: Number(process.env.REVALIDATE_TIMEOUT),
   }

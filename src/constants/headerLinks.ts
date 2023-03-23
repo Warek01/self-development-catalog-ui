@@ -1,17 +1,17 @@
-import AppRoutes from '@/constants/AppRoutes'
+import AppRoute from '@/constants/AppRoute'
 
 const headerLinks: LinkProps[] = [
   {
     text: 'About',
-    href: AppRoutes.About,
+    href: AppRoute.About,
   },
   {
     text: 'Blogs',
-    href: AppRoutes.Categories,
+    href: AppRoute.Categories,
   },
   {
     text: 'Resources',
-    href: AppRoutes.Resources,
+    href: AppRoute.Resources,
   },
 ]
 

@@ -1,5 +1,5 @@
 import icons from '@/icons'
-import AppRoutes from './AppRoutes'
+import AppRoute from './AppRoute'
 
 interface Feature {
   Icon: IconComponent
@@ -12,19 +12,19 @@ const featuresList: Feature[] = [
   {
     title: 'Useful resources',
     Icon: icons.List,
-    slug: AppRoutes.Resources,
+    slug: AppRoute.Resources,
     accessible: true,
   },
   {
     title: 'All categories',
     Icon: icons.List,
-    slug: AppRoutes.Categories,
+    slug: AppRoute.Categories,
     accessible: true,
   },
   {
     title: 'In development',
     Icon: icons.Hammer,
-    slug: AppRoutes.Home,
+    slug: AppRoute.Home,
     accessible: false,
   },
 ]

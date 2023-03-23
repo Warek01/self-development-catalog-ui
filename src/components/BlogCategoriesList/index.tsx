@@ -6,7 +6,7 @@ import type { StrapiEntity, StrapiFindResponse } from '@/types/strapi'
 import { useRenderState } from '@/lib/hooks'
 import { isStrapiEntity } from '@/lib/guards'
 import { BlogCategory } from '@/components'
-import AppRoutes from '@/constants/AppRoutes'
+import AppRoute from '@/constants/AppRoute'
 
 interface Props {
   categories:
@@ -26,7 +26,7 @@ const CategoriesList: FC<Props> = ({ categories }) => {
       {isStrapiEntity(categories) ? (
         <>
           <Link
-            href={AppRoutes.Categories}
+            href={AppRoute.Categories}
             className="text-2xl md:text-xl"
           >
             All Categories

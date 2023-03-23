@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 import headerLinks from '@/constants/headerLinks'
-import AppRoutes from '@/constants/AppRoutes'
+import AppRoute from '@/constants/AppRoute'
 import icons from '@/icons'
 import { mobileViewContext, sideMenuContext, themeContext } from '@/contexts'
 
@@ -23,7 +23,7 @@ const Header: FC = () => {
   return (
     <header className="flex justify-between py-6 max-h-20">
       <Link
-        href={AppRoutes.Home}
+        href={AppRoute.Home}
         className="flex gap-6 items-center font-semibold text-lg md:text-xl"
       >
         <Image
