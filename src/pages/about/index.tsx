@@ -4,7 +4,7 @@ import { GetStaticProps } from 'next'
 import type { AboutProjectProps } from '@/components/AboutProject/interface'
 import { AboutProject, Seo } from '@/components'
 import getPageData from '@/lib/getPageData'
-import AppRoutes from '@/constants/AppRoutes'
+import AppRoute from '@/constants/AppRoute'
 import { AppLayout } from '@/containers'
 
 interface Props {
@@ -27,7 +27,7 @@ export default AboutPage
 export const getStaticProps: GetStaticProps<Props> = async () => {
   return {
     props: {
-      data: await getPageData<AboutProjectProps>(AppRoutes.About),
+      data: await getPageData<AboutProjectProps>(AppRoute.About),
     },
     revalidate: Number(process.env.REVALIDATE_TIMEOUT),
   }

@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 import determineContrastTextColor from '@/lib/determineContrastColor'
-import AppRoutes from '@/constants/AppRoutes'
+import AppRoute from '@/constants/AppRoute'
 
 interface Props {
   category: BlogCategoryModel
@@ -27,7 +27,7 @@ const Category: FC<Props> = ({ category }) => {
           className="duration-100 ease-in-out rounded-xl bg-black/10 hover:bg-black/20 dark:bg-dark-white/5 dark:hover:bg-dark-white/10"
         >
           <Link
-            href={`${AppRoutes.Blogs}/${blog.attributes.slug}`}
+            href={`${AppRoute.Blogs}/${blog.attributes.slug}`}
             className="flex flex-col justify-center items-center gap-12 px-6 md:px-12 py-12"
           >
             <span className="col-span-1 whitespace-nowrap">

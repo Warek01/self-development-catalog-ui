@@ -11,7 +11,7 @@ import {
 import classNames from 'classnames'
 import Image from 'next/image'
 
-import AppRoutes from '@/constants/AppRoutes'
+import AppRoute from '@/constants/AppRoute'
 import { mobileViewContext } from '@/contexts'
 
 interface Props {
@@ -80,7 +80,7 @@ const Category: FC<Props> = ({ attributes, isFirst, isEven }) => {
           </p>
         )}
         <Link
-          href={`${AppRoutes.Categories}/${attributes.slug}`}
+          href={`${AppRoute.Categories}/${attributes.slug}`}
           className="relative flex-1 z-20 overflow-hidden z-20 peer group rounded-2xl"
           style={{ backgroundColor: attributes.color }}
         >
