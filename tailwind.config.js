@@ -35,6 +35,9 @@ module.exports = {
         '11xl': '112rem',
         '12xl': '120rem',
       },
+      margin: {
+        '1/8': '12.5%'
+      },
       fontFamily: {
         epilogue: 'var(--font-epilogue)',
         inconsolata: 'var(--font-inconsolata)',

@@ -2,34 +2,43 @@
   h1,
   h2,
   h3
-    position: relative
-    margin-bottom: 12px
+    @apply relative mb-3
 
     &:not(:first-of-type)
-      margin-top: 36px
+      @apply mt-9
 
     @media (width >= 1024px)
       &:not(:first-of-type)
-        margin-top: 48px
+        @apply mt-12
 
     &:not(:first-of-type)::before
-      content: ''
-      position: absolute
-      top: -10px
-      width: 75%
-      height: 1px
-      margin-left: 12.5%
-      background-color: rgba(#000000, 0.1)
+      @apply absolute bg-black/10 content-[''] -top-3 h-px w-3/4 ml-1/8
 
       @media (width >= 1024px)
-        top: -20px
+        @apply -top-5
 
   ul
-    list-style-type: disc
-    list-style-position: inside
+    @apply list-disc list-inside mb-16
 
     li
-      margin: 12px 0
+      @apply mx-3
 
       @media (width >= 640px)
-        margin: 24px 0 24px 48px
+        @apply mx-3 mb-8
+
+  code
+    @apply text-base font-mono
+
+
+.textSectionDark
+  @extend .textSection
+
+  h1,
+  h2,
+  h3
+    &:not(:first-of-type)::before
+      @apply bg-dark-white/20
+
+  code
+    @apply bg-dark-black
+
