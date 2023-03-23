@@ -3,8 +3,13 @@ import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client'
 export const apolloSsrClient = new ApolloClient({
   connectToDevTools: false,
   ssrMode: true,
-  cache: new InMemoryCache(),
-  assumeImmutableResults: true,
+  cache: new InMemoryCache({
+    resultCaching: false,
+    canonizeResults: false,
+    addTypename: false,
+    resultCacheMaxSize: 0,
+  }),
+  assumeImmutableResults: false,
   ssrForceFetchDelay: 0,
   queryDeduplication: false,
   credentials: 'same-origin',
@@ -18,15 +23,21 @@ export const apolloSsrClient = new ApolloClient({
     includeExtensions: false,
     includeUnusedVariables: false,
     preserveHeaderCase: false,
+    useGETForQueries: false,
   }),
 
   defaultOptions: {
     query: {
-      fetchPolicy: 'network-only',
+      fetchPolicy: 'no-cache',
       errorPolicy: 'all',
       notifyOnNetworkStatusChange: false,
       partialRefetch: false,
       returnPartialData: false,
+    },
+    mutate: {
+      fetchPolicy: 'no-cache',
+      errorPolicy: 'all',
+      optimisticResponse: false,
     },
   },
 })
