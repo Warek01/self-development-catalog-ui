@@ -67,6 +67,6 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
     paths: blogsQuery.data.blogs.data.map((blog) => ({
       params: { slug: blog.attributes.slug },
     })),
-    fallback: true,
+    fallback: false,
   }
 }

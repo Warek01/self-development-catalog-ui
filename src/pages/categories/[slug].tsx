@@ -69,6 +69,6 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
     paths: slugs.data!.blogCategories.data.map(({ attributes }) => ({
       params: { slug: attributes.slug },
     })),
-    fallback: true,
+    fallback: false,
   }
 }
