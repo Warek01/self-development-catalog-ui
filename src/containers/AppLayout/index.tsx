@@ -27,17 +27,22 @@ const AppLayout: FC<PropsWithChildren<AppLayoutProps>> = ({
     <>
       <ToastContainer {...toastDefaultProps} />
       <SideMenu socialMediaLinks={socialMedias} />
-      <main
-        className={classNames(
-          epilogue.variable,
-          epilogue.className,
-          'relative max-w-[1920px] mx-auto min-h-screen flex flex-col text-black font-epilogue px-6 sm:px-12 md:px-24 xl:px-36 dark:bg-dark-black',
-        )}
+      <div
+        id="layout"
+        className="w-screen h-screen bg-white dark:bg-dark-black overflow-x-hidden"
       >
-        <Header />
-        {children}
-        <Footer socialMedias={socialMedias} />
-      </main>
+        <main
+          className={classNames(
+            epilogue.variable,
+            epilogue.className,
+            'relative max-w-[1920px] mx-auto min-h-screen flex flex-col text-black font-epilogue px-6 sm:px-12 md:px-24 xl:px-36',
+          )}
+        >
+          <Header />
+          {children}
+          <Footer socialMedias={socialMedias} />
+        </main>
+      </div>
     </>
   )
 }

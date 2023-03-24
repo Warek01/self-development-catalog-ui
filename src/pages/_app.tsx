@@ -10,8 +10,9 @@ import '@/styles/globals.sass'
 import { apolloClient } from '@/graphql/client'
 import ThemeContextProvider from '@/contexts/theme/Provider'
 import SideMenuContextProvider from '@/contexts/sideMenu/Provider'
-import MobileViewContextProvider from '@/contexts/mobileViewContext/Provider'
+import MobileViewContextProvider from '@/contexts/mobileView/Provider'
 import Head from 'next/head'
+import ModalContextProvider from '@/contexts/modal/Provider'
 
 const App: AppType<AppProps<null>> = ({ Component, pageProps }) => {
   return (
@@ -24,8 +25,10 @@ const App: AppType<AppProps<null>> = ({ Component, pageProps }) => {
         <ThemeContextProvider>
           <MobileViewContextProvider>
             <SideMenuContextProvider>
-              <div id="modal-root" />
-              <Component {...pageProps} />
+              <ModalContextProvider>
+                <div id="modal-root" />
+                <Component {...pageProps} />
+              </ModalContextProvider>
             </SideMenuContextProvider>
           </MobileViewContextProvider>
         </ThemeContextProvider>

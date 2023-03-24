@@ -5,7 +5,7 @@ enum Color {
   CardBg = '#FFFCF5',
   CardBgDark = '#2d3436',
   CardBorder = '#FFD285',
-  HeadingGreen= '#009379',
+  HeadingGreen = '#009379',
   PinkBg = '#F9E6F0',
   LinkBlue = '#3498db',
   DarkBlack = '#2C3333',

@@ -53,9 +53,11 @@ const Category: FC<Props> = ({ category }) => {
     <div>
       <header
         style={{ backgroundColor: category.color }}
-        className='flex flex-col p-3 rounded-xl'
+        className="flex flex-col p-3 rounded-xl"
       >
-        <span className={`flex items-center justify-start gap-4 text-xl ${headerTextColor}`}>
+        <span
+          className={`flex items-center justify-start gap-4 text-xl ${headerTextColor}`}
+        >
           <Image
             src={
               process.env.NEXT_PUBLIC_STRAPI_URL +

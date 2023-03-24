@@ -6,7 +6,7 @@ import featuresList from '@/constants/featuresList'
 
 const FeatureSelect: FC = () => {
   return (
-    <div className="flex justify-evenly my-48">
+    <div className="flex justify-evenly my-24">
       {featuresList.map(({ accessible, Icon, title, slug }, index) =>
         accessible ? (
           <Link

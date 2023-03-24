@@ -1,6 +1,6 @@
 import { Context, createContext } from 'react'
 
-import type { MobileViewContextProps } from '@/contexts/mobileViewContext/interface'
+import type { MobileViewContextProps } from '@/contexts/mobileView/interface'
 
 const mobileViewContext: Context<MobileViewContextProps> =
   createContext<MobileViewContextProps>({

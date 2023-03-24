@@ -9,7 +9,7 @@ interface Props {
 
 const CategorySelect: FC<Props> = ({ categories }) => {
   return (
-    <main className="flex flex-col my-36">
+    <main className="flex flex-col mt-36">
       <ul className="grid grid-cols-1 md:grid-cols-2 gap-y-12 md:gap-y-24 lg:gap-y-36">
         {categories.data.map(({ attributes, id }, index) => (
           <li
