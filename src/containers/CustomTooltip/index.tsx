@@ -1,7 +1,7 @@
 import { ComponentProps, CSSProperties, FC, useContext, useMemo } from 'react'
 import Tooltip from 'rc-tooltip'
 
-import { mobileViewContext, themeContext } from '@/contexts'
+import { mobileViewContext, themeContext } from '@/context'
 import type { CustomTooltipProps } from './interface'
 import Color from '@/constants/Color'
 

@@ -48,6 +48,14 @@ declare global {
     }
   }
 
+  interface UserModel {
+    username: string
+    email: string
+    provider: string
+    confirmed: boolean
+    blocked: boolean
+  }
+
   interface PageDataModel<T> {
     seo: PageSeoModel | null
     socialMedias: StrapiFindResponse<SocialMediaModel>

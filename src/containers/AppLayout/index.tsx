@@ -35,7 +35,7 @@ const AppLayout: FC<PropsWithChildren<AppLayoutProps>> = ({
           className={classNames(
             epilogue.variable,
             epilogue.className,
-            'relative max-w-[1920px] mx-auto min-h-screen flex flex-col text-black font-epilogue px-6 sm:px-12 md:px-24 xl:px-36',
+            'relative max-w-[1920px] mx-auto min-h-screen flex flex-col text-black dark:text-dark-white font-epilogue px-6 sm:px-12 md:px-24 xl:px-36',
           )}
         >
           <Header />

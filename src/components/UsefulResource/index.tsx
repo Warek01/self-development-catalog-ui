@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 import icons from '@/icons'
 import { CustomTooltip } from '@/containers'
-import { modalContext } from '@/contexts'
+import { modalContext } from '@/context'
 
 interface Props {
   attributes: UsefulResourceModel

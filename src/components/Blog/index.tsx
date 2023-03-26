@@ -5,7 +5,7 @@ import highlight from 'highlight.js'
 import preprocessImgSrc from '@/lib/preprocessImgSrc'
 import Aside from '@/components/Blog/Aside'
 import style from './style.module.sass'
-import { themeContext } from '@/contexts'
+import { themeContext } from '@/context'
 
 interface Props {
   blog: BlogModel

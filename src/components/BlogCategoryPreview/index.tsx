@@ -12,7 +12,7 @@ import classNames from 'classnames'
 import Image from 'next/image'
 
 import AppRoute from '@/constants/AppRoute'
-import { mobileViewContext } from '@/contexts'
+import { mobileViewContext } from '@/context'
 
 interface Props {
   attributes: BlogCategoryModel

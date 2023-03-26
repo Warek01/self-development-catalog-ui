@@ -5,7 +5,7 @@ import Image from 'next/image'
 import icons from '@/icons'
 import { CustomTooltip } from '@/containers'
 import type { AboutProjectProps } from './interface'
-import { themeContext } from '@/contexts'
+import { themeContext } from '@/context'
 
 const TECHNOLOGY_ICON_SIZE = 48
 

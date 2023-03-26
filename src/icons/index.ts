@@ -40,6 +40,7 @@ import Spinner from './Spinner'
 import Star from './Star'
 import Sun from './Sun'
 import Moon from './Moon'
+import User from './User'
 
 export default {
   Menu,
@@ -84,4 +85,5 @@ export default {
   Star,
   Sun,
   Moon,
+  User,
 }

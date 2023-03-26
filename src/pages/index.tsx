@@ -1,18 +1,18 @@
 import { FC } from 'react'
 import { GetStaticProps } from 'next'
+import { blogCategoryDocument } from '@/graphql'
 
-import type { StrapiFindResponse, StrapiMultimediaModel } from '@/types/strapi'
+import { StrapiFindResponse, StrapiMultimediaModel } from '@/types/strapi'
+import { apolloSsrClient } from '@/graphql/client'
+import getPageData from '@/lib/getPageData'
+import AppRoute from '@/constants/AppRoute'
 import {
   AboutPreview,
-  CategorySelect,
   FeatureSelect,
+  CategorySelect,
   Seo,
   Welcome,
 } from '@/components'
-import { blogCategoryDocument } from '@/graphql'
-import getPageData from '@/lib/getPageData'
-import AppRoute from '@/constants/AppRoute'
-import { apolloSsrClient } from '@/graphql/client'
 import { AppLayout } from '@/containers'
 
 interface HomePageProps {

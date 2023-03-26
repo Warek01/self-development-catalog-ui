@@ -56,4 +56,4 @@ const Welcome: FC<Props> = ({ welcomeTitle, welcomeImage }) => {
   )
 }
 
-export default memo(Welcome, () => true)
+export default memo(Welcome)

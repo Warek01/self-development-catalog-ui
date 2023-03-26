@@ -1,0 +1,25 @@
+fragment userFields on UsersPermissionsMe {
+  username
+  id
+  confirmed
+  blocked
+  email
+}
+
+mutation Login($ident: String!, $pass: String!) {
+  login(input: {identifier: $ident, password: $pass, provider: "local"}) {
+    jwt
+    user {
+      ...userFields
+    }
+  }
+}
+
+mutation Register($email: String!, $username: String!, $pass: String!) {
+  register(input: {email: $email, username: $username, password: $pass}) {
+    jwt
+    user {
+      ...userFields
+    }
+  }
+}

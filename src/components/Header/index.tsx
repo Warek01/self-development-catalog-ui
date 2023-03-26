@@ -5,9 +5,12 @@ import Image from 'next/image'
 import headerLinks from '@/constants/headerLinks'
 import AppRoute from '@/constants/AppRoute'
 import icons from '@/icons'
-import { mobileViewContext, sideMenuContext, themeContext } from '@/contexts'
+import { mobileViewContext, sideMenuContext, themeContext } from '@/context'
+import { useRouter } from 'next/router'
 
 const Header: FC = () => {
+  const router = useRouter()
+
   const { isMobile } = useContext(mobileViewContext)
   const { isOpen, open } = useContext(sideMenuContext)
   const { isDark, toggle } = useContext(themeContext)
@@ -18,7 +21,7 @@ const Header: FC = () => {
     }
 
     open()
-  }, [isOpen, isMobile])
+  }, [isOpen, isMobile, open])
 
   return (
     <header className="flex justify-between py-6 max-h-20">
@@ -39,10 +42,19 @@ const Header: FC = () => {
         <span className="hidden md:inline-block">Self development catalog</span>
         <span className="inline-block md:hidden">Self-Dev</span>
       </Link>
-      <div className="flex items-center">
+      <div className="flex items-center justify-end gap-2 md:gap-6 lg:gap-12">
+        <button
+          onClick={() => router.push(AppRoute.Me)}
+          className="p-2 rounded-lg"
+        >
+          <icons.User
+            width={25}
+            height={25}
+          />
+        </button>
         <button
           onClick={() => toggle()}
-          className="p-2 rounded-lg mr-12"
+          className="p-2 rounded-lg"
         >
           {isDark ? (
             <icons.Moon

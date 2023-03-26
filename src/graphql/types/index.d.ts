@@ -27,3 +27,8 @@ declare module '*/UsefulResource.graphql' {
 declare module '*/PageData.graphql' {
   export const FindPageData: any
 }
+
+declare module '*/User.graphql' {
+  export const Login: any
+  export const Register: any
+}

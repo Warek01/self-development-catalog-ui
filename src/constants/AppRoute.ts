@@ -4,6 +4,9 @@ enum AppRoute {
   About = '/about',
   Resources = '/resources',
   Blogs = '/blogs',
+  Login = '/login',
+  Register = '/register',
+  Me = '/me',
   ANY = '*',
 }
 

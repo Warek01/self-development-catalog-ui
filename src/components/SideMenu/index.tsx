@@ -6,7 +6,7 @@ import headerLinks from '@/constants/headerLinks'
 import { LinkIcon } from '@/components'
 import socialMediaIconsMap from '@/constants/socialMediaIconsMap'
 import icons from '@/icons'
-import { mobileViewContext, sideMenuContext } from '@/contexts'
+import { mobileViewContext, sideMenuContext } from '@/context'
 import type { SideMenuProps } from './interface'
 
 const SideMenu: FC<SideMenuProps> = ({ socialMediaLinks }) => {

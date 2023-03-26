@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, memo } from 'react'
 import classNames from 'classnames'
 import Link from 'next/link'
 
@@ -44,4 +44,4 @@ const FeatureSelect: FC = () => {
   )
 }
 
-export default FeatureSelect
+export default memo(FeatureSelect)

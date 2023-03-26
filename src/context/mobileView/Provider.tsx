@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, useMemo, useState } from 'react'
+import { FC, PropsWithChildren, useEffect, useMemo, useState } from 'react'
 
 import { useBreakpointCallback } from '@/lib/hooks'
 import type { MobileViewContextProps } from './interface'

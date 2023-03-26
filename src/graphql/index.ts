@@ -4,6 +4,7 @@ import pageSeoDocument from './Seo.graphql'
 import socialMediaDocument from './SocialMedia.graphql'
 import usefulResourceDocument from './UsefulResource.graphql'
 import pageDataDocument from './PageData.graphql'
+import userDocument from './User.graphql'
 
 export {
   blogDocument,
@@ -12,4 +13,5 @@ export {
   socialMediaDocument,
   usefulResourceDocument,
   pageDataDocument,
+  userDocument,
 }
