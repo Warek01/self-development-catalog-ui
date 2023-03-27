@@ -7,6 +7,7 @@ import { TextInput } from '@/components/forms'
 import Link from 'next/link'
 import isValidEmail from '@/lib/isValidEmail'
 import { log } from 'next/dist/server/typescript/utils'
+import icons from '@/icons'
 
 const MIN_PASSWORD_LENGTH = 6
 
@@ -53,45 +54,35 @@ const LoginForm: FC = () => {
   }, [auth])
 
   return (
-    <main className="mx-auto max-w-3xl p-12 flex flex-col gap-6 items-center bg-card-bg dark:bg-card-bg-dark rounded-xl">
-      <label htmlFor="Email">
-        <TextInput
-          name="Email"
-          placeholder="Email"
-          className="w-full sm:w-xs md:w-sm lg:w-md"
-          autoComplete
-          ref={loginRefs.email}
-          onChange={() => setIsInvalidEmail(false)}
-        />
-        <p
-          className={`${
-            isInvalidEmail ? '' : 'hidden'
-          } text-red-600 text-xs pl-4 pt-1`}
-        >
-          Invalid email.
-        </p>
-      </label>
-      <label htmlFor="Password">
-        <TextInput
-          password
-          name="Password"
-          placeholder="Password"
-          className="w-full sm:w-xs md:w-sm lg:w-md"
-          autoComplete
-          ref={loginRefs.password}
-          onChange={() => setIsInvalidPassword(false)}
-        />
-        <p
-          className={`${
-            isInvalidPassword ? '' : 'hidden'
-          } text-red-600 text-xs pl-4 pt-1`}
-        >
-          Password is shorter than {MIN_PASSWORD_LENGTH} characters.
-        </p>
-      </label>
+    <main className="mx-auto max-w-3xl flex flex-col gap-6 items-center my-auto
+     dark:bg-dark-white/5 rounded-xl p-12 shadow-xl">
+      <div className="p-4 bg-black/5 dark:bg-dark-white/5 rounded-full mb-6 shadow-xl">
+        <icons.User width={48} height={48} />
+      </div>
+      <TextInput
+        name="Email"
+        placeholder="Email"
+        className="w-full sm:w-xs md:w-sm lg:w-md"
+        autoComplete
+        ref={loginRefs.email}
+        onChange={() => setIsInvalidEmail(false)}
+        invalid={isInvalidEmail}
+        invalidText="Invalid Email."
+      />
+      <TextInput
+        password
+        name="Password"
+        placeholder="Password"
+        className="w-full sm:w-xs md:w-sm lg:w-md"
+        autoComplete
+        ref={loginRefs.password}
+        onChange={() => setIsInvalidPassword(false)}
+        invalid={isInvalidPassword}
+        invalidText={`Password is shorter than ${MIN_PASSWORD_LENGTH} characters.`}
+      />
       <button
         onClick={handleLogin}
-        className="py-2 px-4 rounded-md"
+        className="py-2 px-4 rounded-md mt-8 shadow-lg hover:bg-transparent hover:shadow-xl hover:bg-black/10"
       >
         Log in
       </button>
