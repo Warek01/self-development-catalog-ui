@@ -6,7 +6,12 @@ import { userDocument } from '@/graphql'
 import { useLocalStorage } from '@/lib/hooks'
 import { apolloClient } from '@/graphql/client'
 import ApolloErrorMessage from '@/constants/ApolloErrorMessage'
-import type { AuthContextProps, LoginResponse, UserData } from './interface'
+import type {
+  AuthContextProps,
+  LoginResponse,
+  RegisterResponse,
+  UserData,
+} from './interface'
 import authContext from './context'
 
 const AuthContextProvider: FC<PropsWithChildren> = ({ children }) => {
@@ -43,9 +48,9 @@ const AuthContextProvider: FC<PropsWithChildren> = ({ children }) => {
           toast(ApolloErrorMessage.Login)
         } else {
           toast('Something went wrong.', { type: 'error' })
-          console.error(err)
         }
 
+        console.error(err)
         return false
       }
     },
@@ -67,10 +72,10 @@ const AuthContextProvider: FC<PropsWithChildren> = ({ children }) => {
     async (email: string, pass: string, username: string): Promise<boolean> => {
       try {
         const registerReq = await apolloClient.mutate<
-          LoginResponse,
+          RegisterResponse,
           { username: string; pass: string; email: string }
         >({
-          mutation: userDocument.Login,
+          mutation: userDocument.Register,
           variables: {
             email,
             username,
@@ -78,7 +83,7 @@ const AuthContextProvider: FC<PropsWithChildren> = ({ children }) => {
           },
         })
 
-        const userData = registerReq.data?.login
+        const userData = registerReq.data?.register
 
         if (!userData) {
           throw new Error('User data is null')
@@ -87,7 +92,15 @@ const AuthContextProvider: FC<PropsWithChildren> = ({ children }) => {
         setUserData(userData)
         return true
       } catch (err) {
-        toast('Something went wrong.', { type: 'error' })
+        if (
+          err instanceof ApolloError &&
+          err.message === ApolloErrorMessage.IdentifierTaken
+        ) {
+          toast(ApolloErrorMessage.IdentifierTaken)
+        } else {
+          toast('Something went wrong.', { type: 'error' })
+        }
+
         console.error(err)
         return false
       }

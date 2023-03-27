@@ -1,11 +1,11 @@
-import { FC, memo, useContext, useMemo } from 'react'
+import { FC, memo, useMemo } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
 import icons from '@/icons'
 import { CustomTooltip } from '@/containers'
 import type { AboutProjectProps } from './interface'
-import { themeContext } from '@/context'
+import { useTheme } from '@/lib/hooks'
 
 const TECHNOLOGY_ICON_SIZE = 48
 
@@ -15,7 +15,7 @@ const AboutProject: FC<AboutProjectProps> = ({
   projectDescription,
   repoLink,
 }) => {
-  const { isDark } = useContext(themeContext)
+  const theme = useTheme()
 
   const projectTechnologiesElements = useMemo<JSX.Element[]>(
     () =>
@@ -35,13 +35,13 @@ const AboutProject: FC<AboutProjectProps> = ({
                 priority={false}
                 width={TECHNOLOGY_ICON_SIZE}
                 height={TECHNOLOGY_ICON_SIZE}
-                style={{ filter: isDark ? 'brightness(0) invert(1)' : '' }}
+                style={{ filter: theme.isDark ? 'brightness(0) invert(1)' : '' }}
               />
             </Link>
           </CustomTooltip>
         </li>
       )),
-    [isDark],
+    [theme.isDark],
   )
 
   return (

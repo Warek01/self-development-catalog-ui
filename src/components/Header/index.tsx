@@ -1,19 +1,20 @@
 import { FC, memo, useCallback, useContext } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 
 import headerLinks from '@/constants/headerLinks'
 import AppRoute from '@/constants/AppRoute'
 import icons from '@/icons'
-import { mobileViewContext, sideMenuContext, themeContext } from '@/context'
-import { useRouter } from 'next/router'
+import { mobileViewContext, sideMenuContext } from '@/context'
+import { useTheme } from '@/lib/hooks'
 
 const Header: FC = () => {
   const router = useRouter()
 
   const { isMobile } = useContext(mobileViewContext)
   const { isOpen, open } = useContext(sideMenuContext)
-  const { isDark, toggle } = useContext(themeContext)
+  const theme = useTheme()
 
   const handleOpenMenu = useCallback(() => {
     if (!isMobile) {
@@ -53,10 +54,10 @@ const Header: FC = () => {
           />
         </button>
         <button
-          onClick={() => toggle()}
+          onClick={() => theme.toggle()}
           className="p-2 rounded-lg"
         >
-          {isDark ? (
+          {theme.isDark ? (
             <icons.Moon
               width={25}
               height={25}

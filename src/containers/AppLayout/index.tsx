@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import toastDefaultProps from '@/constants/toastDefaultProps'
 import { Footer, Header, SideMenu } from '@/components'
 import type { AppLayoutProps } from './interface'
+import { useTheme } from '@/lib/hooks'
 
 const epilogue = Epilogue({
   variable: '--font-epilogue',
@@ -23,9 +24,14 @@ const AppLayout: FC<PropsWithChildren<AppLayoutProps>> = ({
   children,
   socialMedias,
 }) => {
+  const theme = useTheme()
+
   return (
     <>
-      <ToastContainer {...toastDefaultProps} />
+      <ToastContainer
+        {...toastDefaultProps}
+        theme={theme.isDark ? 'dark' : 'light'}
+      />
       <SideMenu socialMediaLinks={socialMedias} />
       <div
         id="layout"

@@ -1,17 +1,18 @@
 import { ComponentProps, CSSProperties, FC, useContext, useMemo } from 'react'
 import Tooltip from 'rc-tooltip'
 
-import { mobileViewContext, themeContext } from '@/context'
+import { mobileViewContext } from '@/context'
 import type { CustomTooltipProps } from './interface'
 import Color from '@/constants/Color'
+import { useTheme } from '@/lib/hooks'
 
 const CustomTooltip: FC<CustomTooltipProps> = ({
   text,
   children,
   hiddenOnMobile = true,
 }) => {
+  const theme = useTheme()
   const { isMobile } = useContext(mobileViewContext)
-  const { isDark } = useContext(themeContext)
 
   const tooltipProps = useMemo<ComponentProps<typeof Tooltip>>(
     () => ({
@@ -20,16 +21,16 @@ const CustomTooltip: FC<CustomTooltipProps> = ({
       mouseLeaveDelay: 0,
       mouseEnterDelay: 0.5,
       overlayInnerStyle: {
-        background: isDark ? Color.DarkBlack : Color.White,
-        color: isDark ? Color.DarkWhite : Color.Black,
+        background: theme.isDark ? Color.DarkBlack : Color.White,
+        color: theme.isDark ? Color.DarkWhite : Color.Black,
       } as CSSProperties,
       overlayStyle: {
-        background: isDark ? Color.CardBgDark : Color.CardBg,
+        background: theme.isDark ? Color.CardBgDark : Color.CardBg,
       } as CSSProperties,
       destroyTooltipOnHide: false,
       trigger: ['hover', 'focus', 'click'],
     }),
-    [isDark],
+    [theme.isDark],
   )
 
   return hiddenOnMobile && isMobile ? (

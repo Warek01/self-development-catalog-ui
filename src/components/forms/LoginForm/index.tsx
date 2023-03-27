@@ -1,12 +1,11 @@
 import { createRef, FC, useCallback, useMemo, useState } from 'react'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 import { useAuth } from '@/lib/hooks'
 import AppRoute from '@/constants/AppRoute'
 import { TextInput } from '@/components/forms'
-import Link from 'next/link'
 import isValidEmail from '@/lib/isValidEmail'
-import { log } from 'next/dist/server/typescript/utils'
 import icons from '@/icons'
 
 const MIN_PASSWORD_LENGTH = 6
