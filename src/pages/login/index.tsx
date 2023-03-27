@@ -1,12 +1,13 @@
-import { FC, useCallback, useEffect } from 'react'
+import { FC, useEffect } from 'react'
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 
-import { Seo } from '@/components'
 import { AppLayout } from '@/containers'
 import getPageData from '@/lib/getPageData'
 import AppRoute from '@/constants/AppRoute'
 import useAuth from '@/lib/hooks/useAuth'
+import { Seo } from '@/components'
+import { LoginForm } from '@/components/forms'
 
 interface Props {
   data: PageDataModel<null>
@@ -22,19 +23,11 @@ const LoginPage: FC<Props> = ({ data }) => {
     }
   }, [auth])
 
-  const handleLogin = useCallback(async () => {
-    const loginResult = await auth.login('test@test.com', 'password')
-
-    if (loginResult) {
-      await router.push(AppRoute.Home)
-    }
-  }, [auth])
-
   return (
     <>
       <Seo {...data.seo} />
       <AppLayout socialMedias={data.socialMedias}>
-        <button onClick={handleLogin}>Log in</button>
+        <LoginForm />
       </AppLayout>
     </>
   )
