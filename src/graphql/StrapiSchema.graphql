@@ -45,17 +45,16 @@ type Blog {
     pagination: PaginationArg = {}
     sort: [String] = []
   ): [ComponentUtilsLink]
-  publishedAt: DateTime
   slug: String!
   title: String!
   updatedAt: DateTime
+  user: UsersPermissionsUserEntityResponse
 }
 
 type BlogCategory {
   blogs(
     filters: BlogFiltersInput
     pagination: PaginationArg = {}
-    publicationState: PublicationState = LIVE
     sort: [String] = []
   ): BlogRelationResponseCollection
   color: String
@@ -235,23 +234,14 @@ type Mutation {
     passwordConfirmation: String!
   ): UsersPermissionsLoginPayload
   updateBlog(data: BlogInput!, id: ID!): BlogEntityResponse
-  updateBlogCategory(
-    data: BlogCategoryInput!
-    id: ID!
-  ): BlogCategoryEntityResponse
+  updateBlogCategory(data: BlogCategoryInput!, id: ID!): BlogCategoryEntityResponse
   updateFileInfo(id: ID!, info: FileInfoInput): UploadFileEntityResponse!
   updatePage(data: PageInput!, id: ID!): PageEntityResponse
   updatePageSeo(data: PageSeoInput!, id: ID!): PageSeoEntityResponse
   updateSocialMedia(data: SocialMediaInput!, id: ID!): SocialMediaEntityResponse
   updateUploadFile(data: UploadFileInput!, id: ID!): UploadFileEntityResponse
-  updateUploadFolder(
-    data: UploadFolderInput!
-    id: ID!
-  ): UploadFolderEntityResponse
-  updateUsefulResource(
-    data: UsefulResourceInput!
-    id: ID!
-  ): UsefulResourceEntityResponse
+  updateUploadFolder(data: UploadFolderInput!, id: ID!): UploadFolderEntityResponse
+  updateUsefulResource(data: UsefulResourceInput!, id: ID!): UsefulResourceEntityResponse
   "Update an existing role"
   updateUsersPermissionsRole(
     data: UsersPermissionsRoleInput!
@@ -335,7 +325,6 @@ type Query {
   blogs(
     filters: BlogFiltersInput
     pagination: PaginationArg = {}
-    publicationState: PublicationState = LIVE
     sort: [String] = []
   ): BlogEntityResponseCollection
   i18NLocale(id: ID): I18NLocaleEntityResponse
@@ -508,6 +497,7 @@ type UsefulResource {
   publishedAt: DateTime
   title: String!
   updatedAt: DateTime
+  user: UsersPermissionsUserEntityResponse
 }
 
 type UsefulResourceEntity {
@@ -522,6 +512,10 @@ type UsefulResourceEntityResponse {
 type UsefulResourceEntityResponseCollection {
   data: [UsefulResourceEntity!]!
   meta: ResponseCollectionMeta!
+}
+
+type UsefulResourceRelationResponseCollection {
+  data: [UsefulResourceEntity!]!
 }
 
 type UsersPermissionsCreateRolePayload {
@@ -611,12 +605,23 @@ type UsersPermissionsUpdateRolePayload {
 
 type UsersPermissionsUser {
   blocked: Boolean
+  blogs(
+    filters: BlogFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): BlogRelationResponseCollection
   confirmed: Boolean
   createdAt: DateTime
   email: String!
   provider: String
   role: UsersPermissionsRoleEntityResponse
   updatedAt: DateTime
+  usefulResources(
+    filters: UsefulResourceFiltersInput
+    pagination: PaginationArg = {}
+    publicationState: PublicationState = LIVE
+    sort: [String] = []
+  ): UsefulResourceRelationResponseCollection
   username: String!
 }
 
@@ -700,10 +705,10 @@ input BlogFiltersInput {
   links: ComponentUtilsLinkFiltersInput
   not: BlogFiltersInput
   or: [BlogFiltersInput]
-  publishedAt: DateTimeFilterInput
   slug: StringFilterInput
   title: StringFilterInput
   updatedAt: DateTimeFilterInput
+  user: UsersPermissionsUserFiltersInput
 }
 
 input BlogInput {
@@ -711,9 +716,9 @@ input BlogInput {
   content: String
   date: Date
   links: [ComponentUtilsLinkInput]
-  publishedAt: DateTime
   slug: String
   title: String
+  user: ID
 }
 
 input BooleanFilterInput {
@@ -1133,6 +1138,7 @@ input UsefulResourceFiltersInput {
   publishedAt: DateTimeFilterInput
   title: StringFilterInput
   updatedAt: DateTimeFilterInput
+  user: UsersPermissionsUserFiltersInput
 }
 
 input UsefulResourceInput {
@@ -1140,6 +1146,7 @@ input UsefulResourceInput {
   link: String
   publishedAt: DateTime
   title: String
+  user: ID
 }
 
 input UsersPermissionsLoginInput {
@@ -1190,6 +1197,7 @@ input UsersPermissionsRoleInput {
 input UsersPermissionsUserFiltersInput {
   and: [UsersPermissionsUserFiltersInput]
   blocked: BooleanFilterInput
+  blogs: BlogFiltersInput
   confirmationToken: StringFilterInput
   confirmed: BooleanFilterInput
   createdAt: DateTimeFilterInput
@@ -1202,11 +1210,13 @@ input UsersPermissionsUserFiltersInput {
   resetPasswordToken: StringFilterInput
   role: UsersPermissionsRoleFiltersInput
   updatedAt: DateTimeFilterInput
+  usefulResources: UsefulResourceFiltersInput
   username: StringFilterInput
 }
 
 input UsersPermissionsUserInput {
   blocked: Boolean
+  blogs: [ID]
   confirmationToken: String
   confirmed: Boolean
   email: String
@@ -1214,5 +1224,6 @@ input UsersPermissionsUserInput {
   provider: String
   resetPasswordToken: String
   role: ID
+  usefulResources: [ID]
   username: String
 }

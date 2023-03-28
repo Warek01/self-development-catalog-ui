@@ -10,10 +10,7 @@ interface Props {
 }
 
 const Category: FC<Props> = ({ category }) => {
-  const blogs = useMemo(
-    () => category.blogs?.data ?? [],
-    [category.blogs?.data],
-  )
+  const blogs = useMemo(() => category.blogs?.data ?? [], [category.blogs?.data])
 
   const headerTextColor = determineContrastTextColor(category.color)
     ? 'text-black dark:text-dark-black'
@@ -30,9 +27,7 @@ const Category: FC<Props> = ({ category }) => {
             href={`${AppRoute.Blogs}/${blog.attributes.slug}`}
             className="flex flex-col justify-center items-center gap-12 px-6 md:px-12 py-12"
           >
-            <span className="col-span-1 whitespace-nowrap">
-              {blog.attributes.title}
-            </span>
+            <span className="col-span-1 whitespace-nowrap">{blog.attributes.title}</span>
             <div className="flex justify-between gap-3 flex-wrap">
               {blog.attributes.blog_categories?.data.map((category) => (
                 <span
@@ -59,10 +54,7 @@ const Category: FC<Props> = ({ category }) => {
           className={`flex items-center justify-start gap-4 text-xl ${headerTextColor}`}
         >
           <Image
-            src={
-              process.env.NEXT_PUBLIC_STRAPI_URL +
-              category.icon.data.attributes.url
-            }
+            src={process.env.NEXT_PUBLIC_STRAPI_URL + category.icon.data.attributes.url}
             alt={category.title}
             width={category.icon.data.attributes.width}
             height={category.icon.data.attributes.height}

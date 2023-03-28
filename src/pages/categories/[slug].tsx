@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
 
-import type { StrapiEntity } from '@/types/strapi'
+import type { BlogCategoryModel, PageDataModel, StrapiEntity } from '@/types/models'
 import { blogCategoryDocument } from '@/graphql'
 import { CategoriesList, Seo } from '@/components'
 import getPageData from '@/lib/getPageData'
@@ -31,9 +31,7 @@ const Category: FC<Props> = ({ category, data }) => {
 
 export default Category
 
-export const getStaticProps: GetStaticProps<Props, Params> = async ({
-  params,
-}) => {
+export const getStaticProps: GetStaticProps<Props, Params> = async ({ params }) => {
   const slug = params!.slug
 
   const blogCategoriesQuery = await apolloSsrClient.query<

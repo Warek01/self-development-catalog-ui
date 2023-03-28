@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
 
+import type { BlogModel, PageDataModel } from '@/types/models'
 import { Blog, Seo } from '@/components'
 import { blogDocument } from '@/graphql'
 import AppRoute from '@/constants/AppRoute'
@@ -30,12 +31,8 @@ const Blogs: FC<Props> = ({ blog, data }) => {
 
 export default Blogs
 
-export const getStaticProps: GetStaticProps<Props, Params> = async ({
-  params,
-}) => {
-  const blogQuery = await apolloSsrClient.query<
-    GraphqlResponse<'blogs', BlogModel>
-  >({
+export const getStaticProps: GetStaticProps<Props, Params> = async ({ params }) => {
+  const blogQuery = await apolloSsrClient.query<GraphqlResponse<'blogs', BlogModel>>({
     query: blogDocument.FindBlog,
     variables: {
       slug: params!.slug,
@@ -57,9 +54,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
 }
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
-  const blogsQuery = await apolloSsrClient.query<
-    GraphqlResponse<'blogs', BlogModel>
-  >({
+  const blogsQuery = await apolloSsrClient.query<GraphqlResponse<'blogs', BlogModel>>({
     query: blogDocument.GetAllBlogs,
   })
 

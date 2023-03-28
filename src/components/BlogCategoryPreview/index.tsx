@@ -1,13 +1,5 @@
 import Link from 'next/link'
-import {
-  FC,
-  memo,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react'
+import { FC, memo, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import classNames from 'classnames'
 import Image from 'next/image'
 
@@ -91,10 +83,7 @@ const Category: FC<Props> = ({ attributes, isFirst, isEven }) => {
             {attributes.title}
           </p>
           <Image
-            src={
-              process.env.NEXT_PUBLIC_STRAPI_URL +
-              attributes.icon.data.attributes.url
-            }
+            src={process.env.NEXT_PUBLIC_STRAPI_URL + attributes.icon.data.attributes.url}
             alt={attributes.title}
             priority={false}
             quality={100}

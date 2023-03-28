@@ -21,12 +21,15 @@ const TextInput = forwardRef<HTMLInputElement, Props>(
       password = false,
       onChange,
       invalid = false,
-      invalidText
+      invalidText,
     },
     ref,
   ) => {
     return (
-      <label htmlFor={name} className="relative">
+      <label
+        htmlFor={name}
+        className="relative"
+      >
         <input
           type={password ? 'password' : 'text'}
           ref={ref}

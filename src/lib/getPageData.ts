@@ -23,11 +23,8 @@ const getPageData = async <T>(slug: string): Promise<PageDataModel<T>> => {
   })
 
   return {
-    props: (pageDataQuery.data.pages.data.at(0)!.attributes.props.at(0) ||
-      null)!, // || null in case T == null (props not expected)
-    seo:
-      pageDataQuery.data.pages.data.at(0)?.attributes.seo.data.attributes ||
-      null,
+    props: (pageDataQuery.data.pages.data.at(0)!.attributes.props.at(0) || null)!, // || null in case T == null (props not expected)
+    seo: pageDataQuery.data.pages.data.at(0)?.attributes.seo.data.attributes || null,
     socialMedias: pageDataQuery.data.socialMedias,
   }
 }

@@ -10,8 +10,11 @@ module.exports = {
   singleQuote: true,
   jsxSingleQuote: false,
   bracketSpacing: true,
-  printWidth: 80,
+  printWidth: 90,
   proseWrap: 'preserve',
-  embeddedLanguageFormatting: "auto",
-  singleAttributePerLine: true
-};
+  embeddedLanguageFormatting: 'auto',
+  singleAttributePerLine: true,
+  quoteProps: "preserve",
+  requirePragma: false,
+  insertPragma: false,
+}

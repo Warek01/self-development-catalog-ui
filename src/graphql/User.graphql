@@ -1,13 +1,67 @@
+#import "./Blog.graphql"
+#import "./UsefulResource.graphql"
+
 fragment userFields on UsersPermissionsMe {
-  username
   id
+  email
+  blocked
+  confirmed
+  username
+  role {
+    id
+    description
+    name
+    type
+  }
+}
+
+fragment authenticatedUserFields on UsersPermissionsUser {
+  username
   confirmed
   blocked
   email
+  createdAt
+  updatedAt
+  role {
+    data {
+      attributes {
+        type
+        name
+        description
+      }
+    }
+  }
+  usefulResources(pagination: { limit: 100 }) {
+    data {
+      id
+      attributes {
+        ...usefulResourcesFields
+      }
+    }
+  }
+  blogs(pagination: { limit: 100 }) {
+    data {
+      id
+      attributes {
+        ...blogFields
+      }
+    }
+  }
+}
+
+query GetUserData($id: ID!) {
+  usersPermissionsUser(id: $id) {
+    data {
+      id
+      attributes {
+        ...authenticatedUserFields
+      }
+    }
+  }
 }
 
 mutation Login($ident: String!, $pass: String!) {
-  login(input: {identifier: $ident, password: $pass, provider: "local"}) {
+  login(input: { identifier: $ident, password: $pass, provider: "local" }) {
     jwt
     user {
       ...userFields
@@ -16,7 +70,7 @@ mutation Login($ident: String!, $pass: String!) {
 }
 
 mutation Register($email: String!, $username: String!, $pass: String!) {
-  register(input: {email: $email, username: $username, password: $pass}) {
+  register(input: { email: $email, username: $username, password: $pass }) {
     jwt
     user {
       ...userFields

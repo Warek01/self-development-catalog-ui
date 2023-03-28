@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { GetStaticProps } from 'next'
 
+import type { PageDataModel } from '@/types/models'
 import { Seo } from '@/components'
 import getPageData from '@/lib/getPageData'
 import AppRoute from '@/constants/AppRoute'

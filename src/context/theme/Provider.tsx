@@ -5,10 +5,7 @@ import type { ThemeContextProps } from './interface'
 import themeContext from './context'
 
 const ThemeContextProvider: FC<PropsWithChildren> = ({ children }) => {
-  const [isDarkTheme, setIsDarkTheme] = useLocalStorage<boolean>(
-    'is-dark-theme',
-    false,
-  )
+  const [isDarkTheme, setIsDarkTheme] = useLocalStorage<boolean>('is-dark-theme', false)
 
   const contextValue = useMemo<ThemeContextProps>(
     () => ({
@@ -26,11 +23,7 @@ const ThemeContextProvider: FC<PropsWithChildren> = ({ children }) => {
       : document.body.classList.remove('dark')
   }, [isDarkTheme])
 
-  return (
-    <themeContext.Provider value={contextValue}>
-      {children}
-    </themeContext.Provider>
-  )
+  return <themeContext.Provider value={contextValue}>{children}</themeContext.Provider>
 }
 
 export default ThemeContextProvider

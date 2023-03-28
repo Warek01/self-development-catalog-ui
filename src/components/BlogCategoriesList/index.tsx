@@ -9,9 +9,7 @@ import { BlogCategory } from '@/components'
 import AppRoute from '@/constants/AppRoute'
 
 interface Props {
-  categories:
-    | StrapiFindResponse<BlogCategoryModel>
-    | StrapiEntity<BlogCategoryModel>
+  categories: StrapiFindResponse<BlogCategoryModel> | StrapiEntity<BlogCategoryModel>
 }
 
 const CategoriesList: FC<Props> = ({ categories }) => {

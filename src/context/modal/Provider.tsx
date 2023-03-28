@@ -34,9 +34,7 @@ const ModalContextProvider: FC<PropsWithChildren> = ({ children }) => {
   return (
     <>
       {modalElement}
-      <modalContext.Provider value={contextValue}>
-        {children}
-      </modalContext.Provider>
+      <modalContext.Provider value={contextValue}>{children}</modalContext.Provider>
     </>
   )
 }

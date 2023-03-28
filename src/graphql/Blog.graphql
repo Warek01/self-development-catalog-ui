@@ -38,3 +38,37 @@ query GetAllBlogs {
     }
   }
 }
+
+mutation CreateBlog(
+  $userId: ID!
+  $categories: [ID!]!
+  $content: String!
+  $slug: String!
+  $title: String!
+  $date: Date!
+  $links: [ComponentUtilsLinkInput]
+) {
+  createBlog(
+    data: {
+      user: $userId
+      blog_categories: $categories
+      content: $content
+      slug: $slug
+      title: $title
+      date: $date
+      links: $links
+    }
+  ) {
+    data {
+      id
+    }
+  }
+}
+
+mutation UpdateBlog($id: ID!, $content: String) {
+  updateBlog(id: $id, data: { content: $content }) {
+    data {
+      id
+    }
+  }
+}

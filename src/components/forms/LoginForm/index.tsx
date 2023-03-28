@@ -1,8 +1,8 @@
-import { createRef, FC, useCallback, useMemo, useState } from 'react'
+import { createRef, FC, KeyboardEvent, memo, useCallback, useMemo, useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 
-import { useAuth } from '@/lib/hooks'
+import { useAuth, useGlobalListener } from '@/lib/hooks'
 import AppRoute from '@/constants/AppRoute'
 import { TextInput } from '@/components/forms'
 import isValidEmail from '@/lib/isValidEmail'
@@ -52,11 +52,26 @@ const LoginForm: FC = () => {
     }
   }, [auth])
 
+  useGlobalListener('keydown', (event: KeyboardEvent) => {
+    if (
+      event.key === 'Enter' &&
+      (document.activeElement === loginRefs.email.current ||
+        document.activeElement === loginRefs.password.current)
+    ) {
+      handleLogin()
+    }
+  })
+
   return (
-    <main className="mx-auto max-w-3xl flex flex-col gap-6 items-center my-auto
-     dark:bg-dark-white/5 rounded-xl p-12 shadow-xl">
+    <main
+      className="mx-auto max-w-3xl flex flex-col gap-6 items-center my-auto
+     dark:bg-dark-white/5 rounded-xl p-12 shadow-xl"
+    >
       <div className="p-4 bg-black/5 dark:bg-dark-white/5 rounded-full mb-6 shadow-xl">
-        <icons.User width={48} height={48} />
+        <icons.User
+          width={48}
+          height={48}
+        />
       </div>
       <TextInput
         name="Email"
@@ -90,4 +105,4 @@ const LoginForm: FC = () => {
   )
 }
 
-export default LoginForm
+export default memo(LoginForm)

@@ -11,15 +11,13 @@ export interface Props {
 
 const Footer: FC<Props> = ({ socialMedias }) => {
   return (
-    <footer className="flex justify-between mt-auto border-t border-black/20 py-4">
+    <footer className="flex justify-between border-t border-black/20 dark:border-dark-white/20 py-4">
       <nav className="flex-col gap-2 hidden md:flex">
         Follow me
         <ul className="flex gap-6">
           {socialMedias.data?.map((link, index) => {
             const Icon =
-              socialMediaIconsMap[
-                link.attributes.platform as SocialMediaPlatform
-              ]
+              socialMediaIconsMap[link.attributes.platform as SocialMediaPlatform]
 
             return (
               <li key={index}>

@@ -19,11 +19,7 @@ const ComposedProvider: FC<PropsWithChildren> = ({ children }) => {
         ? providers[0]
         : { Component: providers[0], props: {} }
 
-      return (
-        <Component {...props}>
-          {composedProviders(providers.slice(1))}
-        </Component>
-      )
+      return <Component {...props}>{composedProviders(providers.slice(1))}</Component>
     }
   }
 

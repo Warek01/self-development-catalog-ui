@@ -27,9 +27,7 @@ const AboutProject: FC<AboutProjectProps> = ({
               className="flex items-center justify-center"
             >
               <Image
-                src={
-                  process.env.NEXT_PUBLIC_STRAPI_URL + image.data.attributes.url
-                }
+                src={process.env.NEXT_PUBLIC_STRAPI_URL + image.data.attributes.url}
                 alt={title}
                 quality={100}
                 priority={false}

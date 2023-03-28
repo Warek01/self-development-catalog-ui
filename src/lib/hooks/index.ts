@@ -4,6 +4,7 @@ import useRenderState from './useRenderState'
 import useBreakpointCallback from './useBreakpointCallback'
 import useAuth from './useAuth'
 import useTheme from './useTheme'
+import useGlobalListener from './useGlobalListener'
 
 export {
   useRenderState,
@@ -12,4 +13,5 @@ export {
   useAbortController,
   useAuth,
   useTheme,
+  useGlobalListener,
 }

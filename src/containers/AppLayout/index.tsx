@@ -20,10 +20,7 @@ const epilogue = Epilogue({
   adjustFontFallback: true,
 })
 
-const AppLayout: FC<PropsWithChildren<AppLayoutProps>> = ({
-  children,
-  socialMedias,
-}) => {
+const AppLayout: FC<PropsWithChildren<AppLayoutProps>> = ({ children, socialMedias }) => {
   const theme = useTheme()
 
   return (

@@ -11,11 +11,7 @@ interface Props {
   onFavoriteClick: () => void
 }
 
-const UsefulResource: FC<Props> = ({
-  attributes,
-  onFavoriteClick,
-  isFavorite,
-}) => {
+const UsefulResource: FC<Props> = ({ attributes, onFavoriteClick, isFavorite }) => {
   const modal = useContext(modalContext)
 
   return (

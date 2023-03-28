@@ -1,8 +1,8 @@
-import { createRef, FC, memo, useCallback, useMemo, useState } from 'react'
+import { createRef, FC, KeyboardEvent, memo, useCallback, useMemo, useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 
-import { useAuth } from '@/lib/hooks'
+import { useAuth, useGlobalListener } from '@/lib/hooks'
 import AppRoute from '@/constants/AppRoute'
 import { TextInput } from '@/components/forms'
 import isValidEmail from '@/lib/isValidEmail'
@@ -67,6 +67,18 @@ const RegisterForm: FC = () => {
     }
   }, [auth])
 
+  useGlobalListener('keydown', (event: KeyboardEvent) => {
+    if (
+      event.key === 'Enter' &&
+      (document.activeElement === loginRefs.email.current ||
+        document.activeElement === loginRefs.username.current ||
+        document.activeElement === loginRefs.passwordConfirm.current ||
+        document.activeElement === loginRefs.password.current)
+    ) {
+      handleRegistration()
+    }
+  })
+
   return (
     <main
       className="mx-auto max-w-3xl flex flex-col gap-6 items-center my-auto
@@ -116,9 +128,7 @@ const RegisterForm: FC = () => {
         autoComplete
         password
         ref={loginRefs.passwordConfirm}
-        onChange={() =>
-          setValidInputs((val) => ({ ...val, passwordConfirm: true }))
-        }
+        onChange={() => setValidInputs((val) => ({ ...val, passwordConfirm: true }))}
         invalid={!validInputs.passwordConfirm}
         invalidText="Passwords do not match."
       />

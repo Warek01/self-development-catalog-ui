@@ -16,9 +16,7 @@ const SideMenuContextProvider: FC<PropsWithChildren> = ({ children }) => {
   )
 
   return (
-    <sideMenuContext.Provider value={contextValue}>
-      {children}
-    </sideMenuContext.Provider>
+    <sideMenuContext.Provider value={contextValue}>{children}</sideMenuContext.Provider>
   )
 }
 

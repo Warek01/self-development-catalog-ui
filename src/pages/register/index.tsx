@@ -2,6 +2,7 @@ import { FC, useEffect } from 'react'
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 
+import type { PageDataModel } from '@/types/models'
 import { AppLayout } from '@/containers'
 import getPageData from '@/lib/getPageData'
 import AppRoute from '@/constants/AppRoute'

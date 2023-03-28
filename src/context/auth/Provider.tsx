@@ -1,4 +1,4 @@
-import { FC, useMemo, PropsWithChildren, useCallback } from 'react'
+import { FC, useMemo, PropsWithChildren, useCallback, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { ApolloError } from '@apollo/client'
 import { userDocument } from '@/graphql'
@@ -6,16 +6,16 @@ import { userDocument } from '@/graphql'
 import { useLocalStorage } from '@/lib/hooks'
 import { apolloClient } from '@/graphql/client'
 import ApolloErrorMessage from '@/constants/ApolloErrorMessage'
-import type {
-  AuthContextProps,
-  LoginResponse,
-  RegisterResponse,
-  UserData,
-} from './interface'
+import type { LoginResponse, RegisterResponse, UserData } from './interface'
 import authContext from './context'
 
 const AuthContextProvider: FC<PropsWithChildren> = ({ children }) => {
   const [userData, setUserData] = useLocalStorage<UserData | null>('user', null)
+  const [userLoaded, setUserLoaded] = useState<boolean>(false)
+
+  useEffect(() => {
+    setUserLoaded(true)
+  }, [userData])
 
   const handleLogin = useCallback(
     async (ident: string, pass: string): Promise<boolean> => {
@@ -31,20 +31,17 @@ const AuthContextProvider: FC<PropsWithChildren> = ({ children }) => {
           },
         })
 
-        const userData = loginReq.data?.login
+        const loginData = loginReq.data?.login
 
-        if (!userData) {
+        if (!loginData) {
           throw new Error('User data is null')
         }
 
-        setUserData(userData)
+        setUserData(loginData)
 
         return true
       } catch (err) {
-        if (
-          err instanceof ApolloError &&
-          err.message === ApolloErrorMessage.Login
-        ) {
+        if (err instanceof ApolloError && err.message === ApolloErrorMessage.Login) {
           toast(ApolloErrorMessage.Login)
         } else {
           toast('Something went wrong.', { type: 'error' })
@@ -83,13 +80,13 @@ const AuthContextProvider: FC<PropsWithChildren> = ({ children }) => {
           },
         })
 
-        const userData = registerReq.data?.register
+        const regData = registerReq.data?.register
 
-        if (!userData) {
+        if (!regData) {
           throw new Error('User data is null')
         }
 
-        setUserData(userData)
+        setUserData(regData)
         return true
       } catch (err) {
         if (
@@ -108,19 +105,15 @@ const AuthContextProvider: FC<PropsWithChildren> = ({ children }) => {
     [setUserData],
   )
 
-  const contextValue = useMemo<AuthContextProps>(
-    () => ({
-      userData,
-      register: handleRegister,
-      logout: handleLogout,
-      login: handleLogin,
-    }),
-    [userData, setUserData],
-  )
+  const contextValue = {
+    userData,
+    userLoaded,
+    register: handleRegister,
+    logout: handleLogout,
+    login: handleLogin,
+  }
 
-  return (
-    <authContext.Provider value={contextValue}>{children}</authContext.Provider>
-  )
+  return <authContext.Provider value={contextValue}>{children}</authContext.Provider>
 }
 
 export default AuthContextProvider

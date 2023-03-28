@@ -11,9 +11,7 @@ import { FavoriteResourcesList, UsefulResourcesList } from '@/components'
 import type { ResourcesContextProps, UsefulResourcesProps } from './interface'
 import usefulResourcesContext from './usefulResourcesContext'
 
-const UsefulResources: FC<UsefulResourcesProps> = ({
-  totalUsefulResources,
-}) => {
+const UsefulResources: FC<UsefulResourcesProps> = ({ totalUsefulResources }) => {
   const signal = useAbortController()
   const [favResourcesIds, setFavResourcesIds] = useLocalStorage<number[]>(
     'favorite-resources',
@@ -58,11 +56,7 @@ const UsefulResources: FC<UsefulResourcesProps> = ({
   const handleLoadMoreResources = useCallback(() => {
     const length = usefulResourcesQuery.data?.usefulResources.data.length
 
-    if (
-      typeof length !== 'number' ||
-      usefulResourcesQuery.loading ||
-      isLoading
-    ) {
+    if (typeof length !== 'number' || usefulResourcesQuery.loading || isLoading) {
       return
     }
 
@@ -89,16 +83,13 @@ const UsefulResources: FC<UsefulResourcesProps> = ({
     })
   }, [usefulResourcesQuery, isLoading, fetchLimit])
 
-  const ResourcesListWithInfiniteScroll = withInfiniteScroll(
-    UsefulResourcesList,
-    {
-      threshold: 0.75,
-      action: handleLoadMoreResources,
-      hasMore:
-        (usefulResourcesQuery.data?.usefulResources.data.length ?? 0) <
-        totalUsefulResources,
-    },
-  )
+  const ResourcesListWithInfiniteScroll = withInfiniteScroll(UsefulResourcesList, {
+    threshold: 0.75,
+    action: handleLoadMoreResources,
+    hasMore:
+      (usefulResourcesQuery.data?.usefulResources.data.length ?? 0) <
+      totalUsefulResources,
+  })
 
   const favoriteUsefulResourcesQuery = useQuery<
     GraphqlResponse<'usefulResources', UsefulResourceModel>,
@@ -156,9 +147,7 @@ const UsefulResources: FC<UsefulResourcesProps> = ({
           <FavoriteResourcesList
             resourcesLength={favResourcesIds.length}
             onFavoriteClick={handleRemoveFromFavorites}
-            resources={
-              favoriteUsefulResourcesQuery.data?.usefulResources.data ?? []
-            }
+            resources={favoriteUsefulResourcesQuery.data?.usefulResources.data ?? []}
           />
           <ResourcesListWithInfiniteScroll
             resources={usefulResourcesQuery.data?.usefulResources.data ?? []}

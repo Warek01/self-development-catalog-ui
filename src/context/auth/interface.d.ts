@@ -1,5 +1,6 @@
 export interface AuthContextProps {
   userData: UserData | null
+  userLoaded: boolean
 
   login: (ident: string, pass: string) => Promise<boolean>
   logout: () => Promise<boolean>
@@ -8,7 +9,7 @@ export interface AuthContextProps {
 
 export interface UserData {
   jwt: string
-  user: UserModel
+  user: UserLoginModel
 }
 
 export interface LoginResponse {

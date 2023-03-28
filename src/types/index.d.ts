@@ -1,5 +1,5 @@
 import type { FC, SVGProps } from 'react'
-import type { StrapiFindOneResponse, StrapiFindResponse } from '@/types/strapi'
+import type { StrapiFindResponse } from '@/types/models'
 
 // Globally available types
 declare global {

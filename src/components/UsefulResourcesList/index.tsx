@@ -12,9 +12,7 @@ interface Props extends WithInfiniteScrollProps {
 }
 
 const ResourcesList: FC<Props> = ({ resources, lastElementRef, isLoading }) => {
-  const { favResourcesIds, setFavResourcesIds } = useContext(
-    usefulResourcesContext,
-  )
+  const { favResourcesIds, setFavResourcesIds } = useContext(usefulResourcesContext)
 
   const resourcesElements: JSX.Element[] = resources
     .slice(0, -1)
@@ -25,9 +23,7 @@ const ResourcesList: FC<Props> = ({ resources, lastElementRef, isLoading }) => {
           isFavorite={favResourcesIds.includes(id)}
           onFavoriteClick={() =>
             setFavResourcesIds((list) =>
-              list.includes(id)
-                ? list.filter((favId) => favId !== id)
-                : [...list, id],
+              list.includes(id) ? list.filter((favId) => favId !== id) : [...list, id],
             )
           }
         />

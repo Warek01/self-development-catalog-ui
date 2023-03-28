@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { GetStaticProps } from 'next'
 
-import type { StrapiFindResponse } from 'types/strapi'
+import type { BlogCategoryModel, PageDataModel, StrapiFindResponse } from '@/types/models'
 import { CategoriesList, Seo } from '@/components'
 import { blogCategoryDocument } from '@/graphql'
 import getPageData from '@/lib/getPageData'

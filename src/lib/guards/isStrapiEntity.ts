@@ -1,4 +1,4 @@
-import type { StrapiEntity } from '@/types/strapi'
+import type { StrapiEntity } from '@/types/models'
 
 const isStrapiEntity = <T>(obj: unknown): obj is StrapiEntity<T> => {
   return (

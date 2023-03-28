@@ -6,8 +6,7 @@ const Seo: FC<Partial<PageSeoModel>> = (props) => {
     return null
   }
 
-  const { title, image, description, robots, preventIndexing, link } =
-    props.data
+  const { title, image, description, robots, preventIndexing, link } = props.data
 
   return (
     <Head>
@@ -60,31 +59,19 @@ const Seo: FC<Partial<PageSeoModel>> = (props) => {
         <>
           <meta
             name="twitter:image"
-            content={
-              process.env.NEXT_PUBLIC_STRAPI_URL +
-              image.media.data.attributes.url
-            }
+            content={process.env.NEXT_PUBLIC_STRAPI_URL + image.media.data.attributes.url}
           />
           <meta
             property="og:image"
-            content={
-              process.env.NEXT_PUBLIC_STRAPI_URL +
-              image.media.data.attributes.url
-            }
+            content={process.env.NEXT_PUBLIC_STRAPI_URL + image.media.data.attributes.url}
           />
           <meta
             name="image"
-            content={
-              process.env.NEXT_PUBLIC_STRAPI_URL +
-              image.media.data.attributes.url
-            }
+            content={process.env.NEXT_PUBLIC_STRAPI_URL + image.media.data.attributes.url}
           />
           <meta
             property="og:image:secure_url"
-            content={
-              process.env.NEXT_PUBLIC_STRAPI_URL +
-              image.media.data.attributes.url
-            }
+            content={process.env.NEXT_PUBLIC_STRAPI_URL + image.media.data.attributes.url}
           />
         </>
       ) : null}

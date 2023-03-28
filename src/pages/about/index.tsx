@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { GetStaticProps } from 'next'
 
+import type { PageDataModel } from '@/types/models'
 import type { AboutProjectProps } from '@/components/AboutProject/interface'
 import { AboutProject, Seo } from '@/components'
 import getPageData from '@/lib/getPageData'

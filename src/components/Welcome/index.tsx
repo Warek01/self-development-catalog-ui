@@ -32,10 +32,7 @@ const Welcome: FC<Props> = ({ welcomeTitle, welcomeImage }) => {
       </div>
       <div className="flex items-center absolute right-12">
         <Image
-          src={
-            process.env.NEXT_PUBLIC_STRAPI_URL +
-            welcomeImage.data.attributes.url
-          }
+          src={process.env.NEXT_PUBLIC_STRAPI_URL + welcomeImage.data.attributes.url}
           alt="Shapes"
           width={200}
           height={200}

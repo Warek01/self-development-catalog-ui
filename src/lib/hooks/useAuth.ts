@@ -11,11 +11,7 @@ const useAuth = (guarded: boolean = false): AuthContextProps => {
   const auth = useContext(authContext)
 
   useEffect(() => {
-    if (!router.isReady || !guarded) {
-      return
-    }
-
-    if (auth.userData === null) {
+    if (router.isReady && guarded && auth.userLoaded && !auth.userData) {
       const redirect = async () => {
         try {
           await router.push(AppRoute.Login)
@@ -27,7 +23,7 @@ const useAuth = (guarded: boolean = false): AuthContextProps => {
 
       redirect()
     }
-  }, [router.isReady, auth])
+  }, [auth.userData, auth.userLoaded])
 
   return auth
 }

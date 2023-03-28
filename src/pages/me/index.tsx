@@ -1,8 +1,8 @@
-import { FC, useCallback } from 'react'
+import { FC } from 'react'
 import { GetStaticProps } from 'next'
-import { useRouter } from 'next/router'
 
-import { Seo } from '@/components'
+import type { PageDataModel } from '@/types/models'
+import { Seo, UserInfo } from '@/components'
 import { AppLayout } from '@/containers'
 import getPageData from '@/lib/getPageData'
 import AppRoute from '@/constants/AppRoute'
@@ -13,23 +13,13 @@ interface Props {
 }
 
 const MePage: FC<Props> = ({ data }) => {
-  const auth = useAuth(true)
-  const router = useRouter()
-
-  const handleLogout = useCallback(async () => {
-    const logoutResult = await auth.logout()
-
-    if (logoutResult) {
-      await router.push(AppRoute.Login)
-    }
-  }, [auth.logout])
+  useAuth(true)
 
   return (
     <>
       <Seo {...data.seo} />
       <AppLayout socialMedias={data.socialMedias}>
-        {auth.userData?.user.username || 'Nothing to show'}
-        <button onClick={handleLogout}>Log Out</button>
+        <UserInfo />
       </AppLayout>
     </>
   )

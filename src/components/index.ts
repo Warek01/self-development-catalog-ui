@@ -17,6 +17,7 @@ import UsefulResource from './UsefulResource'
 import UsefulResourcesList from './UsefulResourcesList'
 import BlogCategory from './BlogCategory'
 import BlogCategoryPreview from './BlogCategoryPreview'
+import UserInfo from './UserInfo'
 
 export {
   Header,
@@ -38,4 +39,5 @@ export {
   UsefulResourcesList,
   BlogCategory,
   BlogCategoryPreview,
+  UserInfo,
 }

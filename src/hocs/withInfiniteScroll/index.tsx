@@ -7,9 +7,7 @@ import type {
   WithInfiniteScrollReturnType,
 } from './interface'
 
-const withInfiniteScroll = <
-  T extends WithInfiniteScrollProps = WithInfiniteScrollProps,
->(
+const withInfiniteScroll = <T extends WithInfiniteScrollProps = WithInfiniteScrollProps>(
   WrappedComponent: ComponentType<T>,
   options: WithInfiniteScrollOptions = {},
 ): WithInfiniteScrollReturnType<T> => {
@@ -20,9 +18,7 @@ const withInfiniteScroll = <
     [WrappedComponent],
   )
 
-  const ComponentWithInfiniteScroll: FC<
-    Omit<T, keyof WithInfiniteScrollProps>
-  > = useMemo(
+  const ComponentWithInfiniteScroll: FC<Omit<T, keyof WithInfiniteScrollProps>> = useMemo(
     () => (props) => {
       const { threshold = 0.5, action = () => null, hasMore = true } = options
 

@@ -36,5 +36,4 @@ next-env.d.ts
 .vscode
 .idea
 .env
-.env.local
-.query.local
+.local
