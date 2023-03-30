@@ -1,4 +1,4 @@
-import { StrapiMultimediaModel } from '@/types/strapi'
+import type { StrapiMultimediaModel } from '@/types/models'
 
 export interface AboutProjectProps {
   projectTitle: string

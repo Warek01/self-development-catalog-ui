@@ -30,7 +30,7 @@ export default MePage
 export const getStaticProps: GetStaticProps<Props> = async () => {
   return {
     props: {
-      data: await getPageData<null>(AppRoute.Resources),
+      data: await getPageData<null>(AppRoute.Me),
     },
   }
 }

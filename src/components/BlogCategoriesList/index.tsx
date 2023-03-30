@@ -2,7 +2,7 @@ import { FC, memo } from 'react'
 import classNames from 'classnames'
 import Link from 'next/link'
 
-import type { StrapiEntity, StrapiFindResponse } from '@/types/strapi'
+import type { BlogCategoryModel, StrapiEntity, StrapiFindResponse } from '@/types/models'
 import { useRenderState } from '@/lib/hooks'
 import { isStrapiEntity } from '@/lib/guards'
 import { BlogCategory } from '@/components'

@@ -1,6 +1,6 @@
 import { FC, memo } from 'react'
 
-import type { StrapiFindResponse } from 'types/strapi'
+import type { BlogCategoryModel, StrapiFindResponse } from '@/types/models'
 import Category from '../BlogCategoryPreview'
 
 interface Props {

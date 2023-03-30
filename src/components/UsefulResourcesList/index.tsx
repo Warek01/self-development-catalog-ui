@@ -1,9 +1,9 @@
 import { FC, memo, useContext } from 'react'
 
-import type { StrapiEntity } from '@/types/strapi'
+import type { StrapiEntity, UsefulResourceModel } from '@/types/models'
 import type { WithInfiniteScrollProps } from '@/hocs/withInfiniteScroll/interface'
 import { Spinner } from '@/components'
-import usefulResourcesContext from '../../containers/UsefulResources/usefulResourcesContext'
+import usefulResourcesContext from '@/containers/UsefulResources/usefulResourcesContext'
 import Resource from '../UsefulResource'
 
 interface Props extends WithInfiniteScrollProps {

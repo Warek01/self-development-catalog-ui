@@ -39,7 +39,7 @@ export default RegisterPage
 export const getStaticProps: GetStaticProps<Props> = async () => {
   return {
     props: {
-      data: await getPageData<null>(AppRoute.Resources),
+      data: await getPageData<null>(AppRoute.Register),
     },
     revalidate: Number(process.env.REVALIDATE_TIMEOUT),
   }

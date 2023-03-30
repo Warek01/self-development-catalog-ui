@@ -7,6 +7,7 @@ enum AppRoute {
   Login = '/login',
   Register = '/register',
   Me = '/me',
+  WriteBlog = '/me/write-blog',
   ANY = '*',
 }
 

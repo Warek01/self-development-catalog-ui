@@ -3,6 +3,7 @@ import { FC, memo, useContext, useEffect, useMemo, useRef, useState } from 'reac
 import classNames from 'classnames'
 import Image from 'next/image'
 
+import type { BlogCategoryModel } from '@/types/models'
 import AppRoute from '@/constants/AppRoute'
 import { mobileViewContext } from '@/context'
 

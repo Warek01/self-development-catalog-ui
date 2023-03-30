@@ -1,6 +1,8 @@
 import { FC, memo } from 'react'
 import Link from 'next/link'
 
+import type { BlogModel } from '@/types/models'
+
 const Aside: FC<BlogModel> = ({ title, links, blog_categories, date }) => {
   return (
     <aside className="flex flex-col text-lg items-start justify-self-stretch pl-12 flex-1 lg:border-l lg:border-solid lg:border-black/10">

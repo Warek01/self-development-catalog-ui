@@ -13,6 +13,7 @@ import getPageData from '@/lib/getPageData'
 import AppRoute from '@/constants/AppRoute'
 import { AboutPreview, FeatureSelect, CategorySelect, Seo, Welcome } from '@/components'
 import { AppLayout } from '@/containers'
+import { useAuth } from '@/lib/hooks'
 
 interface HomePageProps {
   welcomeText: string

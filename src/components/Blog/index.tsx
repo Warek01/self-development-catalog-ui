@@ -2,6 +2,7 @@ import { FC, memo, useEffect } from 'react'
 import snarkdown from 'snarkdown'
 import highlight from 'highlight.js'
 
+import type { BlogModel } from '@/types/models'
 import preprocessImgSrc from '@/lib/preprocessImgSrc'
 import Aside from '@/components/Blog/Aside'
 import style from './style.module.sass'

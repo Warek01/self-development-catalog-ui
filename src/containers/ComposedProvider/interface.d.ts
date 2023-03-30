@@ -5,4 +5,4 @@ export type ProviderObject = {
   props: any
 }
 
-export type ComposedProvider = FC<any> | ProviderObject
+export type ComposedProviderType = FC<any> | ProviderObject

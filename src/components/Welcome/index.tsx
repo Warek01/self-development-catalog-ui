@@ -2,8 +2,8 @@ import { FC, memo } from 'react'
 import Image from 'next/image'
 import classNames from 'classnames'
 
+import type { StrapiMultimediaModel } from '@/types/models'
 import { useRenderState } from '@/lib/hooks'
-import type { StrapiMultimediaModel } from '@/types/strapi'
 import style from './style.module.sass'
 
 interface Props {
@@ -21,7 +21,7 @@ const Welcome: FC<Props> = ({ welcomeTitle, welcomeImage }) => {
           className={classNames(
             style.transition,
             'w-fit text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold relative whitespace-pre-line',
-            'transform transform-gpu left-0 md:hover:left-6 bottom-0 md:hover:bottom-4 z-10',
+            'transform-gpu left-0 md:hover:left-6 bottom-0 md:hover:bottom-4 z-10',
             {
               'opacity-0 -translate-x-full': !isRendered,
             },

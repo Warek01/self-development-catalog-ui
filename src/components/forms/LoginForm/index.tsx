@@ -65,7 +65,7 @@ const LoginForm: FC = () => {
   return (
     <main
       className="mx-auto max-w-3xl flex flex-col gap-6 items-center my-auto
-     dark:bg-dark-white/5 rounded-xl p-12 shadow-xl"
+      dark:bg-dark-white/5 rounded-xl p-12 shadow-xl"
     >
       <div className="p-4 bg-black/5 dark:bg-dark-white/5 rounded-full mb-6 shadow-xl">
         <icons.User
@@ -96,7 +96,7 @@ const LoginForm: FC = () => {
       />
       <button
         onClick={handleLogin}
-        className="py-2 px-4 rounded-md mt-8 shadow-lg hover:bg-transparent hover:shadow-xl hover:bg-black/10"
+        className="py-2 px-4 rounded-md mt-8 shadow-lg hover:shadow-xl hover:bg-black/10"
       >
         Log in
       </button>

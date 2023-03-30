@@ -1,6 +1,12 @@
 import { pageDataDocument } from '@/graphql'
-import type { StrapiFindOneResponse, StrapiFindResponse } from '@/types/strapi'
 import { apolloSsrClient } from '@/graphql/client'
+import type {
+  PageDataModel,
+  PageSeoModel,
+  SocialMediaModel,
+  StrapiFindOneResponse,
+  StrapiFindResponse,
+} from '@/types/models'
 
 interface PageDataQueryResponse<T> {
   pages: {
@@ -23,8 +29,8 @@ const getPageData = async <T>(slug: string): Promise<PageDataModel<T>> => {
   })
 
   return {
-    props: (pageDataQuery.data.pages.data.at(0)!.attributes.props.at(0) || null)!, // || null in case T == null (props not expected)
-    seo: pageDataQuery.data.pages.data.at(0)?.attributes.seo.data.attributes || null,
+    props: (pageDataQuery.data?.pages?.data?.at(0)?.attributes.props.at(0) || null)!, // || null in case T == null (props not expected)
+    seo: pageDataQuery.data?.pages?.data?.at(0)?.attributes.seo.data.attributes || null,
     socialMedias: pageDataQuery.data.socialMedias,
   }
 }

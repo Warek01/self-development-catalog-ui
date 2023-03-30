@@ -1,6 +1,8 @@
 import { FC, memo } from 'react'
 import Head from 'next/head'
 
+import type { PageSeoModel } from '@/types/models'
+
 const Seo: FC<Partial<PageSeoModel>> = (props) => {
   if (!props?.data) {
     return null

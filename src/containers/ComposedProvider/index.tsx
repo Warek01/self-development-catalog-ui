@@ -2,10 +2,10 @@ import { FC, PropsWithChildren, ReactNode } from 'react'
 
 import appContextProviders from '@/constants/appContextProviders'
 import { isProviderObject } from '@/lib/guards'
-import type { ComposedProvider } from './interface'
+import type { ComposedProviderType } from './interface'
 
 const ComposedProvider: FC<PropsWithChildren> = ({ children }) => {
-  const composedProviders = (providers: ComposedProvider[]): ReactNode => {
+  const composedProviders = (providers: ComposedProviderType[]): ReactNode => {
     if (providers.length === 0) {
       return children
     } else if (providers.length === 1) {

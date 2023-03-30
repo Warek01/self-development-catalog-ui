@@ -1,6 +1,7 @@
 import { FC, memo, useContext } from 'react'
 import Link from 'next/link'
 
+import type { UsefulResourceModel } from '@/types/models'
 import icons from '@/icons'
 import { CustomTooltip } from '@/containers'
 import { modalContext } from '@/context'

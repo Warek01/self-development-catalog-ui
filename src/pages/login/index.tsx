@@ -39,7 +39,7 @@ export default LoginPage
 export const getStaticProps: GetStaticProps<Props> = async () => {
   return {
     props: {
-      data: await getPageData<null>(AppRoute.Resources),
+      data: await getPageData<null>(AppRoute.Login),
     },
     revalidate: Number(process.env.REVALIDATE_TIMEOUT),
   }

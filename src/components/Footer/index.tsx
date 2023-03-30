@@ -1,6 +1,6 @@
 import { FC, memo } from 'react'
 
-import type { StrapiFindResponse } from '@/types/strapi'
+import type { SocialMediaModel, StrapiFindResponse } from '@/types/models'
 import { LinkIcon } from '@/components/index'
 import socialMediaIconsMap from '@/constants/socialMediaIconsMap'
 import icons from '@/icons'

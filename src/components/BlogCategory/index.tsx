@@ -2,6 +2,7 @@ import { FC, memo, useMemo } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
+import type { BlogCategoryModel } from '@/types/models'
 import determineContrastTextColor from '@/lib/determineContrastColor'
 import AppRoute from '@/constants/AppRoute'
 

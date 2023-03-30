@@ -3,6 +3,8 @@
 @import 'tailwindcss/utilities.css'
 @import 'tailwindcss/variants.css'
 
+@import  'medium-editor'
+
 @layer base
   *
     @apply duration-100 text-black dark:text-dark-white
@@ -24,7 +26,7 @@
   input:-webkit-autofill:hover,
   input:-webkit-autofill:focus,
   input:-webkit-autofill:active
-      transition: background-color 999999s linear
+    transition: background-color 999999s linear
 
 @layer components
   .default-headings
@@ -45,3 +47,21 @@
 
     h6
       font-size: 0.67em
+
+  .default-lists
+    list-style-type: disc
+    list-style-position: inside
+
+    ol
+      list-style-type: decimal
+      list-style-position: inside
+
+    ul, ol ul
+      list-style-type: circle
+      list-style-position: inside
+      margin-left: 15px
+
+    ol ol, ul ol
+      list-style-type: lower-latin
+      list-style-position: inside
+      margin-left: 15px

@@ -6,8 +6,8 @@ import 'react-toastify/dist/ReactToastify.css'
 
 import toastDefaultProps from '@/constants/toastDefaultProps'
 import { Footer, Header, SideMenu } from '@/components'
-import type { AppLayoutProps } from './interface'
 import { useTheme } from '@/lib/hooks'
+import type { AppLayoutProps } from './interface'
 
 const epilogue = Epilogue({
   variable: '--font-epilogue',
@@ -38,7 +38,7 @@ const AppLayout: FC<PropsWithChildren<AppLayoutProps>> = ({ children, socialMedi
           className={classNames(
             epilogue.variable,
             epilogue.className,
-            'relative max-w-[1920px] mx-auto min-h-screen flex flex-col text-black dark:text-dark-white font-epilogue px-6 sm:px-12 md:px-24 xl:px-36',
+            'relative max-w-[1920px] mx-auto justify-between min-h-screen flex flex-col text-black dark:text-dark-white font-epilogue px-6 sm:px-12 md:px-24 xl:px-36',
           )}
         >
           <Header />

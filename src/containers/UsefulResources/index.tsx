@@ -2,6 +2,7 @@ import { FC, useCallback, useEffect, useMemo, useState } from 'react'
 import { useQuery } from '@apollo/client'
 import { toast } from 'react-toastify'
 
+import type { UsefulResourceModel } from '@/types/models'
 import { useLocalStorage, useBreakpointCallback } from '@/lib/hooks'
 import { withInfiniteScroll } from '@/hocs'
 import { usefulResourceDocument } from '@/graphql'

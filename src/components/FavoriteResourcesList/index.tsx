@@ -1,6 +1,6 @@
 import { FC, memo } from 'react'
 
-import type { StrapiEntity } from '@/types/strapi'
+import type { StrapiEntity, UsefulResourceModel } from '@/types/models'
 import icons from '@/icons'
 import { Spinner, UsefulResource } from '@/components'
 
